@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="32px"
+   height="32px"
+   id="svg2985"
+   version="1.1"
+   inkscape:version="0.48.4 r9939"
+   sodipodi:docname="icono.png">
+  <defs
+     id="defs2987">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="-9.4661435 : 15.732091 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="31.464181 : 11.713444 : 1"
+       inkscape:persp3d-origin="16 : 10.666667 : 1"
+       id="perspective3003" />
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient2995">
+      <stop
+         style="stop-color:#000000;stop-opacity:1"
+         offset="0"
+         id="stop2997" />
+      <stop
+         style="stop-color:#808000;stop-opacity:1"
+         offset="1"
+         id="stop2999" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient2995"
+       id="linearGradient3001"
+       x1="47.330715"
+       y1="33.518154"
+       x2="19.200197"
+       y2="10.835132"
+       gradientUnits="userSpaceOnUse" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="11.197802"
+     inkscape:cx="16"
+     inkscape:cy="10.895193"
+     inkscape:current-layer="layer1"
+     showgrid="true"
+     inkscape:grid-bbox="true"
+     inkscape:document-units="px"
+     inkscape:window-width="1024"
+     inkscape:window-height="712"
+     inkscape:window-x="-4"
+     inkscape:window-y="-4"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata2990">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="layer1"
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer">
+    <rect
+       style="fill:url(#linearGradient3001);fill-opacity:1"
+       id="rect2993"
+       width="32.327793"
+       height="32.059864"
+       x="-2.900167e-008"
+       y="0.11874332" />
+    <g
+       sodipodi:type="inkscape:box3d"
+       style="fill:#000000"
+       id="g3005"
+       inkscape:perspectiveID="#perspective3003"
+       inkscape:corner0="0.75517253 : 0.013534202 : 0 : 1"
+       inkscape:corner7="-0.08548837 : -0.0083359094 : 0.20929551 : 1">
+      <path
+         sodipodi:type="inkscape:box3dside"
+         id="path3015"
+         style="fill:#000000;fill-rule:evenodd;stroke:none"
+         inkscape:box3dsidetype="13"
+         d="M 5.0430532,23.903246 18.38057,30.921996 20.817235,28.941274 7.8579748,23.517922 z" />
+      <path
+         sodipodi:type="inkscape:box3dside"
+         id="path3007"
+         style="fill:#000000;fill-rule:evenodd;stroke:none"
+         inkscape:box3dsidetype="6"
+         d="m 5.0430532,11.442869 0,12.460377 2.8149216,-0.385324 0,-11.132842 z" />
+      <path
+         sodipodi:type="inkscape:box3dside"
+         id="path3017"
+         style="fill:#000000;fill-rule:evenodd;stroke:none"
+         inkscape:box3dsidetype="11"
+         d="m 7.8579748,12.38508 12.9592602,-2.9045395 0,19.4607335 -12.9592602,-5.423352 z" />
+      <path
+         sodipodi:type="inkscape:box3dside"
+         id="path3009"
+         style="fill:#000000;fill-rule:evenodd;stroke:none"
+         inkscape:box3dsidetype="5"
+         d="M 5.0430532,11.442869 18.38057,7.0074713 20.817235,9.4805405 7.8579748,12.38508 z" />
+      <path
+         sodipodi:type="inkscape:box3dside"
+         id="path3013"
+         style="fill:#000000;fill-rule:evenodd;stroke:none"
+         inkscape:box3dsidetype="14"
+         d="m 18.38057,7.0074713 0,23.9145247 2.436665,-1.980722 0,-19.4607335 z" />
+      <path
+         sodipodi:type="inkscape:box3dside"
+         id="path3011"
+         style="fill:#000000;fill-rule:evenodd;stroke:none"
+         inkscape:box3dsidetype="3"
+         d="M 5.0430532,11.442869 18.38057,7.0074713 l 0,23.9145247 -13.3375168,-7.01875 z" />
+    </g>
+    <path
+       sodipodi:type="arc"
+       style="fill:#000000"
+       id="path3079"
+       sodipodi:cx="8.6624146"
+       sodipodi:cy="17.532875"
+       sodipodi:rx="0.08930324"
+       sodipodi:ry="1.6967616"
+       d="m 8.7517178,17.532875 a 0.08930324,1.6967616 0 1 1 -0.1786065,0 0.08930324,1.6967616 0 1 1 0.1786065,0 z" />
+    <path
+       sodipodi:type="arc"
+       style="fill:#ffffff"
+       id="path3085"
+       sodipodi:cx="8.7517176"
+       sodipodi:cy="17.309616"
+       sodipodi:rx="0.89303237"
+       sodipodi:ry="2.2772326"
+       d="m 9.6447499,17.309616 a 0.89303237,2.2772326 0 1 1 -1.233e-4,-0.03784 l -0.892909,0.03784 z"
+       sodipodi:start="0"
+       sodipodi:end="6.2665663" />
+    <path
+       sodipodi:type="arc"
+       style="fill:#ffffff"
+       id="path3087"
+       sodipodi:cx="13.440138"
+       sodipodi:cy="17.979391"
+       sodipodi:rx="1.1162905"
+       sodipodi:ry="2.6790972"
+       d="m 14.556428,17.979391 a 1.1162905,2.6790972 0 1 1 -1.54e-4,-0.04452 l -1.116136,0.04452 z"
+       sodipodi:start="0"
+       sodipodi:end="6.2665663" />
+    <text
+       xml:space="preserve"
+       style="font-size:4px;font-style:normal;font-variant:normal;font-weight:800;font-stretch:normal;text-align:end;line-height:50%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;font-family:Rockwell Extra Bold;-inkscape-font-specification:'Rockwell Extra Bold, Ultra-Bold'"
+       x="31.16683"
+       y="4.4052987"
+       id="text3093"
+       sodipodi:linespacing="50%"><tspan
+         sodipodi:role="line"
+         id="tspan3095"
+         x="31.16683"
+         y="4.4052987">DeckPlayers</tspan></text>
+  </g>
+</svg>
