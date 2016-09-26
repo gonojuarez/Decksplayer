@@ -45,20 +45,21 @@ public int estado;
     @Override
     public void progress(int i, long l, byte[] bytes, Map map) {
        try{
+        
         float progressUpdate = (float) (i * 1.0f/ l * 1.0f);
         int progressNow = (int) (l * progressUpdate);
         progreso=progressNow;
         equalizer=(float[])map.get("mp3.equalizer");
         System.arraycopy(eq, 0, equalizer, 0, equalizer.length);
         System.out.print(map.toString());
-       
+          // System.out.println(progressNow);
        }catch(Exception ex){}
     }
 
     @Override
     public void stateUpdated(BasicPlayerEvent bpe) {
      try{
-        System.out.print(bpe.getPosition());
+       System.out.print(bpe.getPosition());
       
      }catch(Exception ex){
      }
@@ -75,12 +76,13 @@ public int estado;
   }
 public int progresos()
 {
+ 
 return progreso;
 }
     public void setearValor(JProgressBar jps)
     {
     jps.setValue(progreso);
-   
+       
     
     }
     public void setEq(int n,int value)

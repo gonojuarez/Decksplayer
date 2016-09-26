@@ -8,7 +8,6 @@ package acciones;
 import clases.Cancion;
 import java.io.File;
 import javax.swing.JFileChooser;
-import javax.swing.JTable;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
@@ -47,12 +46,12 @@ public class Buscador {
       buscar.setMultiSelectionEnabled(true);
       buscar.setFileSelectionMode(0);
       
-      if(buscar.showSaveDialog(buscar)==JFileChooser.APPROVE_OPTION)
+      if(buscar.showOpenDialog(buscar)==JFileChooser.APPROVE_OPTION)
         {int n=bd.tam();
            File file[] =buscar.getSelectedFiles();
             for (File file1:file) //ciclo for each de esta forma hago un recorrido por todos los archivos
             {
-                cancion=new Cancion(n, file1.getName(), file1.getTotalSpace(),file1.getAbsolutePath());
+                cancion=new Cancion(n, file1.getName().replace("'", "{{"), file1.getTotalSpace(),file1.getAbsolutePath().replace("'", "{{"));
                 System.out.println(cancion.getId()+":"+cancion.getNombre());
              bd.agregar(cancion);
                 n++;
@@ -69,4 +68,11 @@ public class Buscador {
     {
     return model;
     }
+       public void eliminar(int n) {
+        
+      try{
+        bd.eliminar(n);
+        model.getDataVector().removeElementAt(n);
+    }catch(Exception ex){}
+       }
 }

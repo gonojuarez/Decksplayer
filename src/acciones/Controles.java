@@ -96,7 +96,7 @@ bd=new BaseDatos();
     public String getname(int numero) {
         String name = "";
         try {
-             name=bd.devolvercancion(numero).getNombre().replaceAll("<","'");
+             name=bd.devolvercancion(numero).getNombre().replaceAll("'","{{");
         } catch (Exception e) {
         }
      
@@ -106,7 +106,7 @@ bd=new BaseDatos();
     public void playSong(int i) throws BasicPlayerException {
        
         try {
-            player.open(new File(bd.devolvercancion(i).getDireccion().replace(bd.devolvercancion(i).getNombre(), bd.devolvercancion(i).getNombre().replace("<","'"))));
+            player.open(new File(bd.devolvercancion(i).getDireccion().replace(bd.devolvercancion(i).getNombre(), bd.devolvercancion(i).getNombre().replace("{{","'"))));
         } catch (Exception ex) {
             Logger.getLogger(Controles.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -126,7 +126,7 @@ bd=new BaseDatos();
     
           
                 try {
-                    playtu.open(new File(bd.devolvercancion(id).getDireccion().replace(bd.devolvercancion(id).getNombre(),bd.devolvercancion(id).getNombre().replaceAll("<","'"))));
+                    playtu.open(new File(bd.devolvercancion(id).getDireccion().replace(bd.devolvercancion(id).getNombre(),bd.devolvercancion(id).getNombre().replace("{{","'"))));
                 } catch (Exception ex) {
                     Logger.getLogger(Controles.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -257,7 +257,6 @@ bd=new BaseDatos();
     public void adelantar(int n) {
         try {
             player.seek(n);
-            
         } catch (Exception ex) {
 
         }
@@ -281,9 +280,16 @@ bd=new BaseDatos();
         playtu.setSleepTime(n);
         
     }
-
+ 
    
-   
+   public void loop1() 
+   {
+    for(int i=0;i<player.getMixers().toArray().length;i++)
+            {
+                System.out.println(player.getMixers().toArray()[i]);
+            }
+      
+   }
  
     
 }

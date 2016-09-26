@@ -112,12 +112,31 @@ public class BaseDatos {
          while(rs.next()){
         
              c1=new Cancion(rs.getInt("id"),rs.getString("nombre"),rs.getLong("taman"),rs.getString("direc"));
-          String nombre[]={c1.getNombre()};
+          String nombre[]={c1.getNombre().replace(".mp3","").replace(".ogg","").replace(".wav", "").replace("{{", "'")};
              model.addRow(nombre);
           }
           
          rs.close();
           conect.close();
  return model;
+ }
+ public void eliminar(long i)throws Exception
+ {
+ 
+        Connection connection = null;
+            connection = DriverManager.getConnection("jdbc:sqlite:music.db");
+          Statement statement = connection.createStatement();
+            ResultSet rs=statement.executeQuery("select * from musica order by nombre asc");
+        int c=0;
+          while(rs.next()){
+        if(c==i){
+         Cancion  c1=new Cancion(rs.getInt("id"),rs.getString("nombre"),rs.getLong("taman"),rs.getString("direc"));
+          statement.executeUpdate("delete from musica where id="+c1.getId());
+        }
+       c++;
+
+          }
+          
+          connection.close();
  }
 }
