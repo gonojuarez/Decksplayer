@@ -10,6 +10,7 @@ import javax.swing.JProgressBar;
 import javazoom.jlgui.basicplayer.BasicController;
 import javazoom.jlgui.basicplayer.BasicPlayerEvent;
 import javazoom.jlgui.basicplayer.BasicPlayerListener;
+import javazoom.jlgui.basicplayer.BasicPlayerEventLauncher;
 
 /**
  *
@@ -30,7 +31,7 @@ public int estado;
     @Override
     public void opened(Object o, Map map) {
         if (map.containsKey("audio.length.bytes")) {
-            
+          
      double bytesLength = Double.parseDouble(map.get("audio.length.bytes").toString());
    
      tam=(int)bytesLength;
@@ -49,12 +50,13 @@ public int estado;
         float progressUpdate = (float) (i * 1.0f/ l * 1.0f);
         int progressNow = (int) (l * progressUpdate);
         progreso=progressNow;
-        equalizer=(float[])map.get("mp3.equalizer");
+        equalizer=(float[])(map.get("mp3.equalizer"));
         System.arraycopy(eq, 0, equalizer, 0, equalizer.length);
         System.out.print(map.toString());
           // System.out.println(progressNow);
        }catch(Exception ex){}
     }
+    
 
     @Override
     public void stateUpdated(BasicPlayerEvent bpe) {

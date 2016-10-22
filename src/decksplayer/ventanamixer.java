@@ -4,6 +4,7 @@ package decksplayer;
 
 import acciones.Controles;
 import acciones.Buscador;
+import com.sun.media.sound.SoftMixingSourceDataLine;
 import static decksplayer.Principal.sertv;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -33,7 +34,22 @@ import javax.imageio.ImageIO;
 import org.jvnet.substance.button.StandardButtonShaper;
 import java.awt.Toolkit;
 import java.awt.*;
+import static java.awt.SystemColor.info;
 import java.awt.image.BufferedImage;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.CompoundControl;
+import javax.sound.sampled.Control;
+import javax.sound.sampled.Line;
+import javax.sound.sampled.LineListener;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.Mixer;
+import javax.sound.sampled.Port;
+import javax.sound.sampled.SourceDataLine;
+import javax.sound.sampled.TargetDataLine;
+import javax.sound.sampled.spi.MixerProvider;
+import javazoom.jlgui.basicplayer.BasicPlayerListener;
+import org.eclipse.persistence.config.TargetDatabase;
+import org.tritonus.share.sampled.AudioSystemShadow;
 
 
 public class ventanamixer extends javax.swing.JFrame implements KeyListener {
@@ -79,7 +95,9 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
    boolean cargarCanci;
    int contA=0;
    int ss1=0;
-   int x,y;
+   int x,y,cax,cay;
+   int val=0;
+   boolean activar1,activar2;
       public Timer cBand1=new javax.swing.Timer(1000,new ActionListener()// cronometro bandeja 1
    {
     public void actionPerformed(ActionEvent e)
@@ -107,17 +125,22 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
     // System.out.print(buscar.getPlayer().getStatus());
         ti.setText(h1+":"+m1+":"+s1);//muestro el tiempo
         String c=buscar.getPlayer().getStatus()+"";
+        
+        if(automixer==true){
+        if(activar2==true){
+            if(cBand2.isRunning()==false){
+           i=(int)(Math.random()*jTable1.getRowCount());
+           posicion=i;
+           
+           play2();}
+            valor0();
+        }}
       if(c.endsWith("2"))
       {
           cBand1.stop();//para el tiempo
-         
           if(automixer==true)
           {
-           stopo1();   
-           i=(int)(Math.random()*jTable1.getRowCount());
-           posicion=i;
-           play2();
-          valor0();
+          stopo1();
           }
           if(lista==true)
           {
@@ -162,7 +185,8 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         }
       }
     
-    jPanel8.updateUI();
+    jPanel8.repaint();
+    jPanel16.repaint();
    }}
    );
    public Timer cBand2=new javax.swing.Timer(1000,new ActionListener()//Cronometro bandeja 2
@@ -188,19 +212,27 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
     // System.out.print(buscar.getPlayer().getStatus());
     tir.setText(h2+":"+m2+":"+s2);
     String c=buscar.getPlayer1().getStatus()+"";
-    if(c.endsWith("2"))//si se detiene la cancion
-    {
-        cBand2.stop();//detengo el tiempo  
-         
-        if(automixer==true)
+    if(automixer==true)
         {
-           stopo2();
+            if(activar1==true){
+           //stopo2();
+           if(cBand1.isRunning()==false){
            con=(int)(Math.random()*jTable1.getRowCount()); 
            posicion=con;
            
             play1d();
-            valor1();
+           }
+             valor1();
+           } 
         }
+    if(c.endsWith("2"))//si se detiene la cancion
+    {
+        cBand2.stop();//detengo el tiempo  
+         if(automixer==true)
+         {
+         stopo2();
+         }
+        
         if(lista==true)
         { stopo2();
             posicion++;
@@ -241,7 +273,8 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         }
     }
    //muestro en la bandeja el tiempo
-    jPanel15.updateUI();
+    jPanel15.repaint();
+    jPanel17.repaint();
  }
     }
 );
@@ -312,13 +345,11 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
               buscar.getPlayer1().addBasicPlayerListener(escucha2);
                System.out.println("Iniciando servidor\n");
        
-    JDialog d=new JDialog();
-        imagenes imag=new imagenes();
-        jPanel8.add(imag).setLocation(0, 0);
-        jPanel8.repaint();
-           imagenes1 ima=new imagenes1();
-        jPanel15.add(ima).setLocation(0, 0);
-        jPanel15.repaint();
+   
+       
+    
+    
+ 
     }
 
     
@@ -432,10 +463,14 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         jSlider6 = new javax.swing.JSlider();
         jProgressBar5 = new javax.swing.JProgressBar();
         jLabel6 = new javax.swing.JLabel();
+        jPanel16 = new javax.swing.JPanel();
         jDialog4 = new javax.swing.JDialog();
         jSlider7 = new javax.swing.JSlider();
         jProgressBar6 = new javax.swing.JProgressBar();
         jLabel46 = new javax.swing.JLabel();
+        jPanel17 = new javax.swing.JPanel();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jPanel14 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
@@ -454,31 +489,10 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         Escritorio = new javax.swing.JPanel();
         jTabbedPane4 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
-        jPanel8 = new javax.swing.JPanel();
-        jLabel18 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JLabel();
-        play1 = new javax.swing.JButton();
-        next1 = new javax.swing.JButton();
-        stop1 = new javax.swing.JButton();
-        antes1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        ti = new javax.swing.JLabel();
-        jProgressBar1 = new javax.swing.JSlider();
-        jProgressBar3 = new javax.swing.JProgressBar();
-        jButton10 = new javax.swing.JButton();
+        jButton15 = new javax.swing.JButton();
+        jButton16 = new javax.swing.JButton();
+        jButton17 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
-        jTextField2 = new javax.swing.JLabel();
-        antes2 = new javax.swing.JButton();
-        next2 = new javax.swing.JButton();
-        stop2 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        play2 = new javax.swing.JToggleButton();
-        tir = new javax.swing.JLabel();
-        jProgressBar2 = new javax.swing.JSlider();
-        jProgressBar4 = new javax.swing.JProgressBar();
-        jLabel17 = new javax.swing.JLabel();
-        jButton14 = new javax.swing.JButton();
-        jPanel15 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel10 = new javax.swing.JPanel();
@@ -507,6 +521,28 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         jToggleButton1 = new javax.swing.JToggleButton();
         jSlider5 = new javax.swing.JSlider();
         jSlider4 = new javax.swing.JSlider();
+        jTextField2 = new javax.swing.JLabel();
+        jProgressBar4 = new javax.swing.JProgressBar();
+        jProgressBar2 = new javax.swing.JSlider();
+        jPanel15 = new javax.swing.JPanel();
+        play2 = new javax.swing.JToggleButton();
+        jButton14 = new javax.swing.JButton();
+        jPanel8 = new javax.swing.JPanel();
+        tir = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JLabel();
+        jProgressBar3 = new javax.swing.JProgressBar();
+        play1 = new javax.swing.JButton();
+        jProgressBar1 = new javax.swing.JSlider();
+        jButton10 = new javax.swing.JButton();
+        next1 = new javax.swing.JButton();
+        next2 = new javax.swing.JButton();
+        ti = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        stop2 = new javax.swing.JButton();
+        stop1 = new javax.swing.JButton();
+        antes2 = new javax.swing.JButton();
+        antes1 = new javax.swing.JButton();
 
         Lista.setMinimumSize(new java.awt.Dimension(400, 200));
         Lista.setResizable(false);
@@ -1233,6 +1269,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         });
         jPopupMenu4.add(jMenuItem2);
 
+        jDialog3.setMinimumSize(new java.awt.Dimension(489, 124));
         jDialog3.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jDialog3KeyPressed(evt);
@@ -1265,30 +1302,53 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
             }
         });
 
+        jPanel16.setFocusCycleRoot(true);
+        jPanel16.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel16MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
+        jPanel16.setLayout(jPanel16Layout);
+        jPanel16Layout.setHorizontalGroup(
+            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 88, Short.MAX_VALUE)
+        );
+        jPanel16Layout.setVerticalGroup(
+            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 87, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout jDialog3Layout = new javax.swing.GroupLayout(jDialog3.getContentPane());
         jDialog3.getContentPane().setLayout(jDialog3Layout);
         jDialog3Layout.setHorizontalGroup(
             jDialog3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDialog3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jDialog3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jProgressBar5, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSlider6, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jDialog3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jSlider6, javax.swing.GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE)
+                    .addComponent(jProgressBar5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
         jDialog3Layout.setVerticalGroup(
             jDialog3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDialog3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jProgressBar5, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSlider6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jSlider6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 11, Short.MAX_VALUE))
+            .addGroup(jDialog3Layout.createSequentialGroup()
+                .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
+        jDialog4.setMinimumSize(new java.awt.Dimension(481, 134));
         jDialog4.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jDialog4KeyPressed(evt);
@@ -1322,29 +1382,60 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
             }
         });
 
+        jPanel17.setFocusCycleRoot(true);
+        jPanel17.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel17MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
+        jPanel17.setLayout(jPanel17Layout);
+        jPanel17Layout.setHorizontalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 70, Short.MAX_VALUE)
+        );
+        jPanel17Layout.setVerticalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 70, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout jDialog4Layout = new javax.swing.GroupLayout(jDialog4.getContentPane());
         jDialog4.getContentPane().setLayout(jDialog4Layout);
         jDialog4Layout.setHorizontalGroup(
             jDialog4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDialog4Layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
                 .addGroup(jDialog4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jProgressBar6, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSlider7, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel46, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(32, Short.MAX_VALUE))
+                    .addGroup(jDialog4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jSlider7, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jProgressBar6, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel46, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
         jDialog4Layout.setVerticalGroup(
             jDialog4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDialog4Layout.createSequentialGroup()
-                .addGap(4, 4, 4)
-                .addComponent(jProgressBar6, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jSlider7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel46, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addGroup(jDialog4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jDialog4Layout.createSequentialGroup()
+                        .addGap(9, 9, 9)
+                        .addComponent(jProgressBar6, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSlider7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel46, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jDialog4Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
+
+        jMenu1.setText("jMenu1");
+
+        jMenuItem3.setText("jMenuItem3");
+        jMenu1.add(jMenuItem3);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -1352,6 +1443,12 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
+            }
+            public void windowDeiconified(java.awt.event.WindowEvent evt) {
+                formWindowDeiconified(evt);
+            }
+            public void windowIconified(java.awt.event.WindowEvent evt) {
+                formWindowIconified(evt);
             }
         });
         addKeyListener(new java.awt.event.KeyAdapter() {
@@ -1368,6 +1465,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
                 jPanel14KeyPressed(evt);
             }
         });
+        jPanel14.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTabbedPane1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jTabbedPane1.setTabPlacement(javax.swing.JTabbedPane.LEFT);
@@ -1415,6 +1513,9 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 jTable1MouseExited(evt);
             }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTable1MousePressed(evt);
+            }
         });
         jTable1.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentMoved(java.awt.event.ComponentEvent evt) {
@@ -1442,10 +1543,10 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         });
 
         jTextField3.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-            }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 jTextField3InputMethodTextChanged(evt);
+            }
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         jTextField3.addActionListener(new java.awt.event.ActionListener() {
@@ -1515,49 +1616,48 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addComponent(jButton7)
-                                .addGap(54, 54, 54)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(27, 27, 27)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jComboBox3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 3, Short.MAX_VALUE))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane4)))
-                .addContainerGap())
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton7)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(33, 33, 33)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField3)))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(16, 16, 16)
+                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
-                    .addComponent(jScrollPane4))
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
-        jPanel3.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 530, 280));
+        jPanel3.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 530, 220));
 
         jTabbedPane1.addTab("Musica", new javax.swing.ImageIcon(getClass().getResource("/decksplayer/musica2.png")), jPanel3); // NOI18N
 
@@ -1582,151 +1682,29 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         });
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel8.setPreferredSize(new java.awt.Dimension(64, 64));
-        jPanel8.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel8MouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 64, Short.MAX_VALUE)
-        );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 64, Short.MAX_VALUE)
-        );
-
-        jPanel2.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 64, 64));
-
-        jLabel18.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel18.setText("Adelantar");
-        jPanel2.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, 20));
-
-        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jTextField1KeyPressed(evt);
-            }
-        });
-        jPanel2.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 50, 370, 20));
-
-        play1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/play.png"))); // NOI18N
-        play1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        play1.addActionListener(new java.awt.event.ActionListener() {
+        jButton15.setText("1/4");
+        jButton15.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                play1ActionPerformed(evt);
+                jButton15ActionPerformed(evt);
             }
         });
-        play1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                play1KeyPressed(evt);
-            }
-        });
-        jPanel2.add(play1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 100, 50, 50));
+        jPanel2.add(jButton15, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, 50, 20));
 
-        next1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/siguiente.png"))); // NOI18N
-        next1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        next1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                next1MousePressed(evt);
-            }
-        });
-        next1.addActionListener(new java.awt.event.ActionListener() {
+        jButton16.setText("1/8");
+        jButton16.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                next1ActionPerformed(evt);
+                jButton16ActionPerformed(evt);
             }
         });
-        next1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                next1KeyPressed(evt);
-            }
-        });
-        jPanel2.add(next1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 100, 50, 50));
+        jPanel2.add(jButton16, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, 20));
 
-        stop1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/stop.png"))); // NOI18N
-        stop1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        stop1.setFocusCycleRoot(true);
-        stop1.addActionListener(new java.awt.event.ActionListener() {
+        jButton17.setText("1/2");
+        jButton17.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                stop1ActionPerformed(evt);
+                jButton17ActionPerformed(evt);
             }
         });
-        stop1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                stop1KeyPressed(evt);
-            }
-        });
-        jPanel2.add(stop1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 100, 50, 50));
-
-        antes1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/anterior.PNG"))); // NOI18N
-        antes1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        antes1.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/anterior.PNG"))); // NOI18N
-        antes1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                antes1ActionPerformed(evt);
-            }
-        });
-        antes1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                antes1KeyPressed(evt);
-            }
-        });
-        jPanel2.add(antes1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, 50, 50));
-
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/pausa.png"))); // NOI18N
-        jButton3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-        jButton3.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jButton3KeyPressed(evt);
-            }
-        });
-        jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 100, 50, 50));
-
-        ti.setFont(new java.awt.Font("Trebuchet MS", 0, 24)); // NOI18N
-        jPanel2.add(ti, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 180, 110, 40));
-
-        jProgressBar1.setToolTipText("adelantar");
-        jProgressBar1.setValue(0);
-        jProgressBar1.setFocusable(false);
-        jProgressBar1.setOpaque(false);
-        jProgressBar1.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                jProgressBar1StateChanged(evt);
-            }
-        });
-        jProgressBar1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jProgressBar1MouseClicked(evt);
-            }
-        });
-        jProgressBar1.addVetoableChangeListener(new java.beans.VetoableChangeListener() {
-            public void vetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {
-                jProgressBar1VetoableChange(evt);
-            }
-        });
-        jPanel2.add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, 400, 30));
-
-        jProgressBar3.setBackground(new java.awt.Color(0, 102, 153));
-        jProgressBar3.setForeground(new java.awt.Color(255, 0, 0));
-        jProgressBar3.setComponentPopupMenu(jPopupMenu3);
-        jProgressBar3.setStringPainted(true);
-        jPanel2.add(jProgressBar3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, 380, 60));
-
-        jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/ecualizador.png"))); // NOI18N
-        jButton10.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton10ActionPerformed(evt);
-            }
-        });
-        jPanel2.add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 160, 60, 40));
+        jPanel2.add(jButton17, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 20, -1, 20));
 
         jTabbedPane4.addTab("Bandeja 1", jPanel2);
 
@@ -1737,152 +1715,6 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
             }
         });
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jTextField2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jTextField2KeyPressed(evt);
-            }
-        });
-        jPanel4.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 50, 370, 20));
-
-        antes2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/anterior_1.png"))); // NOI18N
-        antes2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        antes2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                antes2ActionPerformed(evt);
-            }
-        });
-        antes2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                antes2KeyPressed(evt);
-            }
-        });
-        jPanel4.add(antes2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, 50, 50));
-
-        next2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/siguiente_1.png"))); // NOI18N
-        next2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        next2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                next2ActionPerformed(evt);
-            }
-        });
-        next2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                next2KeyPressed(evt);
-            }
-        });
-        jPanel4.add(next2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 100, 50, 50));
-
-        stop2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/stop.png"))); // NOI18N
-        stop2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        stop2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                stop2MouseClicked(evt);
-            }
-        });
-        stop2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                stop2ActionPerformed(evt);
-            }
-        });
-        stop2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                stop2KeyPressed(evt);
-            }
-        });
-        jPanel4.add(stop2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 100, 50, 50));
-
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/pausa.png"))); // NOI18N
-        jButton4.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-        jButton4.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jButton4KeyPressed(evt);
-            }
-        });
-        jPanel4.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 100, 50, 50));
-
-        play2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/play.png"))); // NOI18N
-        play2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        play2.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                play2StateChanged(evt);
-            }
-        });
-        play2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                play2ActionPerformed(evt);
-            }
-        });
-        play2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                play2KeyPressed(evt);
-            }
-        });
-        jPanel4.add(play2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 100, 50, 50));
-
-        tir.setFont(new java.awt.Font("Trebuchet MS", 0, 24)); // NOI18N
-        jPanel4.add(tir, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 180, 110, 40));
-
-        jProgressBar2.setValue(0);
-        jProgressBar2.setFocusable(false);
-        jProgressBar2.setOpaque(false);
-        jProgressBar2.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                jProgressBar2StateChanged(evt);
-            }
-        });
-        jProgressBar2.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                jProgressBar2PropertyChange(evt);
-            }
-        });
-        jProgressBar2.addVetoableChangeListener(new java.beans.VetoableChangeListener() {
-            public void vetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {
-                jProgressBar2VetoableChange(evt);
-            }
-        });
-        jPanel4.add(jProgressBar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, 400, 30));
-
-        jProgressBar4.setComponentPopupMenu(jPopupMenu4);
-        jProgressBar4.setStringPainted(true);
-        jPanel4.add(jProgressBar4, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, 380, 60));
-
-        jLabel17.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel17.setText("Adelantar");
-        jPanel4.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, 20));
-
-        jButton14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/ecualizador.png"))); // NOI18N
-        jButton14.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton14ActionPerformed(evt);
-            }
-        });
-        jPanel4.add(jButton14, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 160, 60, 40));
-
-        jPanel15.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel15MouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
-        jPanel15.setLayout(jPanel15Layout);
-        jPanel15Layout.setHorizontalGroup(
-            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 70, Short.MAX_VALUE)
-        );
-        jPanel15Layout.setVerticalGroup(
-            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 70, Short.MAX_VALUE)
-        );
-
-        jPanel4.add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 70, 70));
-
         jTabbedPane4.addTab("Bandeja 2", jPanel4);
 
         javax.swing.GroupLayout EscritorioLayout = new javax.swing.GroupLayout(Escritorio);
@@ -1895,7 +1727,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         );
         EscritorioLayout.setVerticalGroup(
             EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(jTabbedPane4)
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -1967,39 +1799,38 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
-                .addGap(0, 141, Short.MAX_VALUE)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(MarcasDeAgua, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(90, 90, 90))
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(MarcasDeAgua, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel10Layout.createSequentialGroup()
+                                .addGap(197, 197, 197)
+                                .addComponent(jLabel14))
+                            .addGroup(jPanel10Layout.createSequentialGroup()
+                                .addGap(92, 92, 92)
+                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel10Layout.createSequentialGroup()
+                                .addGap(171, 171, 171)
+                                .addComponent(jLabel15))))
                     .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addGap(211, 211, 211)
-                        .addComponent(jLabel14))
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addGap(205, 205, 205)
-                        .addComponent(jLabel15))
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addGap(148, 148, 148)
+                        .addGap(173, 173, 173)
                         .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(136, Short.MAX_VALUE))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
                 .addComponent(jLabel14)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addComponent(jLabel15)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel15)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(MarcasDeAgua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41)
+                .addGap(18, 18, 18)
                 .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("configuracion de la apariencia", jPanel10);
@@ -2063,9 +1894,9 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
                     .addComponent(jLabel9))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
                     .addComponent(jScrollPane1))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Informacion", jPanel6);
@@ -2078,7 +1909,9 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 1, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Configuracion", new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/configuracion_1.png")), jPanel9); // NOI18N
@@ -2148,28 +1981,32 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         jPanel11.setLayout(jPanel11Layout);
         jPanel11Layout.setHorizontalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE)
+            .addComponent(jTabbedPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 527, Short.MAX_VALUE)
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane5, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(jTabbedPane5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Fotos", new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/camara2.png")), jPanel11); // NOI18N
 
-        volumen2.setMaximum(101);
+        jPanel14.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(64, 118, 650, 231));
+
         volumen2.setOrientation(1);
         volumen2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         volumen2.setMaximumSize(new java.awt.Dimension(17, 146));
+        jPanel14.add(volumen2, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 118, 22, 196));
 
-        volumen1.setMaximum(101);
         volumen1.setOrientation(1);
         volumen1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         volumen1.setMaximumSize(new java.awt.Dimension(17, 146));
+        jPanel14.add(volumen1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 119, 22, 200));
 
         jLabel3.setText("Bandeja 2");
+        jPanel14.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(718, 320, 62, 29));
 
         jLabel2.setText("Bandeja 1");
+        jPanel14.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, -1, -1));
 
         volumenn.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         volumenn.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -2185,6 +2022,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
                 volumennKeyTyped(evt);
             }
         });
+        jPanel14.add(volumenn, new org.netbeans.lib.awtextra.AbsoluteConstraints(198, 355, 516, -1));
 
         jToggleButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/window-close.png"))); // NOI18N
         jToggleButton1.setText("salir");
@@ -2195,6 +2033,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
                 jToggleButton1ActionPerformed(evt);
             }
         });
+        jPanel14.add(jToggleButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 355, 110, 50));
 
         jSlider5.setOrientation(javax.swing.JSlider.VERTICAL);
         jSlider5.setValue(0);
@@ -2208,6 +2047,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
                 jSlider5KeyPressed(evt);
             }
         });
+        jPanel14.add(jSlider5, new org.netbeans.lib.awtextra.AbsoluteConstraints(724, 130, 20, 184));
 
         jSlider4.setOrientation(javax.swing.JSlider.VERTICAL);
         jSlider4.setToolTipText("");
@@ -2217,78 +2057,313 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
                 jSlider4StateChanged(evt);
             }
         });
+        jPanel14.add(jSlider4, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 119, 20, 200));
 
-        javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
-        jPanel14.setLayout(jPanel14Layout);
-        jPanel14Layout.setHorizontalGroup(
-            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel14Layout.createSequentialGroup()
-                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel14Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(78, 78, 78)
-                        .addComponent(volumenn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel14Layout.createSequentialGroup()
-                        .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel14Layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(volumen1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jSlider4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel2)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(10, 10, 10)
-                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel14Layout.createSequentialGroup()
-                        .addComponent(jSlider5, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(volumen2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18))
-                    .addGroup(jPanel14Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+        jTextField2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextField2KeyPressed(evt);
+            }
+        });
+        jPanel14.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 40, 210, 20));
+
+        jProgressBar4.setComponentPopupMenu(jPopupMenu4);
+        jProgressBar4.setStringPainted(true);
+        jPanel14.add(jProgressBar4, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 10, 210, 50));
+
+        jProgressBar2.setValue(0);
+        jProgressBar2.setFocusable(false);
+        jProgressBar2.setOpaque(false);
+        jProgressBar2.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jProgressBar2StateChanged(evt);
+            }
+        });
+        jProgressBar2.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jProgressBar2PropertyChange(evt);
+            }
+        });
+        jProgressBar2.addVetoableChangeListener(new java.beans.VetoableChangeListener() {
+            public void vetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {
+                jProgressBar2VetoableChange(evt);
+            }
+        });
+        jPanel14.add(jProgressBar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 60, 210, 30));
+
+        jPanel15.setOpaque(false);
+        jPanel15.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jPanel15MouseDragged(evt);
+            }
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jPanel15MouseMoved(evt);
+            }
+        });
+        jPanel15.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel15MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
+        jPanel15.setLayout(jPanel15Layout);
+        jPanel15Layout.setHorizontalGroup(
+            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 70, Short.MAX_VALUE)
         );
-        jPanel14Layout.setVerticalGroup(
-            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel14Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel14Layout.createSequentialGroup()
-                        .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSlider5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(volumen2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel3)
-                        .addGap(33, 33, 33))
-                    .addGroup(jPanel14Layout.createSequentialGroup()
-                        .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel14Layout.createSequentialGroup()
-                                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel14Layout.createSequentialGroup()
-                                        .addGap(1, 1, 1)
-                                        .addComponent(volumen1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jSlider4, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel2)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)))
-                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(volumenn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(17, Short.MAX_VALUE))
+        jPanel15Layout.setVerticalGroup(
+            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 70, Short.MAX_VALUE)
         );
+
+        jPanel14.add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 0, 70, 70));
+
+        play2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/play1.png"))); // NOI18N
+        play2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        play2.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                play2StateChanged(evt);
+            }
+        });
+        play2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                play2ActionPerformed(evt);
+            }
+        });
+        play2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                play2KeyPressed(evt);
+            }
+        });
+        jPanel14.add(play2, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 90, 20, 20));
+
+        jButton14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/ecualizador.png"))); // NOI18N
+        jButton14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton14ActionPerformed(evt);
+            }
+        });
+        jPanel14.add(jButton14, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 10, 60, 40));
+
+        jPanel8.setOpaque(false);
+        jPanel8.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jPanel8MouseDragged(evt);
+            }
+        });
+        jPanel8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel8MouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jPanel8MousePressed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        jPanel14.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 90, 80));
+
+        tir.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jPanel14.add(tir, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 80, 100, 30));
+
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextField1KeyPressed(evt);
+            }
+        });
+        jPanel14.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 40, 210, 20));
+
+        jProgressBar3.setBackground(new java.awt.Color(0, 102, 153));
+        jProgressBar3.setForeground(new java.awt.Color(255, 0, 0));
+        jProgressBar3.setComponentPopupMenu(jPopupMenu3);
+        jProgressBar3.setStringPainted(true);
+        jPanel14.add(jProgressBar3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 210, 50));
+
+        play1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/play1.png"))); // NOI18N
+        play1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        play1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                play1ActionPerformed(evt);
+            }
+        });
+        play1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                play1KeyPressed(evt);
+            }
+        });
+        jPanel14.add(play1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 90, 20, 20));
+
+        jProgressBar1.setToolTipText("adelantar");
+        jProgressBar1.setValue(0);
+        jProgressBar1.setFocusable(false);
+        jProgressBar1.setOpaque(false);
+        jProgressBar1.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jProgressBar1StateChanged(evt);
+            }
+        });
+        jProgressBar1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jProgressBar1MouseClicked(evt);
+            }
+        });
+        jProgressBar1.addVetoableChangeListener(new java.beans.VetoableChangeListener() {
+            public void vetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {
+                jProgressBar1VetoableChange(evt);
+            }
+        });
+        jPanel14.add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, 210, 30));
+
+        jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/ecualizador.png"))); // NOI18N
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
+        jPanel14.add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 10, 60, 40));
+
+        next1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/siguiente1.png"))); // NOI18N
+        next1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        next1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                next1MousePressed(evt);
+            }
+        });
+        next1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                next1ActionPerformed(evt);
+            }
+        });
+        next1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                next1KeyPressed(evt);
+            }
+        });
+        jPanel14.add(next1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 90, 20, 20));
+
+        next2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/siguiente1.png"))); // NOI18N
+        next2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        next2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                next2ActionPerformed(evt);
+            }
+        });
+        next2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                next2KeyPressed(evt);
+            }
+        });
+        jPanel14.add(next2, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 90, 20, 20));
+
+        ti.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jPanel14.add(ti, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 100, 30));
+
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/pausa1.png"))); // NOI18N
+        jButton3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jButton3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButton3KeyPressed(evt);
+            }
+        });
+        jPanel14.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 90, 20, 20));
+
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/pausa1.png"))); // NOI18N
+        jButton4.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        jButton4.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButton4KeyPressed(evt);
+            }
+        });
+        jPanel14.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 90, 20, 20));
+
+        stop2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/stop1.png"))); // NOI18N
+        stop2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        stop2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                stop2MouseClicked(evt);
+            }
+        });
+        stop2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                stop2ActionPerformed(evt);
+            }
+        });
+        stop2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                stop2KeyPressed(evt);
+            }
+        });
+        jPanel14.add(stop2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 90, 20, 20));
+
+        stop1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/stop1.png"))); // NOI18N
+        stop1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        stop1.setFocusCycleRoot(true);
+        stop1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                stop1ActionPerformed(evt);
+            }
+        });
+        stop1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                stop1KeyPressed(evt);
+            }
+        });
+        jPanel14.add(stop1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 90, 20, 20));
+
+        antes2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/anterior1.png"))); // NOI18N
+        antes2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        antes2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                antes2ActionPerformed(evt);
+            }
+        });
+        antes2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                antes2KeyPressed(evt);
+            }
+        });
+        jPanel14.add(antes2, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 90, 20, 20));
+
+        antes1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/anterior1.png"))); // NOI18N
+        antes1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        antes1.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/anterior1.png"))); // NOI18N
+        antes1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                antes1ActionPerformed(evt);
+            }
+        });
+        antes1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                antes1KeyPressed(evt);
+            }
+        });
+        jPanel14.add(antes1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 20, 20));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, 776, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2473,9 +2548,9 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
     private void play1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_play1ActionPerformed
  
        
-    imagenes im=new imagenes();
-    jPanel8.add(im).setLocation(32, 32);
-  jPanel8.repaint();
+   // imagenes im=new imagenes();
+
+ 
         play1d(); //Se encarga de realizar la funcion de play del programa boton de la bandeja 1
         value();
    
@@ -2617,9 +2692,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
           i=jTable1.getSelectedRow();
           jTextField2.setText(buscar.getname(jTable1.getSelectedRow()));
           cargarCancion2(buscar.getname(jTable1.getSelectedRow()));
-        
      
-         
         }
        catch (Exception ex)
         {
@@ -3254,6 +3327,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
        jDialog1.setVisible(true);
        jDialog1.setSize(600,400);
+        
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
@@ -3339,21 +3413,91 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
     evt.getWindow().addKeyListener(this);setFocusable(true);
     }//GEN-LAST:event_formWindowActivated
 
-    private void jPanel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel8MouseClicked
-
-    }//GEN-LAST:event_jPanel8MouseClicked
-
     private void jTabbedPane4StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane4StateChanged
-        jPanel8.repaint();
-        jPanel15.repaint();
+      jPanel8.updateUI();
+      jPanel8.repaint();
+     jPanel5.updateUI();
+     jPanel15.repaint();
     }//GEN-LAST:event_jTabbedPane4StateChanged
 
-    private void jPanel15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel15MouseClicked
-       x=(int)jPanel8.getMousePosition().getX();
-      y=(int)jPanel8.getMousePosition().getY();
-      jPanel8.repaint();
+    private void jPanel16MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel16MouseClicked
         // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel16MouseClicked
+
+    private void jPanel17MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel17MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel17MouseClicked
+
+    private void jPanel15MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel15MouseMoved
+      
+
+    }//GEN-LAST:event_jPanel15MouseMoved
+
+    private void jTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MousePressed
+        con=jTable1.getSelectedRow();
+        JComponent jc=(JComponent)evt.getSource();
+        TransferHandler tr=new TransferHandler( buscar.getname(jTable1.getSelectedRow()));
+           tr.exportAsDrag(jc, evt, TransferHandler.COPY);
+         
+    }//GEN-LAST:event_jTable1MousePressed
+
+    private void jPanel15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel15MouseClicked
+       
     }//GEN-LAST:event_jPanel15MouseClicked
+
+    private void jPanel8MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel8MouseDragged
+    if(evt.getY()<35&&evt.getX()==35)
+    {
+    jProgressBar1.setValue(jProgressBar1.getMaximum()-(jProgressBar1.getMaximum()/4));
+    }
+    else if(evt.getY()>35&&evt.getX()==35)
+    {
+    jProgressBar1.setValue(jProgressBar1.getMaximum()-(3*jProgressBar1.getMaximum()/4));
+    }
+    else if(evt.getY()==35&&evt.getX()<35)
+    {
+        jProgressBar1.setValue(jProgressBar1.getMaximum()-(jProgressBar1.getMaximum()/2));
+    }
+    else if(evt.getY()==35&&evt.getX()>35)
+    {
+        jProgressBar1.setValue(jProgressBar1.getMaximum()-(jProgressBar1.getMaximum()));
+    }
+  
+	//g.dispose();
+    }//GEN-LAST:event_jPanel8MouseDragged
+
+    private void jPanel8MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel8MousePressed
+      cax=evt.getX();
+      cay=evt.getY();// TODO add your handling code here:
+    }//GEN-LAST:event_jPanel8MousePressed
+
+    private void jPanel15MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel15MouseDragged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel15MouseDragged
+
+    private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton15ActionPerformed
+
+    private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton16ActionPerformed
+
+    private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton17ActionPerformed
+
+    private void jPanel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel8MouseClicked
+        jPanel8.repaint();
+    }//GEN-LAST:event_jPanel8MouseClicked
+
+    private void formWindowIconified(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowIconified
+       
+    }//GEN-LAST:event_formWindowIconified
+
+    private void formWindowDeiconified(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowDeiconified
+     
+    }//GEN-LAST:event_formWindowDeiconified
 
     /**
      * @param args the command line arguments
@@ -3423,6 +3567,9 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
     javax.swing.JButton jButton12;
     javax.swing.JButton jButton13;
     javax.swing.JButton jButton14;
+    javax.swing.JButton jButton15;
+    javax.swing.JButton jButton16;
+    javax.swing.JButton jButton17;
     javax.swing.JButton jButton2;
     javax.swing.JButton jButton3;
     javax.swing.JButton jButton4;
@@ -3445,8 +3592,6 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
     javax.swing.JLabel jLabel14;
     javax.swing.JLabel jLabel15;
     javax.swing.JLabel jLabel16;
-    javax.swing.JLabel jLabel17;
-    javax.swing.JLabel jLabel18;
     javax.swing.JLabel jLabel19;
     javax.swing.JLabel jLabel2;
     javax.swing.JLabel jLabel20;
@@ -3482,8 +3627,10 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
     javax.swing.JLabel jLabel7;
     javax.swing.JLabel jLabel8;
     javax.swing.JLabel jLabel9;
+    javax.swing.JMenu jMenu1;
     javax.swing.JMenuItem jMenuItem1;
     javax.swing.JMenuItem jMenuItem2;
+    javax.swing.JMenuItem jMenuItem3;
     javax.swing.JPanel jPanel1;
     javax.swing.JPanel jPanel10;
     javax.swing.JPanel jPanel11;
@@ -3491,6 +3638,8 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
     javax.swing.JPanel jPanel13;
     javax.swing.JPanel jPanel14;
     javax.swing.JPanel jPanel15;
+    javax.swing.JPanel jPanel16;
+    javax.swing.JPanel jPanel17;
     javax.swing.JPanel jPanel2;
     javax.swing.JPanel jPanel3;
     javax.swing.JPanel jPanel4;
@@ -3767,12 +3916,15 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
 public void value()
 {
   volumen1.setValue(100-volumenn.getValue());
+ 
   volumen2.setValue(volumenn.getValue());
-        try {int gainValue = volumen1.getValue();
-            int gainValue1 = volumen2.getValue();
-            int maxGain = volumenn.getMaximum();
-            buscar.setVolumen((float) ((double) gainValue / (double) maxGain));
-            buscar.setVolumen1((float) ((double) gainValue1 / (double) maxGain));
+        try {
+            float valuee=(float) volumen1.getValue() /  volumenn.getMaximum();
+           buscar.setVolumen(valuee);
+           float valuee2=(float) volumen2.getValue() /  volumenn.getMaximum();
+            buscar.setVolumen1(valuee2);
+            
+            
         } catch (BasicPlayerException ex) {
             Logger.getLogger(ventanamixer.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -3792,7 +3944,7 @@ private void play1d()
                       buscar.playSong(con);
                       iseek=true;
                       value();
-               
+                     cargarBandeja1();
                    
                 } catch (BasicPlayerException ex) {
                 }
@@ -3814,12 +3966,12 @@ private void play1d()
   jProgressBar1.setMaximum(escucha1.taman());
    jProgressBar5.setMaximum(escucha1.taman());
      jSlider6.setMaximum(escucha1.taman());
-
+  
 }
 
 private void antes(){
   
-      
+      cargarBandeja1();
         try 
         {if(listaC==true)
             {
@@ -3914,7 +4066,7 @@ private void antes(){
  }
 private void siguiente1()
  {
-
+     cargarBandeja1();
         
       try 
        {if(listaC==true)
@@ -3977,7 +4129,7 @@ private void siguiente1()
  }
  private void antes2()
  {
-        
+        cargarBandeja2();
         cBand2.stop();
         m2=0;
         s2=0;
@@ -4084,7 +4236,7 @@ private void siguiente1()
              // buscar.Play1();
                        
                 try {
-                
+                cargarBandeja2();
                  
                      cBand2.start();
                         buscar.playsSong(i);
@@ -4118,7 +4270,7 @@ private void siguiente1()
  }
  private void siguiente2()
  {
-       
+       cargarBandeja2();
         try {
             if(listaC==true)
             {
@@ -4197,6 +4349,7 @@ private void siguiente1()
            s1=0;m1=0;
            cBand1.start();
            cBand1.stop();
+          cargarBandeja1();
         for (int j = 0; j < jTable1.getRowCount(); j++) 
         {
         
@@ -4224,7 +4377,7 @@ private void siguiente1()
        m2=0;s2=0;
        cBand2.start();
        cBand2.stop();
-       
+       cargarBandeja2();
        for (int j = 0; j < jTable1.getRowCount(); j++) 
         {
        
@@ -4343,7 +4496,7 @@ private void siguiente1()
     {
         public imagenes()
         {
-            this.setSize(64,64);
+            this.setSize(70,70);
         }
         @Override
         public void paint(Graphics g)
@@ -4354,33 +4507,42 @@ private void siguiente1()
             Image image;
             Toolkit t1=Toolkit.getDefaultToolkit(); 
                 image=t1.getImage(getClass().getResource("bandeja3.png"));
-               //  ImageIcon img=new ImageIcon(image);
-                 // g.drawImage(image ,0,0,this);
-                 double r=0;
-      
-      if(x!=0&&y!=0)
-      {
-          r= Math.toRadians(jProgressBar3.getPercentComplete()*360-(x*360/y));
-      }
-      else{
-      r= Math.toRadians(jProgressBar3.getPercentComplete()*360);
-            System.out.println(r);
-      }
+                double r=0;
+      r= Math.toRadians(jProgressBar3.getPercentComplete()*360); 
        AffineTransform at=new AffineTransform();
     at.rotate(r, this.getWidth()/2,this.getHeight()/2); 
    ( (Graphics2D)g).setTransform(at); 
       image.setAccelerationPriority(1);
-       g.drawImage(image, 0,0,this.getWidth(), this.getHeight(),this);
-      
+  g.drawImage(image, 5,5,this.getWidth()-9, this.getHeight()-9,this);
+       g.setColor(Color.decode("#FF0000"));
+          g.drawArc(4, 4, this.getWidth()-8, this.getHeight()-8, 0, (int)Math.toDegrees(r));
+        g.drawArc(3, 3, this.getWidth()-7, this.getHeight()-7, 0, (int)Math.toDegrees(r));
+      g.drawArc(2, 2, this.getWidth()-6, this.getHeight()-6, 0, (int)Math.toDegrees(r));
+          g.drawArc(1, 1, this.getWidth()-5, this.getHeight()-5, 0, (int)Math.toDegrees(r));
+        if((int)Math.toDegrees(r)>=306&&(int)Math.toDegrees(r)<360)
+           {if(activar2==false)
+           {
+           activar2=true;
+           }
+               if(jProgressBar3.isVisible())
+              jProgressBar3.setVisible(false);
+               else
+                   jProgressBar3.setVisible(true);
+           }
+           else
+           {
+           jProgressBar3.setVisible(true);
+           activar1=false;
+           }
      }
            
            
         }
     public class imagenes1 extends JPanel
     {
-        public imagenes1()
+         public imagenes1()
         {
-            this.setSize(64,64);
+            this.setSize(70,70);
         }
         @Override
         public void paint(Graphics g)
@@ -4391,23 +4553,60 @@ private void siguiente1()
             Image image;
             Toolkit t1=Toolkit.getDefaultToolkit(); 
                 image=t1.getImage(getClass().getResource("bandeja3.png"));
-               //  ImageIcon img=new ImageIcon(image);
-                 // g.drawImage(image ,0,0,this);
-      
        double r = Math.toRadians(jProgressBar4.getPercentComplete()*360);
         AffineTransform at=new AffineTransform();
-            System.out.println(r);
-  
     at.rotate(r, this.getWidth()/2,this.getHeight()/2); 
    ( (Graphics2D)g).setTransform(at); 
-      image.setAccelerationPriority(1);
-      
-   
-     
-      g.drawImage(image, 0,0,this.getWidth(), this.getHeight(),this);
-      
+      image.setAccelerationPriority(1); 
+      g.drawImage(image, 5,5,this.getWidth()-9, this.getHeight()-9,this);
+       g.setColor(Color.decode("#FF0000"));
+          g.drawArc(4, 4, this.getWidth()-8, this.getHeight()-8, 0, (int)Math.toDegrees(r));
+        g.drawArc(3, 3, this.getWidth()-7, this.getHeight()-7, 0, (int)Math.toDegrees(r));
+      g.drawArc(2, 2, this.getWidth()-6, this.getHeight()-6, 0, (int)Math.toDegrees(r));
+          g.drawArc(1, 1, this.getWidth()-5, this.getHeight()-5, 0, (int)Math.toDegrees(r));
+           if((int)Math.toDegrees(r)>=306&&(int)Math.toDegrees(r)<360)
+           {    if(activar1==false){
+                activar1=true;
+                }
+               if(jProgressBar4.isVisible()){
+              jProgressBar4.setVisible(false);
+               } else
+               {   jProgressBar4.setVisible(true);
+           }}
+           else
+           {
+           jProgressBar4.setVisible(true);
+           activar2=false;
+           }
      }
            
            
         }
+    public Graphics  dibujar(Graphics g)
+    {
+    return g;
+    }
+    public void cargarBandeja1()
+    {
+      jPanel8.removeAll();
+           jPanel16.removeAll();
+                   imagenes imag1=new imagenes(),imag=new imagenes();
+                    jPanel16.add(imag1);
+            jPanel8.add(imag);
+          jPanel8.repaint();
+    }
+    public void cargarBandeja2()
+    {
+      jPanel17.removeAll();
+       jPanel15.removeAll();
+       imagenes1 ima=new imagenes1(),ima1=new imagenes1();
+        jPanel15.add(ima);
+      jPanel17.add(ima1);
+          jPanel15.repaint();
+          jPanel17.repaint();
+    }
+    public void cambiarEn5(int n)
+    {
+    
+    }
 }

@@ -41,7 +41,7 @@ import javazoom.jlgui.basicplayer.BasicPlayerListener;
 import javazoom.spi.vorbis.sampled.file.*;
 import sun.font.EAttribute;
 import java.lang.Object;
-
+import javax.sound.sampled.Mixer;
 /*
  *
  * @author joaco
@@ -282,15 +282,18 @@ bd=new BaseDatos();
     }
  
    
-   public void loop1() 
+   public Object[] loop1() 
    {
     for(int i=0;i<player.getMixers().toArray().length;i++)
             {
                 System.out.println(player.getMixers().toArray()[i]);
             }
-      
+      return player.getMixers().toArray();
    }
- 
+ public void seleccionarSalida(int n)
+ {
+
+ }
     
 }
  
