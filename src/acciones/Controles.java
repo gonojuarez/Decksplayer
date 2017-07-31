@@ -290,7 +290,6 @@ bd=new BaseDatos();
             }
       
    }
-   
  
     
 }
