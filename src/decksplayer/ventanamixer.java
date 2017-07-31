@@ -4,7 +4,13 @@ package decksplayer;
 
 import acciones.Controles;
 import acciones.Buscador;
-import static decksplayer.main.sertv;
+import static decksplayer.Principal.sertv;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,17 +24,21 @@ import java.io.*;
 import org.jvnet.substance.SubstanceLookAndFeel;
 import javax.swing.*;
 import java.awt.event.KeyEvent;
+import java.awt.geom.AffineTransform;
 import java.net.*;
 import java.util.ArrayList;
 import static java.util.Collections.enumeration;
 import java.util.Enumeration;
+import javax.imageio.ImageIO;
 import org.jvnet.substance.button.StandardButtonShaper;
-
+import java.awt.Toolkit;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 
 
 public class ventanamixer extends javax.swing.JFrame implements KeyListener {
     int con=0;
-    int i=0;
+   int i=0;
     int cont;
     int cont1=0;
     int value=0;
@@ -67,7 +77,9 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
    boolean cAnt;
    int ct;
    boolean cargarCanci;
-   
+   int contA=0;
+   int ss1=0;
+   int x,y;
       public Timer cBand1=new javax.swing.Timer(1000,new ActionListener()// cronometro bandeja 1
    {
     public void actionPerformed(ActionEvent e)
@@ -75,7 +87,11 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         jProgressBar3.setValue(escucha1.progresos());
    
     jProgressBar5.setValue(escucha1.progresos());
-  
+  contA++;
+  if(contA==360)
+  {
+  contA=0;
+  }
         s1++;//segundos
         System.out.println(escucha1.taman());
      if(s1==60)
@@ -146,7 +162,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         }
       }
     
-    
+    jPanel8.updateUI();
    }}
    );
    public Timer cBand2=new javax.swing.Timer(1000,new ActionListener()//Cronometro bandeja 2
@@ -225,7 +241,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         }
     }
    //muestro en la bandeja el tiempo
-    
+    jPanel15.updateUI();
  }
     }
 );
@@ -239,7 +255,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
          listas=new ArrayList<String>();//genero un arreglo para la lista
       gr=new ImageIcon( getClass().getResource("Decksplayer.png"));//agrego el logo a una foto
       this.setIconImage(gr.getImage());//establezco el logo del programa
-      this.setTitle("DECKSPLAYER     \n Ip "+Inet4Address.getLocalHost().getHostAddress());//pongo el titulo
+      this.setTitle("DECKSPLAYER     \n Ip "+InetAddress.getLocalHost().getHostAddress());//pongo el titulo
       this.setLocationRelativeTo(null);//centro la ventana al medio
       Lista.setLocationRelativeTo(null);//centro la ventana de busqueda al medio
       tir.setText(h2+":"+m2+":"+s2);//muestro hora, minutos y segundos
@@ -297,12 +313,12 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
                System.out.println("Iniciando servidor\n");
        
     JDialog d=new JDialog();
-    
-       
-
-    
-    
-      
+        imagenes imag=new imagenes();
+        jPanel8.add(imag).setLocation(0, 0);
+        jPanel8.repaint();
+           imagenes1 ima=new imagenes1();
+        jPanel15.add(ima).setLocation(0, 0);
+        jPanel15.repaint();
     }
 
     
@@ -420,6 +436,8 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         jSlider7 = new javax.swing.JSlider();
         jProgressBar6 = new javax.swing.JProgressBar();
         jLabel46 = new javax.swing.JLabel();
+        jButton14 = new javax.swing.JButton();
+        jButton10 = new javax.swing.JButton();
         jPanel14 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
@@ -439,30 +457,20 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         jTabbedPane4 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JLabel();
         play1 = new javax.swing.JButton();
         next1 = new javax.swing.JButton();
         stop1 = new javax.swing.JButton();
         antes1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         ti = new javax.swing.JLabel();
-        jProgressBar1 = new javax.swing.JSlider();
-        jProgressBar3 = new javax.swing.JProgressBar();
-        jButton10 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
-        jTextField2 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         antes2 = new javax.swing.JButton();
         next2 = new javax.swing.JButton();
         stop2 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         play2 = new javax.swing.JToggleButton();
         tir = new javax.swing.JLabel();
-        jProgressBar2 = new javax.swing.JSlider();
-        jProgressBar4 = new javax.swing.JProgressBar();
         jLabel17 = new javax.swing.JLabel();
-        jButton14 = new javax.swing.JButton();
         jPanel9 = new javax.swing.JPanel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel10 = new javax.swing.JPanel();
@@ -491,6 +499,14 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         jToggleButton1 = new javax.swing.JToggleButton();
         jSlider5 = new javax.swing.JSlider();
         jSlider4 = new javax.swing.JSlider();
+        jPanel15 = new javax.swing.JPanel();
+        jPanel8 = new javax.swing.JPanel();
+        jTextField1 = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JLabel();
+        jProgressBar3 = new javax.swing.JProgressBar();
+        jProgressBar4 = new javax.swing.JProgressBar();
+        jProgressBar2 = new javax.swing.JSlider();
+        jProgressBar1 = new javax.swing.JSlider();
 
         Lista.setMinimumSize(new java.awt.Dimension(400, 200));
         Lista.setResizable(false);
@@ -1343,6 +1359,23 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
                 formKeyPressed(evt);
             }
         });
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jButton14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/ecualizador.png"))); // NOI18N
+        jButton14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton14ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton14, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 20, 60, 40));
+
+        jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/ecualizador.png"))); // NOI18N
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 20, 60, 40));
 
         jPanel14.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jPanel14.setFocusable(false);
@@ -1546,6 +1579,11 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         jTabbedPane1.addTab("Musica", new javax.swing.ImageIcon(getClass().getResource("/decksplayer/musica2.png")), jPanel3); // NOI18N
 
         jTabbedPane4.setFocusable(false);
+        jTabbedPane4.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jTabbedPane4StateChanged(evt);
+            }
+        });
         jTabbedPane4.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jTabbedPane4KeyPressed(evt);
@@ -1564,18 +1602,6 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         jLabel18.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel18.setText("Adelantar");
         jPanel2.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, 20));
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel1.setText("Pista:");
-        jLabel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 80, 23));
-
-        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jTextField1KeyPressed(evt);
-            }
-        });
-        jPanel2.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 50, 370, 20));
 
         play1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/play.png"))); // NOI18N
         play1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -1657,41 +1683,6 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         ti.setFont(new java.awt.Font("Trebuchet MS", 0, 24)); // NOI18N
         jPanel2.add(ti, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 180, 110, 40));
 
-        jProgressBar1.setToolTipText("adelantar");
-        jProgressBar1.setValue(0);
-        jProgressBar1.setFocusable(false);
-        jProgressBar1.setOpaque(false);
-        jProgressBar1.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                jProgressBar1StateChanged(evt);
-            }
-        });
-        jProgressBar1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jProgressBar1MouseClicked(evt);
-            }
-        });
-        jProgressBar1.addVetoableChangeListener(new java.beans.VetoableChangeListener() {
-            public void vetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {
-                jProgressBar1VetoableChange(evt);
-            }
-        });
-        jPanel2.add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, 400, 30));
-
-        jProgressBar3.setBackground(new java.awt.Color(0, 102, 153));
-        jProgressBar3.setForeground(new java.awt.Color(255, 0, 0));
-        jProgressBar3.setComponentPopupMenu(jPopupMenu3);
-        jProgressBar3.setStringPainted(true);
-        jPanel2.add(jProgressBar3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, 380, 60));
-
-        jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/ecualizador.png"))); // NOI18N
-        jButton10.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton10ActionPerformed(evt);
-            }
-        });
-        jPanel2.add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 160, 60, 40));
-
         jTabbedPane4.addTab("Bandeja 1", jPanel2);
 
         jPanel4.setFocusable(false);
@@ -1701,18 +1692,6 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
             }
         });
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jTextField2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jTextField2KeyPressed(evt);
-            }
-        });
-        jPanel4.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 50, 370, 20));
-
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel5.setText("Pista:");
-        jLabel5.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel4.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, 39));
 
         antes2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/anterior_1.png"))); // NOI18N
         antes2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -1797,41 +1776,9 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         tir.setFont(new java.awt.Font("Trebuchet MS", 0, 24)); // NOI18N
         jPanel4.add(tir, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 180, 110, 40));
 
-        jProgressBar2.setValue(0);
-        jProgressBar2.setFocusable(false);
-        jProgressBar2.setOpaque(false);
-        jProgressBar2.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                jProgressBar2StateChanged(evt);
-            }
-        });
-        jProgressBar2.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                jProgressBar2PropertyChange(evt);
-            }
-        });
-        jProgressBar2.addVetoableChangeListener(new java.beans.VetoableChangeListener() {
-            public void vetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {
-                jProgressBar2VetoableChange(evt);
-            }
-        });
-        jPanel4.add(jProgressBar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, 400, 30));
-
-        jProgressBar4.setComponentPopupMenu(jPopupMenu4);
-        jProgressBar4.setStringPainted(true);
-        jPanel4.add(jProgressBar4, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, 380, 60));
-
         jLabel17.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel17.setText("Adelantar");
         jPanel4.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, 20));
-
-        jButton14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/ecualizador.png"))); // NOI18N
-        jButton14.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton14ActionPerformed(evt);
-            }
-        });
-        jPanel4.add(jButton14, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 160, 60, 40));
 
         jTabbedPane4.addTab("Bandeja 2", jPanel4);
 
@@ -1918,7 +1865,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
-                .addGap(0, 138, Short.MAX_VALUE)
+                .addGap(0, 141, Short.MAX_VALUE)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(MarcasDeAgua, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -2098,7 +2045,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         jPanel11.setLayout(jPanel11Layout);
         jPanel11Layout.setHorizontalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 527, Short.MAX_VALUE)
+            .addComponent(jTabbedPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE)
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2225,25 +2172,118 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
                                     .addComponent(jSlider4, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel2)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)))
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(volumenn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, 776, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+        getContentPane().add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 105, 776, -1));
+
+        jPanel15.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel15MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
+        jPanel15.setLayout(jPanel15Layout);
+        jPanel15Layout.setHorizontalGroup(
+            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 70, Short.MAX_VALUE)
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        jPanel15Layout.setVerticalGroup(
+            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 70, Short.MAX_VALUE)
         );
+
+        getContentPane().add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 10, 70, 70));
+
+        jPanel8.setPreferredSize(new java.awt.Dimension(64, 64));
+        jPanel8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel8MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 64, Short.MAX_VALUE)
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 64, Short.MAX_VALUE)
+        );
+
+        getContentPane().add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 64, 64));
+
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextField1KeyPressed(evt);
+            }
+        });
+        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 50, 180, 20));
+
+        jTextField2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextField2KeyPressed(evt);
+            }
+        });
+        getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 50, 180, 20));
+
+        jProgressBar3.setBackground(new java.awt.Color(0, 102, 153));
+        jProgressBar3.setForeground(new java.awt.Color(255, 0, 0));
+        jProgressBar3.setComponentPopupMenu(jPopupMenu3);
+        jProgressBar3.setStringPainted(true);
+        getContentPane().add(jProgressBar3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, 180, 60));
+
+        jProgressBar4.setComponentPopupMenu(jPopupMenu4);
+        jProgressBar4.setStringPainted(true);
+        getContentPane().add(jProgressBar4, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 10, 180, 60));
+
+        jProgressBar2.setValue(0);
+        jProgressBar2.setFocusable(false);
+        jProgressBar2.setOpaque(false);
+        jProgressBar2.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jProgressBar2StateChanged(evt);
+            }
+        });
+        jProgressBar2.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jProgressBar2PropertyChange(evt);
+            }
+        });
+        jProgressBar2.addVetoableChangeListener(new java.beans.VetoableChangeListener() {
+            public void vetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {
+                jProgressBar2VetoableChange(evt);
+            }
+        });
+        getContentPane().add(jProgressBar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 70, 180, 30));
+
+        jProgressBar1.setToolTipText("adelantar");
+        jProgressBar1.setValue(0);
+        jProgressBar1.setFocusable(false);
+        jProgressBar1.setOpaque(false);
+        jProgressBar1.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jProgressBar1StateChanged(evt);
+            }
+        });
+        jProgressBar1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jProgressBar1MouseClicked(evt);
+            }
+        });
+        jProgressBar1.addVetoableChangeListener(new java.beans.VetoableChangeListener() {
+            public void vetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {
+                jProgressBar1VetoableChange(evt);
+            }
+        });
+        getContentPane().add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 180, 30));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -2423,8 +2463,9 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
     private void play1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_play1ActionPerformed
  
        
-    
-  
+    imagenes im=new imagenes();
+    jPanel8.add(im).setLocation(32, 32);
+  jPanel8.repaint();
         play1d(); //Se encarga de realizar la funcion de play del programa boton de la bandeja 1
         value();
    
@@ -3196,6 +3237,8 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
             {
 
             }
+        jPanel8.repaint();
+        jPanel15.repaint();
     }//GEN-LAST:event_jTabbedPane1StateChanged
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
@@ -3286,6 +3329,22 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
     evt.getWindow().addKeyListener(this);setFocusable(true);
     }//GEN-LAST:event_formWindowActivated
 
+    private void jPanel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel8MouseClicked
+
+    }//GEN-LAST:event_jPanel8MouseClicked
+
+    private void jTabbedPane4StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane4StateChanged
+        jPanel8.repaint();
+        jPanel15.repaint();
+    }//GEN-LAST:event_jTabbedPane4StateChanged
+
+    private void jPanel15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel15MouseClicked
+       x=(int)jPanel8.getMousePosition().getX();
+      y=(int)jPanel8.getMousePosition().getY();
+      jPanel8.repaint();
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel15MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -3369,7 +3428,6 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
     javax.swing.JDialog jDialog2;
     javax.swing.JDialog jDialog3;
     javax.swing.JDialog jDialog4;
-    javax.swing.JLabel jLabel1;
     javax.swing.JLabel jLabel10;
     javax.swing.JLabel jLabel11;
     javax.swing.JLabel jLabel12;
@@ -3410,7 +3468,6 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
     javax.swing.JLabel jLabel44;
     javax.swing.JLabel jLabel45;
     javax.swing.JLabel jLabel46;
-    javax.swing.JLabel jLabel5;
     javax.swing.JLabel jLabel6;
     javax.swing.JLabel jLabel7;
     javax.swing.JLabel jLabel8;
@@ -3423,12 +3480,14 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
     javax.swing.JPanel jPanel12;
     javax.swing.JPanel jPanel13;
     javax.swing.JPanel jPanel14;
+    javax.swing.JPanel jPanel15;
     javax.swing.JPanel jPanel2;
     javax.swing.JPanel jPanel3;
     javax.swing.JPanel jPanel4;
     javax.swing.JPanel jPanel5;
     javax.swing.JPanel jPanel6;
     javax.swing.JPanel jPanel7;
+    javax.swing.JPanel jPanel8;
     javax.swing.JPanel jPanel9;
     javax.swing.JPopupMenu jPopupMenu1;
     javax.swing.JPopupMenu jPopupMenu2;
@@ -4260,17 +4319,85 @@ private void siguiente1()
      }
      
  }
-    public String devolverCancion1()
+    public int devolverCancion1()
+    {   
+      
+    return con;
+    }
+      public int devolverCancion2()
     {   
        
-    return jTextField2.getText();
+    return i;
     }
-      public String devolverCancion2()
-    {   
-       
-    return jTextField1.getText();
-    }
- 
- 
+ public class imagenes extends JPanel
+    {
+        public imagenes()
+        {
+            this.setSize(64,64);
+        }
+        @Override
+        public void paint(Graphics g)
+        {
+            super.paint(g);
+            Dimension heigh=getSize();
+            
+            Image image;
+            Toolkit t1=Toolkit.getDefaultToolkit(); 
+                image=t1.getImage(getClass().getResource("bandeja3.png"));
+               //  ImageIcon img=new ImageIcon(image);
+                 // g.drawImage(image ,0,0,this);
+                 double r=0;
+      
+      if(x!=0&&y!=0)
+      {
+          r= Math.toRadians(jProgressBar3.getPercentComplete()*360-(x*360/y));
+      }
+      else{
+      r= Math.toRadians(jProgressBar3.getPercentComplete()*360);
+            System.out.println(r);
+      }
+       AffineTransform at=new AffineTransform();
+    at.rotate(r, this.getWidth()/2,this.getHeight()/2); 
+   ( (Graphics2D)g).setTransform(at); 
+      image.setAccelerationPriority(1);
+       g.drawImage(image, 0,0,this.getWidth(), this.getHeight(),this);
+      
+     }
+           
+           
+        }
+    public class imagenes1 extends JPanel
+    {
+        public imagenes1()
+        {
+            this.setSize(64,64);
+        }
+        @Override
+        public void paint(Graphics g)
+        {
+            super.paint(g);
+            Dimension heigh=getSize();
+            
+            Image image;
+            Toolkit t1=Toolkit.getDefaultToolkit(); 
+                image=t1.getImage(getClass().getResource("bandeja3.png"));
+               //  ImageIcon img=new ImageIcon(image);
+                 // g.drawImage(image ,0,0,this);
+      
+       double r = Math.toRadians(jProgressBar4.getPercentComplete()*360);
+        AffineTransform at=new AffineTransform();
+            System.out.println(r);
+  
+    at.rotate(r, this.getWidth()/2,this.getHeight()/2); 
+   ( (Graphics2D)g).setTransform(at); 
+      image.setAccelerationPriority(1);
+      
+   
+     
+      g.drawImage(image, 0,0,this.getWidth(), this.getHeight(),this);
+      
+     }
+           
+           
+        }
 }
-

@@ -17,7 +17,7 @@ import decksplayer.ventanamixer;
  *
  * @author Gonzalo
  */
-public class main {
+public class Principal {
    
        static ventanamixer v2 ;
     public   static  Servidor1 sertv;
