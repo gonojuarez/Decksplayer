@@ -17,22 +17,19 @@ import decksplayer.ventanamixer;
  *
  * @author Gonzalo
  */
-public class Principal {
+public class main {
    
        static ventanamixer v2 ;
-    public   static  Servidor1 sertv;
     public static void main(String[]args) throws Exception{
         JFrame.setDefaultLookAndFeelDecorated(true);
   
       int num=0;
      
-      v2=new ventanamixer();
+                v2=new ventanamixer();
            v2.setVisible(true);
-        
-     sertv=new Servidor1(v2); 
-  
+    
     }
-   
+
     
     
        

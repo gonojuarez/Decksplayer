@@ -4,13 +4,6 @@ package decksplayer;
 
 import acciones.Controles;
 import acciones.Buscador;
-import static decksplayer.Principal.sertv;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Toolkit;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,21 +17,13 @@ import java.io.*;
 import org.jvnet.substance.SubstanceLookAndFeel;
 import javax.swing.*;
 import java.awt.event.KeyEvent;
-import java.awt.geom.AffineTransform;
-import java.net.*;
 import java.util.ArrayList;
-import static java.util.Collections.enumeration;
-import java.util.Enumeration;
-import javax.imageio.ImageIO;
 import org.jvnet.substance.button.StandardButtonShaper;
-import java.awt.Toolkit;
-import java.awt.*;
-import java.awt.image.BufferedImage;
 
 
 public class ventanamixer extends javax.swing.JFrame implements KeyListener {
     int con=0;
-   int i=0;
+    int i=0;
     int cont;
     int cont1=0;
     int value=0;
@@ -63,6 +48,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
     private RandomAccessFile flow,file;
     private int m1=0,m2=0,s1=0,s2=0,h1=0,h2=0;//variables relacionadas con el tiempo
     public VisorFotos.Album vs;
+    private JPopupMenu popup;
     int posxw=0;//variable para aumentar el tamaño de la lista creada
     public float[] equalizer; 
     float[] eq = new float[32]; 
@@ -73,27 +59,18 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
    boolean automixer;//boolean  para mezclar en modo aleatorio
    boolean lista;//boolean para una lista comun
    boolean listaC;//boolean para crear una lista
-   boolean activar;//bandera para poder activar los tipos de reproducciones
+   boolean activar;
    boolean cAnt;
-   int ct;
-   boolean cargarCanci;
-   int contA=0;
-   int ss1=0;
-   int x,y;
+   
+   
       public Timer cBand1=new javax.swing.Timer(1000,new ActionListener()// cronometro bandeja 1
    {
     public void actionPerformed(ActionEvent e)
     {
         jProgressBar3.setValue(escucha1.progresos());
-   
-    jProgressBar5.setValue(escucha1.progresos());
-  contA++;
-  if(contA==360)
-  {
-  contA=0;
-  }
+     //   System.out.println("Tamaño:"+escucha1.taman());
         s1++;//segundos
-        System.out.println(escucha1.taman());
+        
      if(s1==60)
      {
         m1++;//minutos
@@ -104,7 +81,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         m1=0;
        }
      }
-    // System.out.print(buscar.getPlayer().getStatus());
+     System.out.print(buscar.getPlayer().getStatus());
         ti.setText(h1+":"+m1+":"+s1);//muestro el tiempo
         String c=buscar.getPlayer().getStatus()+"";
       if(c.endsWith("2"))
@@ -162,7 +139,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         }
       }
     
-    jPanel8.updateUI();
+    
    }}
    );
    public Timer cBand2=new javax.swing.Timer(1000,new ActionListener()//Cronometro bandeja 2
@@ -171,7 +148,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
  {
     
   jProgressBar4.setValue(escucha2.progresos());
-    jProgressBar6.setValue(escucha2.progresos());
+      
     s2++;//segundos
      
     if(s2==60)
@@ -185,7 +162,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
          
       }
     }
-    // System.out.print(buscar.getPlayer().getStatus());
+     System.out.print(buscar.getPlayer().getStatus());
     tir.setText(h2+":"+m2+":"+s2);
     String c=buscar.getPlayer1().getStatus()+"";
     if(c.endsWith("2"))//si se detiene la cancion
@@ -241,7 +218,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         }
     }
    //muestro en la bandeja el tiempo
-    jPanel15.updateUI();
+    
  }
     }
 );
@@ -255,7 +232,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
          listas=new ArrayList<String>();//genero un arreglo para la lista
       gr=new ImageIcon( getClass().getResource("Decksplayer.png"));//agrego el logo a una foto
       this.setIconImage(gr.getImage());//establezco el logo del programa
-      this.setTitle("DECKSPLAYER     \n Ip "+InetAddress.getLocalHost().getHostAddress());//pongo el titulo
+      this.setTitle("DECKSPLAYER");//pongo el titulo
       this.setLocationRelativeTo(null);//centro la ventana al medio
       Lista.setLocationRelativeTo(null);//centro la ventana de busqueda al medio
       tir.setText(h2+":"+m2+":"+s2);//muestro hora, minutos y segundos
@@ -310,15 +287,9 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
             cont=volumenn.getValue();
              buscar.getPlayer().addBasicPlayerListener(escucha1);
               buscar.getPlayer1().addBasicPlayerListener(escucha2);
-               System.out.println("Iniciando servidor\n");
-       
-    JDialog d=new JDialog();
-        imagenes imag=new imagenes();
-        jPanel8.add(imag).setLocation(0, 0);
-        jPanel8.repaint();
-           imagenes1 ima=new imagenes1();
-        jPanel15.add(ima).setLocation(0, 0);
-        jPanel15.repaint();
+   
+    
+      
     }
 
     
@@ -423,22 +394,10 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         jLabel43 = new javax.swing.JLabel();
         jLabel44 = new javax.swing.JLabel();
         preset2 = new javax.swing.JLabel();
-        jLabel45 = new javax.swing.JLabel();
-        jPopupMenu3 = new javax.swing.JPopupMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jPopupMenu4 = new javax.swing.JPopupMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jDialog3 = new javax.swing.JDialog();
-        jSlider6 = new javax.swing.JSlider();
-        jProgressBar5 = new javax.swing.JProgressBar();
-        jLabel6 = new javax.swing.JLabel();
-        jDialog4 = new javax.swing.JDialog();
-        jSlider7 = new javax.swing.JSlider();
-        jProgressBar6 = new javax.swing.JProgressBar();
-        jLabel46 = new javax.swing.JLabel();
         jPanel14 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
+        jTabbedPane3 = new javax.swing.JTabbedPane();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -454,20 +413,23 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         Escritorio = new javax.swing.JPanel();
         jTabbedPane4 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
-        jPanel8 = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
         play1 = new javax.swing.JButton();
         next1 = new javax.swing.JButton();
         stop1 = new javax.swing.JButton();
         antes1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        volumen = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         ti = new javax.swing.JLabel();
         jProgressBar1 = new javax.swing.JSlider();
         jProgressBar3 = new javax.swing.JProgressBar();
         jButton10 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
-        jTextField2 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
         antes2 = new javax.swing.JButton();
         next2 = new javax.swing.JButton();
         stop2 = new javax.swing.JButton();
@@ -478,7 +440,6 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         jProgressBar4 = new javax.swing.JProgressBar();
         jLabel17 = new javax.swing.JLabel();
         jButton14 = new javax.swing.JButton();
-        jPanel15 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel10 = new javax.swing.JPanel();
@@ -764,12 +725,6 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         });
         jPopupMenu2.add(Jazz);
 
-        jDialog1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jDialog1KeyPressed(evt);
-            }
-        });
-
         jPanel12.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jPanel12KeyPressed(evt);
@@ -779,7 +734,6 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
 
         Parlante.setMinimum(-100);
         Parlante.setValue(0);
-        Parlante.setFocusable(false);
         Parlante.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 ParlanteStateChanged(evt);
@@ -801,7 +755,6 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         jSlider1.setMaximum(50);
         jSlider1.setToolTipText("");
         jSlider1.setValue(0);
-        jSlider1.setFocusable(false);
         jSlider1.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jSlider1StateChanged(evt);
@@ -977,22 +930,22 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         jDialog1.getContentPane().setLayout(jDialog1Layout);
         jDialog1Layout.setHorizontalGroup(
             jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 544, Short.MAX_VALUE)
+            .addGap(0, 400, Short.MAX_VALUE)
             .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, 544, Short.MAX_VALUE))
+                .addGroup(jDialog1Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, 524, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         jDialog1Layout.setVerticalGroup(
             jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 300, Short.MAX_VALUE)
             .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanel12, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE))
+                .addGroup(jDialog1Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
-
-        jDialog2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jDialog2KeyPressed(evt);
-            }
-        });
 
         jPanel13.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1024,7 +977,6 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         jSlider3.setMaximum(50);
         jSlider3.setToolTipText("");
         jSlider3.setValue(0);
-        jSlider3.setFocusable(false);
         jSlider3.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jSlider3StateChanged(evt);
@@ -1200,160 +1152,24 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         jDialog2.getContentPane().setLayout(jDialog2Layout);
         jDialog2Layout.setHorizontalGroup(
             jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 499, Short.MAX_VALUE)
+            .addGap(0, 400, Short.MAX_VALUE)
             .addGroup(jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jDialog2Layout.createSequentialGroup()
-                    .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, 499, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, 524, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
         jDialog2Layout.setVerticalGroup(
             jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 300, Short.MAX_VALUE)
             .addGroup(jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanel13, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE))
-        );
-
-        jLabel45.setText("jLabel45");
-
-        jMenuItem1.setText("bandeja1 - informe");
-        jMenuItem1.setToolTipText("");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        jPopupMenu3.add(jMenuItem1);
-
-        jMenuItem2.setText("bandeja 2 - informe");
-        jMenuItem2.setToolTipText("");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
-            }
-        });
-        jPopupMenu4.add(jMenuItem2);
-
-        jDialog3.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jDialog3KeyPressed(evt);
-            }
-        });
-
-        jSlider6.setValue(0);
-        jSlider6.setFocusable(false);
-        jSlider6.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                jSlider6StateChanged(evt);
-            }
-        });
-        jSlider6.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jSlider6KeyPressed(evt);
-            }
-        });
-
-        jProgressBar5.setStringPainted(true);
-        jProgressBar5.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jProgressBar5KeyPressed(evt);
-            }
-        });
-
-        jLabel6.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jLabel6KeyPressed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jDialog3Layout = new javax.swing.GroupLayout(jDialog3.getContentPane());
-        jDialog3.getContentPane().setLayout(jDialog3Layout);
-        jDialog3Layout.setHorizontalGroup(
-            jDialog3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jDialog3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jDialog3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jProgressBar5, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSlider6, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(22, Short.MAX_VALUE))
-        );
-        jDialog3Layout.setVerticalGroup(
-            jDialog3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jDialog3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jProgressBar5, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSlider6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
-        jDialog4.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jDialog4KeyPressed(evt);
-            }
-        });
-
-        jSlider7.setValue(0);
-        jSlider7.setFocusable(false);
-        jSlider7.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                jSlider7StateChanged(evt);
-            }
-        });
-        jSlider7.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jSlider7KeyPressed(evt);
-            }
-        });
-
-        jProgressBar6.setStringPainted(true);
-        jProgressBar6.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jProgressBar6KeyPressed(evt);
-            }
-        });
-
-        jLabel46.setText(" ");
-        jLabel46.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jLabel46KeyPressed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jDialog4Layout = new javax.swing.GroupLayout(jDialog4.getContentPane());
-        jDialog4.getContentPane().setLayout(jDialog4Layout);
-        jDialog4Layout.setHorizontalGroup(
-            jDialog4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jDialog4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jDialog4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jProgressBar6, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSlider7, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel46, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(32, Short.MAX_VALUE))
-        );
-        jDialog4Layout.setVerticalGroup(
-            jDialog4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jDialog4Layout.createSequentialGroup()
-                .addGap(4, 4, 4)
-                .addComponent(jProgressBar6, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jSlider7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel46, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addGroup(jDialog2Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setFocusCycleRoot(false);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowActivated(java.awt.event.WindowEvent evt) {
-                formWindowActivated(evt);
-            }
-        });
         addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 formKeyPressed(evt);
@@ -1370,10 +1186,10 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         });
 
         jTabbedPane1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jTabbedPane1.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
         jTabbedPane1.setTabPlacement(javax.swing.JTabbedPane.LEFT);
         jTabbedPane1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jTabbedPane1.setFocusable(false);
-        jTabbedPane1.setRequestFocusEnabled(false);
         jTabbedPane1.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jTabbedPane1StateChanged(evt);
@@ -1386,6 +1202,12 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         });
 
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jTabbedPane3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTabbedPane3KeyPressed(evt);
+            }
+        });
 
         jPanel5.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1495,18 +1317,8 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
                 jButton7ActionPerformed(evt);
             }
         });
-        jButton7.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jButton7KeyPressed(evt);
-            }
-        });
 
         jTextPane1.setContentType("text/html"); // NOI18N
-        jTextPane1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jTextPane1KeyPressed(evt);
-            }
-        });
         jScrollPane4.setViewportView(jTextPane1);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -1517,56 +1329,51 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
+                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addComponent(jButton7)
-                                .addGap(54, 54, 54)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(27, 27, 27)
+                                .addGap(18, 18, 18)
                                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jComboBox3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 3, Short.MAX_VALUE))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane4)))
-                .addContainerGap())
+                            .addComponent(jComboBox3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(16, 16, 16)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
                     .addComponent(jScrollPane4))
                 .addContainerGap())
         );
 
-        jPanel3.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 530, 280));
+        jTabbedPane3.addTab("", jPanel5);
 
-        jTabbedPane1.addTab("Musica", new javax.swing.ImageIcon(getClass().getResource("/decksplayer/musica2.png")), jPanel3); // NOI18N
+        jPanel3.add(jTabbedPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 530, 290));
 
-        jTabbedPane4.setFocusable(false);
-        jTabbedPane4.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                jTabbedPane4StateChanged(evt);
-            }
-        });
+        jTabbedPane1.addTab("MUSICA", new javax.swing.ImageIcon(getClass().getResource("/decksplayer/musica2.png")), jPanel3); // NOI18N
+
         jTabbedPane4.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jTabbedPane4KeyPressed(evt);
@@ -1574,7 +1381,6 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         });
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel2.setFocusable(false);
         jPanel2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jPanel2KeyPressed(evt);
@@ -1582,36 +1388,22 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         });
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel8.setPreferredSize(new java.awt.Dimension(64, 64));
-        jPanel8.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel8MouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 64, Short.MAX_VALUE)
-        );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 64, Short.MAX_VALUE)
-        );
-
-        jPanel2.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 64, 64));
-
         jLabel18.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel18.setText("Adelantar");
-        jPanel2.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, 20));
+        jPanel2.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 204, -1, 20));
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
+        jLabel1.setText("TEMA :");
+        jLabel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, 91, 23));
+
+        jTextField1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jTextField1KeyPressed(evt);
             }
         });
-        jPanel2.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 50, 370, 20));
+        jPanel2.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 288, 20));
 
         play1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/play.png"))); // NOI18N
         play1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -1625,9 +1417,9 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
                 play1KeyPressed(evt);
             }
         });
-        jPanel2.add(play1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 100, 50, 50));
+        jPanel2.add(play1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 90, 50, 50));
 
-        next1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/siguiente.png"))); // NOI18N
+        next1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/siguiente_1.png"))); // NOI18N
         next1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         next1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -1644,7 +1436,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
                 next1KeyPressed(evt);
             }
         });
-        jPanel2.add(next1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 100, 50, 50));
+        jPanel2.add(next1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 90, 60, 50));
 
         stop1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/stop.png"))); // NOI18N
         stop1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -1659,9 +1451,9 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
                 stop1KeyPressed(evt);
             }
         });
-        jPanel2.add(stop1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 100, 50, 50));
+        jPanel2.add(stop1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 90, 50, 50));
 
-        antes1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/anterior.PNG"))); // NOI18N
+        antes1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/anterior_1.png"))); // NOI18N
         antes1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         antes1.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/anterior.PNG"))); // NOI18N
         antes1.addActionListener(new java.awt.event.ActionListener() {
@@ -1674,7 +1466,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
                 antes1KeyPressed(evt);
             }
         });
-        jPanel2.add(antes1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, 50, 50));
+        jPanel2.add(antes1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, 60, 50));
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/pausa.png"))); // NOI18N
         jButton3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -1688,15 +1480,15 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
                 jButton3KeyPressed(evt);
             }
         });
-        jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 100, 50, 50));
+        jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 90, 60, 50));
+        jPanel2.add(volumen, new org.netbeans.lib.awtextra.AbsoluteConstraints(543, 230, 60, 23));
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 280, 50, 20));
 
         ti.setFont(new java.awt.Font("Trebuchet MS", 0, 24)); // NOI18N
-        jPanel2.add(ti, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 180, 110, 40));
+        jPanel2.add(ti, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 170, 110, 40));
 
         jProgressBar1.setToolTipText("adelantar");
         jProgressBar1.setValue(0);
-        jProgressBar1.setFocusable(false);
-        jProgressBar1.setOpaque(false);
         jProgressBar1.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jProgressBar1StateChanged(evt);
@@ -1712,13 +1504,12 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
                 jProgressBar1VetoableChange(evt);
             }
         });
-        jPanel2.add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, 400, 30));
+        jPanel2.add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 200, 320, 30));
 
         jProgressBar3.setBackground(new java.awt.Color(0, 102, 153));
         jProgressBar3.setForeground(new java.awt.Color(255, 0, 0));
-        jProgressBar3.setComponentPopupMenu(jPopupMenu3);
         jProgressBar3.setStringPainted(true);
-        jPanel2.add(jProgressBar3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, 380, 60));
+        jPanel2.add(jProgressBar3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 480, 50));
 
         jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/ecualizador.png"))); // NOI18N
         jButton10.addActionListener(new java.awt.event.ActionListener() {
@@ -1726,11 +1517,10 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
                 jButton10ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 160, 60, 40));
+        jPanel2.add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 150, 60, 40));
 
         jTabbedPane4.addTab("Bandeja 1", jPanel2);
 
-        jPanel4.setFocusable(false);
         jPanel4.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jPanel4KeyPressed(evt);
@@ -1738,12 +1528,23 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         });
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
+        jLabel5.setText("TEMA:");
+        jLabel5.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jPanel4.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, -1, 39));
+
+        jTextField2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
+            }
+        });
         jTextField2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jTextField2KeyPressed(evt);
             }
         });
-        jPanel4.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 50, 370, 20));
+        jPanel4.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, 288, 20));
 
         antes2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/anterior_1.png"))); // NOI18N
         antes2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -1757,7 +1558,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
                 antes2KeyPressed(evt);
             }
         });
-        jPanel4.add(antes2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, 50, 50));
+        jPanel4.add(antes2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, 60, 50));
 
         next2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/siguiente_1.png"))); // NOI18N
         next2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -1771,7 +1572,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
                 next2KeyPressed(evt);
             }
         });
-        jPanel4.add(next2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 100, 50, 50));
+        jPanel4.add(next2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 100, 60, 50));
 
         stop2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/stop.png"))); // NOI18N
         stop2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -1790,7 +1591,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
                 stop2KeyPressed(evt);
             }
         });
-        jPanel4.add(stop2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 100, 50, 50));
+        jPanel4.add(stop2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 100, 50, 50));
 
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/pausa.png"))); // NOI18N
         jButton4.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -1804,7 +1605,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
                 jButton4KeyPressed(evt);
             }
         });
-        jPanel4.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 100, 50, 50));
+        jPanel4.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 100, 50, 50));
 
         play2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/play.png"))); // NOI18N
         play2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -1823,14 +1624,12 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
                 play2KeyPressed(evt);
             }
         });
-        jPanel4.add(play2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 100, 50, 50));
+        jPanel4.add(play2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 100, 50, 50));
 
         tir.setFont(new java.awt.Font("Trebuchet MS", 0, 24)); // NOI18N
-        jPanel4.add(tir, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 180, 110, 40));
+        jPanel4.add(tir, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 170, 120, 40));
 
         jProgressBar2.setValue(0);
-        jProgressBar2.setFocusable(false);
-        jProgressBar2.setOpaque(false);
         jProgressBar2.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jProgressBar2StateChanged(evt);
@@ -1846,15 +1645,14 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
                 jProgressBar2VetoableChange(evt);
             }
         });
-        jPanel4.add(jProgressBar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, 400, 30));
+        jPanel4.add(jProgressBar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 200, 320, -1));
 
-        jProgressBar4.setComponentPopupMenu(jPopupMenu4);
         jProgressBar4.setStringPainted(true);
-        jPanel4.add(jProgressBar4, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, 380, 60));
+        jPanel4.add(jProgressBar4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 4, 480, 50));
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel17.setText("Adelantar");
-        jPanel4.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, 20));
+        jPanel4.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, -1, 20));
 
         jButton14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/ecualizador.png"))); // NOI18N
         jButton14.addActionListener(new java.awt.event.ActionListener() {
@@ -1862,26 +1660,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
                 jButton14ActionPerformed(evt);
             }
         });
-        jPanel4.add(jButton14, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 160, 60, 40));
-
-        jPanel15.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel15MouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
-        jPanel15.setLayout(jPanel15Layout);
-        jPanel15Layout.setHorizontalGroup(
-            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 70, Short.MAX_VALUE)
-        );
-        jPanel15Layout.setVerticalGroup(
-            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 70, Short.MAX_VALUE)
-        );
-
-        jPanel4.add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 70, 70));
+        jPanel4.add(jButton14, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 160, 60, 40));
 
         jTabbedPane4.addTab("Bandeja 2", jPanel4);
 
@@ -1889,13 +1668,11 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         Escritorio.setLayout(EscritorioLayout);
         EscritorioLayout.setHorizontalGroup(
             EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(EscritorioLayout.createSequentialGroup()
-                .addComponent(jTabbedPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 529, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jTabbedPane4)
         );
         EscritorioLayout.setVerticalGroup(
             EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(jTabbedPane4, javax.swing.GroupLayout.Alignment.TRAILING)
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -1909,7 +1686,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
             .addComponent(Escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Bandejas", new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/bandeja.png")), jPanel1); // NOI18N
+        jTabbedPane1.addTab("BANDEJAS", new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/bandeja.png")), jPanel1); // NOI18N
 
         jTabbedPane2.setToolTipText("");
         jTabbedPane2.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -1968,7 +1745,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
-                .addGap(0, 141, Short.MAX_VALUE)
+                .addGap(0, 140, Short.MAX_VALUE)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(MarcasDeAgua, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1999,7 +1776,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
                 .addComponent(MarcasDeAgua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(41, 41, 41)
                 .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(65, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("configuracion de la apariencia", jPanel10);
@@ -2017,7 +1794,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         jTextArea1.setEditable(false);
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
-        jTextArea1.setText("shift +\ni:Bandejas pequeñas\ne:ecualizador\nf: tema anterior\ng: poner play\nh :tema siguiente\np: pausar tema\ns:parar tema\nb :buscar para agreg\nar tema\nM: musica\nalt+2 \nbandeja 2");
+        jTextArea1.setText("shift +\nf: tema anterior\ng: poner play\nh :tema siguiente\np: pausar tema\ns:parar tema\nb :buscar para agreg\nar tema\nM: musica\nalt+2 \nbandeja 2");
         jTextArea1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jTextArea1KeyPressed(evt);
@@ -2028,8 +1805,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         jTextArea2.setEditable(false);
         jTextArea2.setColumns(20);
         jTextArea2.setRows(5);
-        jTextArea2.setText("ctrl +\ni :bandeja pequeñas \ne :Ecualizador\nf :tema anterior\ng :poner play\nh : tema siguiente\np :pausar tema\ns : parar tema\nb: buscar para agreg\nar musica\nalt + 1\nbandeja 1\nflechas izquierda y \nderecha sonido de las\nbandejas\n");
-        jTextArea2.setToolTipText("\n");
+        jTextArea2.setText("ctrl +\nf :tema anterior\ng :poner play\nh : tema siguiente\np :pausar tema\ns : parar tema\nb: buscar para agreg\nar musica\nalt + 1\nbandeja 1\nflechas arriba y abajo\nsonido de las bandejas\n");
         jTextArea2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jTextArea2KeyPressed(evt);
@@ -2065,7 +1841,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
                     .addComponent(jScrollPane1))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Informacion", jPanel6);
@@ -2078,10 +1854,12 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Configuracion", new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/configuracion_1.png")), jPanel9); // NOI18N
+        jTabbedPane1.addTab("configuracion", new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/configuracion_1.png")), jPanel9); // NOI18N
 
         jTabbedPane5.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -2148,7 +1926,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         jPanel11.setLayout(jPanel11Layout);
         jPanel11Layout.setHorizontalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE)
+            .addComponent(jTabbedPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 529, Short.MAX_VALUE)
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2259,7 +2037,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel14Layout.createSequentialGroup()
                         .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSlider5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jSlider5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addComponent(volumen2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel3)
@@ -2275,24 +2053,24 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
                                     .addComponent(jSlider4, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel2)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(volumenn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, 776, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 29, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -2337,9 +2115,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
     }//GEN-LAST:event_jButton8KeyPressed
 
     private void volumennStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_volumennStateChanged
-   
-     volumenn.setValue(volumenn.getValue());
-//establezco el volumen
+     cont=volumenn.getValue();//establezco el volumen
      value();//metodo para cambiar el volumen
     }//GEN-LAST:event_volumennStateChanged
 
@@ -2424,6 +2200,10 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
        
     }//GEN-LAST:event_antes2ActionPerformed
 
+    private void jTextField2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyPressed
+        keyPressed(evt);setFocusable(true);          // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2KeyPressed
+
     private void jPanel2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel2KeyPressed
         keyPressed(evt);setFocusable(true);
     }//GEN-LAST:event_jPanel2KeyPressed
@@ -2473,9 +2253,8 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
     private void play1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_play1ActionPerformed
  
        
-    imagenes im=new imagenes();
-    jPanel8.add(im).setLocation(32, 32);
-  jPanel8.repaint();
+    
+  
         play1d(); //Se encarga de realizar la funcion de play del programa boton de la bandeja 1
         value();
    
@@ -2483,6 +2262,10 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
       
        
     }//GEN-LAST:event_play1ActionPerformed
+
+    private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyPressed
+        keyPressed(evt);setFocusable(true);          // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1KeyPressed
 
     private void jTabbedPane2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTabbedPane2KeyPressed
         keyPressed(evt);setFocusable(true);
@@ -2536,6 +2319,10 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
     private void jComboBox2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBox2MouseClicked
 
     }//GEN-LAST:event_jComboBox2MouseClicked
+
+    private void jTabbedPane3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTabbedPane3KeyPressed
+        keyPressed(evt);setFocusable(true);      // TODO add your handling code here:
+    }//GEN-LAST:event_jTabbedPane3KeyPressed
 
     private void jPanel5KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel5KeyPressed
         keyPressed(evt);setFocusable(true);
@@ -2657,10 +2444,10 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
 
     private void EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarActionPerformed
      
-         int k=jTable1.getSelectedRow();
-     cargar.eliminar(k);
-        jTable1.remove(k);
-        jTable1.updateUI();
+      int k=jTable1.getSelectedRow();
+      buscar.eliminar(k);
+      jTable1.remove(k);
+      jTable1.updateUI();
     }//GEN-LAST:event_EliminarActionPerformed
 
     private void jSlider4StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider4StateChanged
@@ -2811,6 +2598,10 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
       
        
     }//GEN-LAST:event_jProgressBar1MouseClicked
+
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2ActionPerformed
 
     private void jProgressBar2StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jProgressBar2StateChanged
 
@@ -3182,7 +2973,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
             posicion=con;
             play1d();
             automixer=true;
-            volumenn.setValue(0);
+            cont=0;
             value();
 
             ImageIcon gr1=new ImageIcon( getClass().getResource("/dj/Imagenes/aleatorio1.png"));
@@ -3204,7 +2995,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         try{
             switch(jTabbedPane1.getSelectedIndex())
             {
-                case 0: gr1=new ImageIcon( getClass().getResource("/dj/Imagenes/musica2.png"));
+                case 0: gr1=new ImageIcon( getClass().getResource("/dj/Imagenes/musica.png"));
                 gr2=new ImageIcon( getClass().getResource("/dj/Imagenes/bandeja.png"));
                 gr3=new ImageIcon(getClass().getResource("/dj/imagenes/configuracion_1.png"));
                 gr4=new ImageIcon(getClass().getResource("/dj/imagenes/camara2.png"));
@@ -3247,8 +3038,6 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
             {
 
             }
-        jPanel8.repaint();
-        jPanel15.repaint();
     }//GEN-LAST:event_jTabbedPane1StateChanged
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
@@ -3260,100 +3049,6 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
        jDialog2.setVisible(true);
        jDialog2.setSize(600,400);
     }//GEN-LAST:event_jButton14ActionPerformed
-
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        jDialog3.setVisible(true);
-          jDialog3.setSize(415,150);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        jDialog4.setVisible(true);
-        jDialog4.setSize(415, 150);
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
-
-    private void jTextField2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyPressed
-           keyPressed(evt);setFocusable(true);
-    }//GEN-LAST:event_jTextField2KeyPressed
-
-    private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyPressed
-           keyPressed(evt);setFocusable(true);
-    }//GEN-LAST:event_jTextField1KeyPressed
-
-    private void jDialog3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jDialog3KeyPressed
-           keyPressed(evt);setFocusable(true);
-    }//GEN-LAST:event_jDialog3KeyPressed
-
-    private void jProgressBar5KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jProgressBar5KeyPressed
-           keyPressed(evt);setFocusable(true);
-    }//GEN-LAST:event_jProgressBar5KeyPressed
-
-    private void jSlider6KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jSlider6KeyPressed
-           keyPressed(evt);setFocusable(true);
-    }//GEN-LAST:event_jSlider6KeyPressed
-
-    private void jDialog4KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jDialog4KeyPressed
-           keyPressed(evt);setFocusable(true);
-    }//GEN-LAST:event_jDialog4KeyPressed
-
-    private void jProgressBar6KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jProgressBar6KeyPressed
-           keyPressed(evt);setFocusable(true);
-    }//GEN-LAST:event_jProgressBar6KeyPressed
-
-    private void jSlider7KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jSlider7KeyPressed
-            keyPressed(evt);setFocusable(true);
-    }//GEN-LAST:event_jSlider7KeyPressed
-
-    private void jLabel46KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabel46KeyPressed
-          keyPressed(evt);setFocusable(true);
-    }//GEN-LAST:event_jLabel46KeyPressed
-
-    private void jLabel6KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabel6KeyPressed
-            keyPressed(evt);setFocusable(true);
-    }//GEN-LAST:event_jLabel6KeyPressed
-
-    private void jSlider7StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider7StateChanged
-         buscar.adelantar1(jSlider7.getValue());
-    }//GEN-LAST:event_jSlider7StateChanged
-
-    private void jSlider6StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider6StateChanged
-        buscar.adelantar(jSlider6.getValue());
-    }//GEN-LAST:event_jSlider6StateChanged
-
-    private void jDialog1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jDialog1KeyPressed
-       keyPressed(evt);setFocusable(true);  
-    }//GEN-LAST:event_jDialog1KeyPressed
-
-    private void jDialog2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jDialog2KeyPressed
-        keyPressed(evt);setFocusable(true);  
-    }//GEN-LAST:event_jDialog2KeyPressed
-
-    private void jButton7KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton7KeyPressed
-        keyPressed(evt);setFocusable(true);
-    }//GEN-LAST:event_jButton7KeyPressed
-
-    private void jTextPane1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextPane1KeyPressed
-       keyPressed(evt);setFocusable(true);
-    }//GEN-LAST:event_jTextPane1KeyPressed
-
-    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-    evt.getWindow().addKeyListener(this);setFocusable(true);
-    }//GEN-LAST:event_formWindowActivated
-
-    private void jPanel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel8MouseClicked
-
-    }//GEN-LAST:event_jPanel8MouseClicked
-
-    private void jTabbedPane4StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane4StateChanged
-        jPanel8.repaint();
-        jPanel15.repaint();
-    }//GEN-LAST:event_jTabbedPane4StateChanged
-
-    private void jPanel15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel15MouseClicked
-       x=(int)jPanel8.getMousePosition().getX();
-      y=(int)jPanel8.getMousePosition().getY();
-      jPanel8.repaint();
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jPanel15MouseClicked
 
     /**
      * @param args the command line arguments
@@ -3436,8 +3131,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
     javax.swing.JComboBox jComboBox3;
     javax.swing.JDialog jDialog1;
     javax.swing.JDialog jDialog2;
-    javax.swing.JDialog jDialog3;
-    javax.swing.JDialog jDialog4;
+    javax.swing.JLabel jLabel1;
     javax.swing.JLabel jLabel10;
     javax.swing.JLabel jLabel11;
     javax.swing.JLabel jLabel12;
@@ -3476,39 +3170,30 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
     javax.swing.JLabel jLabel42;
     javax.swing.JLabel jLabel43;
     javax.swing.JLabel jLabel44;
-    javax.swing.JLabel jLabel45;
-    javax.swing.JLabel jLabel46;
+    javax.swing.JLabel jLabel5;
     javax.swing.JLabel jLabel6;
     javax.swing.JLabel jLabel7;
     javax.swing.JLabel jLabel8;
     javax.swing.JLabel jLabel9;
-    javax.swing.JMenuItem jMenuItem1;
-    javax.swing.JMenuItem jMenuItem2;
     javax.swing.JPanel jPanel1;
     javax.swing.JPanel jPanel10;
     javax.swing.JPanel jPanel11;
     javax.swing.JPanel jPanel12;
     javax.swing.JPanel jPanel13;
     javax.swing.JPanel jPanel14;
-    javax.swing.JPanel jPanel15;
     javax.swing.JPanel jPanel2;
     javax.swing.JPanel jPanel3;
     javax.swing.JPanel jPanel4;
     javax.swing.JPanel jPanel5;
     javax.swing.JPanel jPanel6;
     javax.swing.JPanel jPanel7;
-    javax.swing.JPanel jPanel8;
     javax.swing.JPanel jPanel9;
     javax.swing.JPopupMenu jPopupMenu1;
     javax.swing.JPopupMenu jPopupMenu2;
-    javax.swing.JPopupMenu jPopupMenu3;
-    javax.swing.JPopupMenu jPopupMenu4;
     javax.swing.JSlider jProgressBar1;
     javax.swing.JSlider jProgressBar2;
     public transient javax.swing.JProgressBar jProgressBar3;
     public javax.swing.JProgressBar jProgressBar4;
-    javax.swing.JProgressBar jProgressBar5;
-    javax.swing.JProgressBar jProgressBar6;
     javax.swing.JScrollPane jScrollPane1;
     javax.swing.JScrollPane jScrollPane2;
     javax.swing.JScrollPane jScrollPane3;
@@ -3518,17 +3203,16 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
     javax.swing.JSlider jSlider3;
     javax.swing.JSlider jSlider4;
     javax.swing.JSlider jSlider5;
-    javax.swing.JSlider jSlider6;
-    javax.swing.JSlider jSlider7;
     javax.swing.JTabbedPane jTabbedPane1;
     javax.swing.JTabbedPane jTabbedPane2;
+    javax.swing.JTabbedPane jTabbedPane3;
     javax.swing.JTabbedPane jTabbedPane4;
     javax.swing.JTabbedPane jTabbedPane5;
     javax.swing.JTable jTable1;
     javax.swing.JTextArea jTextArea1;
     javax.swing.JTextArea jTextArea2;
-    javax.swing.JLabel jTextField1;
-    javax.swing.JLabel jTextField2;
+    javax.swing.JTextField jTextField1;
+    javax.swing.JTextField jTextField2;
     javax.swing.JTextField jTextField3;
     javax.swing.JTextPane jTextPane1;
     javax.swing.JToggleButton jToggleButton1;
@@ -3563,6 +3247,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
     javax.swing.JButton stop2;
     javax.swing.JLabel ti;
     javax.swing.JLabel tir;
+    javax.swing.JLabel volumen;
     javax.swing.JProgressBar volumen1;
     javax.swing.JProgressBar volumen2;
     javax.swing.JSlider volumenn;
@@ -3605,12 +3290,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
     volumenn.setValue(volumenn.getValue()-1);
     value();
     }
-    if(cargarCanci==false)
-    {jTable1.setRowSelectionInterval(0, 0);
-        con=jTable1.getSelectedRow();
-        i=jTable1.getSelectedRow();
-        cargarCanci=true;
-    }
+    
     if(swcontrol==true)
     {
         switch(e.getKeyCode())
@@ -3631,7 +3311,6 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
                 pausa1();swcontrol=false;
                 break;
             case KeyEvent.VK_H:
-                con=jTable1.getSelectedRow();
                 siguiente1();
                 swcontrol=false;
                 break;
@@ -3639,24 +3318,6 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
                 jTabbedPane1.setSelectedIndex(0);
                 swcontrol=false;
                 break;
-                 case KeyEvent.VK_E:
-                      swcontrol=false;
-                jDialog1.setVisible(true);
-                jDialog1.setSize(500,350);
-                jDialog1.setTitle("Bandeja  1");
-                  jDialog2.setVisible(true);
-                jDialog2.setBounds(jDialog1.getX()+jDialog1.getWidth(), 0, 500, 350);
-                jDialog2.setTitle("Bandeja  2");
-            break;    
-            case KeyEvent.VK_I:
-                swShift=false;
-                jDialog4.setVisible(true);
-                jDialog4.setTitle("Bandeja 2");
-                jDialog3.setVisible(true);
-                jDialog3.setSize(400,150);
-                jDialog3.setTitle("Bandeja  1");
-                 jDialog4.setBounds(jDialog3.getX()+jDialog3.getWidth(), 0, 400, 150);
-            break;
     }
     }
     if(swShift==true){
@@ -3679,32 +3340,13 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
                 swShift=false;
                 break;
             case KeyEvent.VK_H:
-               
                 siguiente2();
                 swShift=false;
                 break;
             case KeyEvent.VK_M:
                 jTabbedPane1.setSelectedIndex(0);
                 swShift=false;
-                break;
-            case KeyEvent.VK_E:
-                swShift=false;
-                jDialog2.setVisible(true);
-                jDialog2.setTitle("Bandeja 2");
-                jDialog1.setVisible(true);
-                jDialog1.setSize(500,350);
-                jDialog1.setTitle("Bandeja  1");
-                 jDialog2.setBounds(jDialog1.getX()+jDialog1.getWidth(), 0, 500, 350);
-            break;
-                case KeyEvent.VK_I:
-                swShift=false;
-                jDialog4.setVisible(true);
-                jDialog4.setTitle("Bandeja 2");
-                jDialog3.setVisible(true);
-                jDialog3.setSize(400,150);
-                jDialog3.setTitle("Bandeja  1");
-                 jDialog4.setBounds(jDialog3.getX()+jDialog3.getWidth(), 0, 400, 150);
-            break;
+                break;    
     }
     }
     if(swAlt==true)
@@ -3766,8 +3408,8 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
     }
 public void value()
 {
-  volumen1.setValue(100-volumenn.getValue());
-  volumen2.setValue(volumenn.getValue());
+  volumen1.setValue(100-cont);
+  volumen2.setValue(cont);
         try {int gainValue = volumen1.getValue();
             int gainValue1 = volumen2.getValue();
             int maxGain = volumenn.getMaximum();
@@ -3786,8 +3428,7 @@ private void play1d()
                
                 try {
                     
-                    jTextField1.setText(buscar.getname(con).replace(".mp3","").replace(".ogg","").replace(".wav", "").replace("{{","'"));
-                    jLabel6.setText(jTextField1.getText());
+                    jTextField1.setText(buscar.getname(con));
                     cBand1.start();
                       buscar.playSong(con);
                       iseek=true;
@@ -3812,9 +3453,6 @@ private void play1d()
   buscar.getPlayer().addBasicPlayerListener(escucha1);
   jProgressBar3.setMaximum(escucha1.taman());
   jProgressBar1.setMaximum(escucha1.taman());
-   jProgressBar5.setMaximum(escucha1.taman());
-     jSlider6.setMaximum(escucha1.taman());
-
 }
 
 private void antes(){
@@ -3847,8 +3485,7 @@ private void antes(){
                        
                        jTable1.setRowSelectionInterval(j, j);//selecciono la cancion
                         con=jTable1.getSelectedRow();
-                        jTextField1.setText( buscar.getname(j).replace(".mp3", "").replace(".ogg", "").replace(".wav",""));//escribo el nombre en la bandeja
-                        jLabel6.setText(jTextField1.getText());
+                        jTextField2.setText( buscar.getname(j));//escribo el nombre en la bandeja
                       }catch (Exception ex)
                      {
                           Logger.getLogger(ventanamixer.class.getName()).log(Level.SEVERE, null, ex);
@@ -3877,8 +3514,7 @@ private void antes(){
               cBand1.stop();
               s1=0;m1=0;
               jTable1.setRowSelectionInterval(con, con);
-              jTextField1.setText("" + buscar.getname(con).replace(".mp3","").replace(".ogg","").replace(".wav", ""));
-              jLabel6.setText(jTextField1.getText());
+              jTextField1.setText("" + buscar.getname(con));
         }
         catch (BasicPlayerException ex)
         {
@@ -3954,7 +3590,6 @@ private void siguiente1()
             {
             con=0;
             }
-            
        }
             buscar.playSong(con);
         try 
@@ -3968,8 +3603,7 @@ private void siguiente1()
              cBand1.stop();
              s1=0;m1=0;
              jTable1.setRowSelectionInterval(con , con);
-             jTextField1.setText("" + buscar.getname(con).replace(".mp3","").replace(".ogg","").replace(".wav",""));
-             jLabel6.setText(jTextField1.getText());
+             jTextField1.setText("" + buscar.getname(con));
        }
       catch (BasicPlayerException ex)
       {
@@ -4008,8 +3642,7 @@ private void siguiente1()
                        
                        jTable1.setRowSelectionInterval(j, j);//selecciono la cancion
                         i=jTable1.getSelectedRow();
-                        jTextField2.setText( buscar.getname(j).replace(".mp3","").replace(".ogg", "").replace(".wav",""));//escribo el nombre en la bandeja
-                        jLabel46.setText(jTextField2.getText());
+                        jTextField2.setText( buscar.getname(j));//escribo el nombre en la bandeja
                       }catch (Exception ex)
                      {
                           Logger.getLogger(ventanamixer.class.getName()).log(Level.SEVERE, null, ex);
@@ -4036,8 +3669,7 @@ private void siguiente1()
            Logger.getLogger(ventanamixer.class.getName()).log(Level.SEVERE, null, ex);
        }
             jTable1.setRowSelectionInterval(i, i);
-           jTextField2.setText(buscar.getname(i).replace(".mp3","").replace(".ogg","").replace(".wav", ""));
-                    jLabel46.setText(jTextField2.getText());
+            jTextField2.setText(buscar.getname(i));
         } catch (BasicPlayerException ex) {
         }
  }
@@ -4085,11 +3717,9 @@ private void siguiente1()
                        
                 try {
                 
-                 
+                    buscar.playsSong(i);
                      cBand2.start();
-                        buscar.playsSong(i);
-                    jTextField2.setText(buscar.getname(i).replace(".mp3","").replace(".ogg","").replace(".wav", "").replace("{{","'"));
-                    jLabel46.setText(jTextField2.getText());
+                    jTextField2.setText(buscar.getname(i));
                     value();
                   
                 } catch (BasicPlayerException ex) {
@@ -4112,13 +3742,12 @@ private void siguiente1()
      
      jProgressBar2.setMaximum(escucha2.taman());
      jProgressBar4.setMaximum(escucha2.taman());
-     jSlider7.setMaximum(escucha2.taman());
-     jProgressBar6.setMaximum(escucha2.taman());
-    
  }
  private void siguiente2()
  {
-       
+        cBand2.stop();
+        m2=0;
+        s2=0;
         try {
             if(listaC==true)
             {
@@ -4162,10 +3791,8 @@ private void siguiente1()
             } catch (Exception ex) {
                 Logger.getLogger(ventanamixer.class.getName()).log(Level.SEVERE, null, ex);
             }
-             cBand2.stop();m2=0;s2=0;
             jTable1.setRowSelectionInterval(i, i);
-            jTextField2.setText(buscar.getname(i).replace(".mp3", "").replace(".ogg","").replace(".wav",""));
-            jLabel46.setText(jTextField2.getText());
+            jTextField2.setText(buscar.getname(i));
         } catch (BasicPlayerException ex) {
         }
  }
@@ -4297,117 +3924,14 @@ private void siguiente1()
    }
  private void valor0()
  {
-  volumenn.setValue(100);
+   cont=100;
    value();
  }
  private void valor1()
  {
-   volumenn.setValue(0);
+   cont=0;
   value();
  }
- public void recibirSms(String s)
- {
-     System.out.println(s);
-     switch(s)
-     {
-         case "play1": play1d();break;
-         case "stop1":stopo1();break;
-         case "pausa1":pausa1();break;
-         case "siguiente1":if(i==0){jTable1.setRowSelectionInterval(1, 1); i=jTable1.getSelectedRow();}siguiente1();break;
-         case "anterior1" :if(i==0){jTable1.setRowSelectionInterval(1, 1); i=jTable1.getSelectedRow();} antes();break;   
-         case "play2": play2();break;
-         case "stop2":stopo2();break;
-         case "pausa2":pausa2();break;
-         case "siguiente2":if(con==0){jTable1.setRowSelectionInterval(1, 1); con=jTable1.getSelectedRow();}siguiente2();break;
-         case "anterior2" :if(i==0){jTable1.setRowSelectionInterval(1, 1); i=jTable1.getSelectedRow();}antes2();break;       
-     }
-     if(s.contains("valor"))
-     {String ss=s.replace("valor","");
-     int vw=Integer.parseInt(ss);
-     volumenn.setValue(vw);
-         value();
-     }
-     
- }
-    public int devolverCancion1()
-    {   
-      
-    return con;
-    }
-      public int devolverCancion2()
-    {   
-       
-    return i;
-    }
- public class imagenes extends JPanel
-    {
-        public imagenes()
-        {
-            this.setSize(64,64);
-        }
-        @Override
-        public void paint(Graphics g)
-        {
-            super.paint(g);
-            Dimension heigh=getSize();
-            
-            Image image;
-            Toolkit t1=Toolkit.getDefaultToolkit(); 
-                image=t1.getImage(getClass().getResource("bandeja3.png"));
-               //  ImageIcon img=new ImageIcon(image);
-                 // g.drawImage(image ,0,0,this);
-                 double r=0;
-      
-      if(x!=0&&y!=0)
-      {
-          r= Math.toRadians(jProgressBar3.getPercentComplete()*360-(x*360/y));
-      }
-      else{
-      r= Math.toRadians(jProgressBar3.getPercentComplete()*360);
-            System.out.println(r);
-      }
-       AffineTransform at=new AffineTransform();
-    at.rotate(r, this.getWidth()/2,this.getHeight()/2); 
-   ( (Graphics2D)g).setTransform(at); 
-      image.setAccelerationPriority(1);
-       g.drawImage(image, 0,0,this.getWidth(), this.getHeight(),this);
-      
-     }
-           
-           
-        }
-    public class imagenes1 extends JPanel
-    {
-        public imagenes1()
-        {
-            this.setSize(64,64);
-        }
-        @Override
-        public void paint(Graphics g)
-        {
-            super.paint(g);
-            Dimension heigh=getSize();
-            
-            Image image;
-            Toolkit t1=Toolkit.getDefaultToolkit(); 
-                image=t1.getImage(getClass().getResource("bandeja3.png"));
-               //  ImageIcon img=new ImageIcon(image);
-                 // g.drawImage(image ,0,0,this);
-      
-       double r = Math.toRadians(jProgressBar4.getPercentComplete()*360);
-        AffineTransform at=new AffineTransform();
-            System.out.println(r);
-  
-    at.rotate(r, this.getWidth()/2,this.getHeight()/2); 
-   ( (Graphics2D)g).setTransform(at); 
-      image.setAccelerationPriority(1);
-      
-   
-     
-      g.drawImage(image, 0,0,this.getWidth(), this.getHeight(),this);
-      
-     }
-           
-           
-        }
+ 
 }
+
