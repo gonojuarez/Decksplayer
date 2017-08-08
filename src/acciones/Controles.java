@@ -106,7 +106,9 @@ bd=new BaseDatos();
     public void playSong(int i) throws BasicPlayerException {
        
         try {
-            player.open(new File(bd.devolvercancion(i).getDireccion().replace(bd.devolvercancion(i).getNombre(), bd.devolvercancion(i).getNombre().replace("{{","'"))));
+          
+          player.stop();
+player.open(new File(bd.devolvercancion(i).getDireccion().replace(bd.devolvercancion(i).getNombre(), bd.devolvercancion(i).getNombre().replace("{{","'"))));
         } catch (Exception ex) {
             Logger.getLogger(Controles.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -117,6 +119,40 @@ bd=new BaseDatos();
             
         
     }
+    public void eff(int n)throws BasicPlayerException
+    {
+    try{
+     BasicPlayer bl=new BasicPlayer();
+     switch(n)
+     {
+         case 0:
+     bl.open(getClass().getResource("/sound/siren1.wav"));
+     break;
+         case 1:
+              bl.open(getClass().getResource("/sound/yelp3.wav"));
+             break;
+       case 2:
+              bl.open(getClass().getResource("/sound/tone12.wav"));
+            
+             break;
+         case 3:
+              bl.open(getClass().getResource("/sound/alarm.wav"));
+            
+             break; 
+               case 4:
+              bl.open(getClass().getResource("/sound/DINGDONG.mp3"));
+            
+             break;     
+     }
+    bl.play();
+    if(bl.getLineBufferSize()==-1)
+    {
+    bl.play();
+    }
+    }catch(Exception ex)
+    {}
+   
+    }
 
     public void eliminar(int n) {
         model.getDataVector().removeElementAt(n);
@@ -126,7 +162,9 @@ bd=new BaseDatos();
     
           
                 try {
+                    playtu.stop();
                     playtu.open(new File(bd.devolvercancion(id).getDireccion().replace(bd.devolvercancion(id).getNombre(),bd.devolvercancion(id).getNombre().replace("{{","'"))));
+               
                 } catch (Exception ex) {
                     Logger.getLogger(Controles.class.getName()).log(Level.SEVERE, null, ex);
                 }
