@@ -63,7 +63,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
     private RandomAccessFile flow,file;
     private int m1=0,m2=0,s1=0,s2=0,h1=0,h2=0;//variables relacionadas con el tiempo
     public VisorFotos.Album vs;
-    int posxw=0;//variable para aumentar el tamaño de la lista creada
+    int posxw=0;//variable para aumentar el tamaÃ±o de la lista creada
     public float[] equalizer; 
     float[] eq = new float[32]; 
    private listener escucha1,escucha2;
@@ -319,6 +319,9 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
            imagenes1 ima=new imagenes1();
         jPanel15.add(ima).setLocation(0, 0);
         jPanel15.repaint();
+        
+      
+       //this.setVisible(true);
     }
 
     
@@ -456,21 +459,14 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         Escritorio = new javax.swing.JPanel();
         jTabbedPane4 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
-        jLabel18 = new javax.swing.JLabel();
-        play1 = new javax.swing.JButton();
-        next1 = new javax.swing.JButton();
-        stop1 = new javax.swing.JButton();
-        antes1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        ti = new javax.swing.JLabel();
+        jButton15 = new javax.swing.JButton();
+        jSpinner1 = new javax.swing.JSpinner();
+        jLabel1 = new javax.swing.JLabel();
+        jButton16 = new javax.swing.JButton();
+        jButton17 = new javax.swing.JButton();
+        jButton18 = new javax.swing.JButton();
+        jButton19 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
-        antes2 = new javax.swing.JButton();
-        next2 = new javax.swing.JButton();
-        stop2 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        play2 = new javax.swing.JToggleButton();
-        tir = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel10 = new javax.swing.JPanel();
@@ -507,6 +503,18 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         jProgressBar4 = new javax.swing.JProgressBar();
         jProgressBar2 = new javax.swing.JSlider();
         jProgressBar1 = new javax.swing.JSlider();
+        ti = new javax.swing.JLabel();
+        tir = new javax.swing.JLabel();
+        antes1 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        stop1 = new javax.swing.JButton();
+        play1 = new javax.swing.JButton();
+        next1 = new javax.swing.JButton();
+        antes2 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        stop2 = new javax.swing.JButton();
+        play2 = new javax.swing.JToggleButton();
+        next2 = new javax.swing.JButton();
 
         Lista.setMinimumSize(new java.awt.Dimension(400, 200));
         Lista.setResizable(false);
@@ -1367,7 +1375,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
                 jButton14ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton14, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 20, 60, 40));
+        getContentPane().add(jButton14, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 10, 60, 40));
 
         jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/ecualizador.png"))); // NOI18N
         jButton10.addActionListener(new java.awt.event.ActionListener() {
@@ -1375,7 +1383,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
                 jButton10ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 20, 60, 40));
+        getContentPane().add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 10, 60, 40));
 
         jPanel14.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jPanel14.setFocusable(false);
@@ -1431,6 +1439,9 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 jTable1MouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTable1MousePressed(evt);
             }
         });
         jTable1.addComponentListener(new java.awt.event.ComponentAdapter() {
@@ -1546,7 +1557,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jComboBox3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 3, Short.MAX_VALUE))
+                        .addGap(0, 33, Short.MAX_VALUE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -1568,15 +1579,15 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
                         .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(16, 16, 16)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
-                    .addComponent(jScrollPane4))
-                .addContainerGap())
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel3.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 530, 280));
+        jPanel3.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 560, 250));
 
-        jTabbedPane1.addTab("Musica", new javax.swing.ImageIcon(getClass().getResource("/decksplayer/musica2.png")), jPanel3); // NOI18N
+        jTabbedPane1.addTab("", new javax.swing.ImageIcon(getClass().getResource("/decksplayer/musica2.png")), jPanel3); // NOI18N
 
         jTabbedPane4.setFocusable(false);
         jTabbedPane4.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -1597,91 +1608,91 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
                 jPanel2KeyPressed(evt);
             }
         });
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel18.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel18.setText("Adelantar");
-        jPanel2.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, 20));
-
-        play1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/play.png"))); // NOI18N
-        play1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        play1.addActionListener(new java.awt.event.ActionListener() {
+        jButton15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/sirena.png"))); // NOI18N
+        jButton15.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                play1ActionPerformed(evt);
+                jButton15ActionPerformed(evt);
             }
         });
-        play1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                play1KeyPressed(evt);
-            }
-        });
-        jPanel2.add(play1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 100, 50, 50));
 
-        next1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/siguiente.png"))); // NOI18N
-        next1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        next1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                next1MousePressed(evt);
-            }
-        });
-        next1.addActionListener(new java.awt.event.ActionListener() {
+        jSpinner1.setModel(new javax.swing.SpinnerNumberModel(0, 0, 10, 1));
+        jSpinner1.setMaximumSize(new java.awt.Dimension(29, 20));
+
+        jLabel1.setText("Repeticiones");
+
+        jButton16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/sirena.png"))); // NOI18N
+        jButton16.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                next1ActionPerformed(evt);
+                jButton16ActionPerformed(evt);
             }
         });
-        next1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                next1KeyPressed(evt);
-            }
-        });
-        jPanel2.add(next1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 100, 50, 50));
 
-        stop1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/stop.png"))); // NOI18N
-        stop1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        stop1.setFocusCycleRoot(true);
-        stop1.addActionListener(new java.awt.event.ActionListener() {
+        jButton17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/sirena.png"))); // NOI18N
+        jButton17.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                stop1ActionPerformed(evt);
+                jButton17ActionPerformed(evt);
             }
         });
-        stop1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                stop1KeyPressed(evt);
-            }
-        });
-        jPanel2.add(stop1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 100, 50, 50));
 
-        antes1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/anterior.PNG"))); // NOI18N
-        antes1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        antes1.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/anterior.PNG"))); // NOI18N
-        antes1.addActionListener(new java.awt.event.ActionListener() {
+        jButton18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/alarma.png"))); // NOI18N
+        jButton18.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                antes1ActionPerformed(evt);
+                jButton18ActionPerformed(evt);
             }
         });
-        antes1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                antes1KeyPressed(evt);
-            }
-        });
-        jPanel2.add(antes1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, 50, 50));
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/pausa.png"))); // NOI18N
-        jButton3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jButton19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/alarma.png"))); // NOI18N
+        jButton19.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jButton19ActionPerformed(evt);
             }
         });
-        jButton3.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jButton3KeyPressed(evt);
-            }
-        });
-        jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 100, 50, 50));
 
-        ti.setFont(new java.awt.Font("Trebuchet MS", 0, 24)); // NOI18N
-        jPanel2.add(ti, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 180, 110, 40));
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jButton18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton17))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel1)
+                            .addComponent(jButton15))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jSpinner1, javax.swing.GroupLayout.DEFAULT_SIZE, 57, Short.MAX_VALUE)
+                            .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButton19)))
+                .addGap(392, 392, 392))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton18)
+                    .addComponent(jButton17))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton15)
+                    .addComponent(jButton16))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton19)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20))
+        );
 
         jTabbedPane4.addTab("Bandeja 1", jPanel2);
 
@@ -1692,94 +1703,6 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
             }
         });
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        antes2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/anterior_1.png"))); // NOI18N
-        antes2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        antes2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                antes2ActionPerformed(evt);
-            }
-        });
-        antes2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                antes2KeyPressed(evt);
-            }
-        });
-        jPanel4.add(antes2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, 50, 50));
-
-        next2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/siguiente_1.png"))); // NOI18N
-        next2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        next2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                next2ActionPerformed(evt);
-            }
-        });
-        next2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                next2KeyPressed(evt);
-            }
-        });
-        jPanel4.add(next2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 100, 50, 50));
-
-        stop2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/stop.png"))); // NOI18N
-        stop2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        stop2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                stop2MouseClicked(evt);
-            }
-        });
-        stop2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                stop2ActionPerformed(evt);
-            }
-        });
-        stop2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                stop2KeyPressed(evt);
-            }
-        });
-        jPanel4.add(stop2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 100, 50, 50));
-
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/pausa.png"))); // NOI18N
-        jButton4.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-        jButton4.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jButton4KeyPressed(evt);
-            }
-        });
-        jPanel4.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 100, 50, 50));
-
-        play2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/play.png"))); // NOI18N
-        play2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        play2.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                play2StateChanged(evt);
-            }
-        });
-        play2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                play2ActionPerformed(evt);
-            }
-        });
-        play2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                play2KeyPressed(evt);
-            }
-        });
-        jPanel4.add(play2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 100, 50, 50));
-
-        tir.setFont(new java.awt.Font("Trebuchet MS", 0, 24)); // NOI18N
-        jPanel4.add(tir, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 180, 110, 40));
-
-        jLabel17.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel17.setText("Adelantar");
-        jPanel4.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, 20));
-
         jTabbedPane4.addTab("Bandeja 2", jPanel4);
 
         javax.swing.GroupLayout EscritorioLayout = new javax.swing.GroupLayout(Escritorio);
@@ -1787,12 +1710,12 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         EscritorioLayout.setHorizontalGroup(
             EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(EscritorioLayout.createSequentialGroup()
-                .addComponent(jTabbedPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 529, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(jTabbedPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addGap(37, 37, 37))
         );
         EscritorioLayout.setVerticalGroup(
             EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(jTabbedPane4)
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -1806,7 +1729,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
             .addComponent(Escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Bandejas", new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/bandeja.png")), jPanel1); // NOI18N
+        jTabbedPane1.addTab("", new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/bandeja.png")), jPanel1); // NOI18N
 
         jTabbedPane2.setToolTipText("");
         jTabbedPane2.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -1821,7 +1744,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
             }
         });
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "AutumnSkin", "BusinessSkinn", "BusinessBlackSteelSkin", "BusinessBlueSteelSkin", "ChallengerDeepSkin", "CremeSkin", "CremeCoffeeSkin", "DustSkin", "DustCoffeeSkin", "EmeraldDuskSkin", "GeminiSkin", "GraphiteAquaSkin", "MagellanSkin", "MagmaSkin", "MistAquaSkin", "MistSilverSkin", "ModerateSkin", "NebulaSkin", "NebulaBrickWallSkin", "OfficeBlue2007Skin", "OfficeSilver2007Skin", "RavenSkin", "RavenGraphiteSkin", "RavenGraphiteGlassSkin", "SaharaSkin", "TwilightSkin" }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "AutumnSkin", "BusinessBlackSteelSkin", "BusinessBlueSteelSkin", "BusinessSkin", "CremeCoffeeSkin", "CremeSkin", "EmeraldDuskSkin", "FieldOfWheatSkin", "FindingNemoSkin", "GreenMagicSkin", "MagmaSkin", "MangoSkin", "MistAquaSkin", "ModerateSkin", "NebulaBrickWallSkin", "NebulaSkin", "OfficeBlue2007Skin", "OfficeSilver2007Skin", "RavenGraphiteGlassSkin", "RavenGraphiteSkin", "RavenSkin", "SaharaSkin" }));
         jComboBox2.setToolTipText("");
         jComboBox2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jComboBox2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1865,7 +1788,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
-                .addGap(0, 141, Short.MAX_VALUE)
+                .addGap(0, 177, Short.MAX_VALUE)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(MarcasDeAgua, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1896,7 +1819,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
                 .addComponent(MarcasDeAgua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(41, 41, 41)
                 .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("configuracion de la apariencia", jPanel10);
@@ -1947,7 +1870,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 107, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37))
         );
@@ -1960,9 +1883,9 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
                     .addComponent(jLabel9))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
                     .addComponent(jScrollPane1))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Informacion", jPanel6);
@@ -1975,10 +1898,10 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)
+            .addComponent(jTabbedPane2)
         );
 
-        jTabbedPane1.addTab("Configuracion", new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/configuracion_1.png")), jPanel9); // NOI18N
+        jTabbedPane1.addTab("", new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/configuracion_1.png")), jPanel9); // NOI18N
 
         jTabbedPane5.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -2025,14 +1948,14 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(jButton11)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 417, Short.MAX_VALUE)
                 .addComponent(jButton12)
                 .addGap(64, 64, 64))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(198, Short.MAX_VALUE)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton11)
                     .addComponent(jButton12))
@@ -2045,14 +1968,14 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         jPanel11.setLayout(jPanel11Layout);
         jPanel11Layout.setHorizontalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE)
+            .addComponent(jTabbedPane5)
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jTabbedPane5, javax.swing.GroupLayout.Alignment.TRAILING)
         );
 
-        jTabbedPane1.addTab("Fotos", new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/camara2.png")), jPanel11); // NOI18N
+        jTabbedPane1.addTab("", new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/camara2.png")), jPanel11); // NOI18N
 
         volumen2.setMaximum(101);
         volumen2.setOrientation(1);
@@ -2137,12 +2060,12 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
                                 .addContainerGap()
                                 .addComponent(jLabel2)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jTabbedPane1)))
                 .addGap(10, 10, 10)
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel14Layout.createSequentialGroup()
                         .addComponent(jSlider5, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                         .addComponent(volumen2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18))
                     .addGroup(jPanel14Layout.createSequentialGroup()
@@ -2162,24 +2085,23 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
                         .addComponent(jLabel3)
                         .addGap(33, 33, 33))
                     .addGroup(jPanel14Layout.createSequentialGroup()
-                        .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addGroup(jPanel14Layout.createSequentialGroup()
-                                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel14Layout.createSequentialGroup()
-                                        .addGap(1, 1, 1)
-                                        .addComponent(volumen1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jSlider4, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(volumen1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jSlider4, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel2)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)))
+                                .addComponent(jLabel2)
+                                .addGap(20, 20, 20)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)))
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(volumenn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
-        getContentPane().add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 105, 776, -1));
+        getContentPane().add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 149, 776, 340));
 
         jPanel15.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -2191,11 +2113,11 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         jPanel15.setLayout(jPanel15Layout);
         jPanel15Layout.setHorizontalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 70, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jPanel15Layout.setVerticalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 70, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         getContentPane().add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 10, 70, 70));
@@ -2211,11 +2133,11 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 64, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 64, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         getContentPane().add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 64, 64));
@@ -2284,6 +2206,182 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
             }
         });
         getContentPane().add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 180, 30));
+
+        ti.setFont(new java.awt.Font("Trebuchet MS", 0, 10)); // NOI18N
+        ti.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        getContentPane().add(ti, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 70, 60, 20));
+
+        tir.setFont(new java.awt.Font("Trebuchet MS", 0, 10)); // NOI18N
+        tir.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        tir.setToolTipText("");
+        getContentPane().add(tir, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 70, 60, 20));
+
+        antes1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/anterior_1.png"))); // NOI18N
+        antes1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        antes1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        antes1.setMaximumSize(new java.awt.Dimension(38, 38));
+        antes1.setMinimumSize(new java.awt.Dimension(38, 38));
+        antes1.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/anterior_1.png"))); // NOI18N
+        antes1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                antes1ActionPerformed(evt);
+            }
+        });
+        antes1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                antes1KeyPressed(evt);
+            }
+        });
+        getContentPane().add(antes1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, 38, 38));
+
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/pausa.png"))); // NOI18N
+        jButton3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jButton3.setMaximumSize(new java.awt.Dimension(38, 38));
+        jButton3.setMinimumSize(new java.awt.Dimension(38, 38));
+        jButton3.setPreferredSize(new java.awt.Dimension(38, 38));
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jButton3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButton3KeyPressed(evt);
+            }
+        });
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 110, 38, 38));
+
+        stop1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/stop.png"))); // NOI18N
+        stop1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        stop1.setFocusCycleRoot(true);
+        stop1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                stop1ActionPerformed(evt);
+            }
+        });
+        stop1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                stop1KeyPressed(evt);
+            }
+        });
+        getContentPane().add(stop1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 110, 38, 38));
+
+        play1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/play.png"))); // NOI18N
+        play1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        play1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                play1ActionPerformed(evt);
+            }
+        });
+        play1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                play1KeyPressed(evt);
+            }
+        });
+        getContentPane().add(play1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 110, 38, 38));
+
+        next1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/siguiente_1.png"))); // NOI18N
+        next1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        next1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        next1.setMaximumSize(new java.awt.Dimension(38, 38));
+        next1.setMinimumSize(new java.awt.Dimension(38, 38));
+        next1.setPreferredSize(new java.awt.Dimension(38, 38));
+        next1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                next1MousePressed(evt);
+            }
+        });
+        next1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                next1ActionPerformed(evt);
+            }
+        });
+        next1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                next1KeyPressed(evt);
+            }
+        });
+        getContentPane().add(next1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 110, 38, 38));
+
+        antes2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/anterior_1.png"))); // NOI18N
+        antes2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        antes2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                antes2ActionPerformed(evt);
+            }
+        });
+        antes2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                antes2KeyPressed(evt);
+            }
+        });
+        getContentPane().add(antes2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 110, 38, 38));
+
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/pausa.png"))); // NOI18N
+        jButton4.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        jButton4.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButton4KeyPressed(evt);
+            }
+        });
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 110, 38, 38));
+
+        stop2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/stop.png"))); // NOI18N
+        stop2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        stop2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                stop2MouseClicked(evt);
+            }
+        });
+        stop2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                stop2ActionPerformed(evt);
+            }
+        });
+        stop2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                stop2KeyPressed(evt);
+            }
+        });
+        getContentPane().add(stop2, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 110, 38, 38));
+
+        play2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/play.png"))); // NOI18N
+        play2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        play2.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                play2StateChanged(evt);
+            }
+        });
+        play2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                play2ActionPerformed(evt);
+            }
+        });
+        play2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                play2KeyPressed(evt);
+            }
+        });
+        getContentPane().add(play2, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 110, 38, 38));
+
+        next2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/siguiente_1.png"))); // NOI18N
+        next2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        next2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                next2ActionPerformed(evt);
+            }
+        });
+        next2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                next2KeyPressed(evt);
+            }
+        });
+        getContentPane().add(next2, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 110, 38, 38));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -2573,7 +2671,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
     }//GEN-LAST:event_jComboBox2ActionPerformed
 
     private void next1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_next1MousePressed
-        siguiente1(); //paso a la siguiente cancion
+     
     }//GEN-LAST:event_next1MousePressed
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
@@ -3345,6 +3443,32 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         // TODO add your handling code here:
     }//GEN-LAST:event_jPanel15MouseClicked
 
+    private void jTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MousePressed
+//      jPanel1.setTransferHandler(new TransferHandler(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), jTable1.getSelectedRow()).toString()));
+    }//GEN-LAST:event_jTable1MousePressed
+
+    private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
+          sirenas(0);
+    }//GEN-LAST:event_jButton15ActionPerformed
+
+    private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
+        sirenas(1);
+    }//GEN-LAST:event_jButton16ActionPerformed
+
+    private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
+        sirenas(2);
+// TODO add your handling code here:
+    }//GEN-LAST:event_jButton17ActionPerformed
+
+    private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
+        sirenas(3);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton18ActionPerformed
+
+    private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
+       sirenas(4);
+    }//GEN-LAST:event_jButton19ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -3413,6 +3537,11 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
     javax.swing.JButton jButton12;
     javax.swing.JButton jButton13;
     javax.swing.JButton jButton14;
+    javax.swing.JButton jButton15;
+    javax.swing.JButton jButton16;
+    javax.swing.JButton jButton17;
+    javax.swing.JButton jButton18;
+    javax.swing.JButton jButton19;
     javax.swing.JButton jButton2;
     javax.swing.JButton jButton3;
     javax.swing.JButton jButton4;
@@ -3428,6 +3557,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
     javax.swing.JDialog jDialog2;
     javax.swing.JDialog jDialog3;
     javax.swing.JDialog jDialog4;
+    javax.swing.JLabel jLabel1;
     javax.swing.JLabel jLabel10;
     javax.swing.JLabel jLabel11;
     javax.swing.JLabel jLabel12;
@@ -3435,8 +3565,6 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
     javax.swing.JLabel jLabel14;
     javax.swing.JLabel jLabel15;
     javax.swing.JLabel jLabel16;
-    javax.swing.JLabel jLabel17;
-    javax.swing.JLabel jLabel18;
     javax.swing.JLabel jLabel19;
     javax.swing.JLabel jLabel2;
     javax.swing.JLabel jLabel20;
@@ -3510,6 +3638,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
     javax.swing.JSlider jSlider5;
     javax.swing.JSlider jSlider6;
     javax.swing.JSlider jSlider7;
+    javax.swing.JSpinner jSpinner1;
     javax.swing.JTabbedPane jTabbedPane1;
     javax.swing.JTabbedPane jTabbedPane2;
     javax.swing.JTabbedPane jTabbedPane4;
@@ -3909,7 +4038,7 @@ private void siguiente1()
       try 
        {if(listaC==true)
        {
-        
+           System.out.println("Lista1");
         
            if(posicion==listas.size())
            {
@@ -3928,18 +4057,22 @@ private void siguiente1()
                         jTextField2.setText( buscar.getname(j));//escribo el nombre en la bandeja
                       }catch (Exception ex)
                      {
-                          Logger.getLogger(ventanamixer.class.getName()).log(Level.SEVERE, null, ex);
+                        //  Logger.getLogger(ventanamixer.class.getName()).log(Level.SEVERE, null, ex);
                     }
            
                  }
                }
           
-        posicion=posicion+1;
+       posicion++;
          
            
        }else{
-            con=con+1;
+           //con=jTable1.getSelectedRow();
+            System.out.println("con :" +con); 
+           con=jTable1.getSelectedRow()+1;
+             System.out.println("con :" +con); 
             posicion=con;
+            System.out.println("con :" +con); 
             if(con==jTable1.getRowCount())
             {
             con=0;
@@ -3953,7 +4086,7 @@ private void siguiente1()
          }
         catch (Exception ex)
         {
-         Logger.getLogger(ventanamixer.class.getName()).log(Level.SEVERE, null, ex);
+        // Logger.getLogger(ventanamixer.class.getName()).log(Level.SEVERE, null, ex);
         }
              cBand1.stop();
              s1=0;m1=0;
@@ -4351,6 +4484,7 @@ private void siguiente1()
       if(x!=0&&y!=0)
       {
           r= Math.toRadians(jProgressBar3.getPercentComplete()*360-(x*360/y));
+          
       }
       else{
       r= Math.toRadians(jProgressBar3.getPercentComplete()*360);
@@ -4361,9 +4495,12 @@ private void siguiente1()
    ( (Graphics2D)g).setTransform(at); 
       image.setAccelerationPriority(1);
        g.drawImage(image, 0,0,this.getWidth(), this.getHeight(),this);
-      
+       if(jProgressBar3.getPercentComplete()>85)
+       {
+       jProgressBar3.setVisible(false);
+       }    
      }
-           
+     
            
         }
     public class imagenes1 extends JPanel
@@ -4400,4 +4537,12 @@ private void siguiente1()
            
            
         }
+    private void sirenas(int n)
+    {
+    try {
+            buscar.eff(n);        // TODO add your handling code here:
+        } catch (BasicPlayerException ex) {
+            Logger.getLogger(ventanamixer.class.getName()).log(Level.SEVERE, null, ex);
+        }  
+    }
 }
