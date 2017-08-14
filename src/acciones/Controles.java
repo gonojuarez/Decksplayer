@@ -162,7 +162,7 @@ player.open(new File(bd.devolvercancion(i).getDireccion().replace(bd.devolvercan
     
           
                 try {
-                    playtu.stop();
+                    
                     playtu.open(new File(bd.devolvercancion(id).getDireccion().replace(bd.devolvercancion(id).getNombre(),bd.devolvercancion(id).getNombre().replace("{{","'"))));
                
                 } catch (Exception ex) {
