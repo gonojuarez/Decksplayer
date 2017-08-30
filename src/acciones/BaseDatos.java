@@ -59,13 +59,18 @@ public class BaseDatos {
        
         conect.close();
     }
-    public  Cancion devolvercancion(long i)throws Exception
+    public  Cancion devolvercancion(long i,String vl)throws Exception
     {
        Cancion c1 = null;
      Connection conect = null;
             conect = DriverManager.getConnection("jdbc:sqlite:music.db");
           Statement state = conect.createStatement();
-          ResultSet rs=state.executeQuery("select * from musica order by nombre asc");
+          
+          ResultSet rs;
+          if(vl.length()==0)
+                  rs=state.executeQuery("select * from musica order by nombre asc");
+          else
+              rs=state.executeQuery("select * from musica where nombre Like '%"+vl+"%'order by nombre asc");
         int c=0;
           while(rs.next()){
         if(c==i)
@@ -94,7 +99,7 @@ public class BaseDatos {
       conect.close();
           return i;
     }
- public DefaultTableModel DevolverListado(String tipo)throws Exception
+ public DefaultTableModel DevolverListado(String tipo,String filter)throws Exception
  {
     DefaultTableModel model = new DefaultTableModel() {
 
@@ -108,7 +113,13 @@ public class BaseDatos {
      Connection conect = null;
             conect = DriverManager.getConnection("jdbc:sqlite:music.db");
           Statement state = conect.createStatement();
-          ResultSet rs=state.executeQuery("select * from musica order by nombre "+tipo);
+          ResultSet rs;
+          if(filter.length()==0)
+          { rs=state.executeQuery("select * from musica order by nombre "+tipo);}
+          else
+          {
+           rs=state.executeQuery("select * from musica where nombre Like '%"+filter+"%' order by nombre "+tipo);
+          }
          while(rs.next()){
         
              c1=new Cancion(rs.getInt("id"),rs.getString("nombre"),rs.getLong("taman"),rs.getString("direc"));

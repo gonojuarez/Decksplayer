@@ -81,6 +81,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
    int ss1=0;
    int x,y;
    double porc1=0,porc2=0;
+   int cant=0;
       public Timer cBand1=new javax.swing.Timer(1000,new ActionListener()// cronometro bandeja 1
    {
     public void actionPerformed(ActionEvent e)
@@ -247,7 +248,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
     
            this.buscar = new Controles();//
        
-            this.jTable1.setModel(cargar.devolverModelo());//genero el modelo de la primer tabla
+            this.jTable1.setModel(cargar.devolverModelo(""));//genero el modelo de la primer tabla
             this.buscar.getPlayer();//obtengo la funcion para reproducir
             cont=volumenn.getValue();
              buscar.getPlayer().addBasicPlayerListener(escucha1);
@@ -401,11 +402,8 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         Escritorio = new javax.swing.JPanel();
         jTabbedPane4 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
-        jSpinner1 = new javax.swing.JSpinner();
-        jLabel1 = new javax.swing.JLabel();
         jButton17 = new javax.swing.JButton();
         jButton18 = new javax.swing.JButton();
-        jPanel4 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel10 = new javax.swing.JPanel();
@@ -711,12 +709,14 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         });
         jPopupMenu2.add(Jazz);
 
+        jDialog1.setTitle("Bandeja1");
         jDialog1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jDialog1KeyPressed(evt);
             }
         });
 
+        jPanel12.setToolTipText("");
         jPanel12.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jPanel12KeyPressed(evt);
@@ -918,15 +918,17 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
                 preset1MouseEntered(evt);
             }
         });
-        jPanel12.add(preset1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 10, -1, -1));
+        jPanel12.add(preset1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 10, 140, -1));
 
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
         jDialog1.getContentPane().setLayout(jDialog1Layout);
         jDialog1Layout.setHorizontalGroup(
             jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 544, Short.MAX_VALUE)
+            .addGap(0, 577, Short.MAX_VALUE)
             .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, 544, Short.MAX_VALUE))
+                .addGroup(jDialog1Layout.createSequentialGroup()
+                    .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, 577, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         jDialog1Layout.setVerticalGroup(
             jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -935,6 +937,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
                 .addComponent(jPanel12, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE))
         );
 
+        jDialog2.setTitle("Bandeja 2");
         jDialog2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jDialog2KeyPressed(evt);
@@ -1141,17 +1144,15 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
                 preset2MouseEntered(evt);
             }
         });
-        jPanel13.add(preset2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 10, 40, -1));
+        jPanel13.add(preset2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 10, 130, -1));
 
         javax.swing.GroupLayout jDialog2Layout = new javax.swing.GroupLayout(jDialog2.getContentPane());
         jDialog2.getContentPane().setLayout(jDialog2Layout);
         jDialog2Layout.setHorizontalGroup(
             jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 499, Short.MAX_VALUE)
+            .addGap(0, 566, Short.MAX_VALUE)
             .addGroup(jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jDialog2Layout.createSequentialGroup()
-                    .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, 499, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE))
         );
         jDialog2Layout.setVerticalGroup(
             jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1322,6 +1323,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         getContentPane().add(jButton14, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 10, 60, 40));
 
         jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/ecualizador.png"))); // NOI18N
+        jButton10.setBorder(null);
         jButton10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton10ActionPerformed(evt);
@@ -1407,7 +1409,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         jScrollPane3.setViewportView(jTable1);
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/carpeta.png"))); // NOI18N
-        jButton1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jButton1.setBorder(null);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -1443,7 +1445,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         jLabel4.setText("Buscar");
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/lista1.png"))); // NOI18N
-        jButton2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jButton2.setBorder(null);
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -1468,6 +1470,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         });
 
         jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/aleatorio.png"))); // NOI18N
+        jButton7.setBorder(null);
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton7ActionPerformed(evt);
@@ -1507,7 +1510,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jComboBox3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 33, Short.MAX_VALUE))
+                        .addGap(0, 65, Short.MAX_VALUE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -1523,7 +1526,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton7)
                             .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1559,21 +1562,6 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
             }
         });
 
-        jSpinner1.setModel(new javax.swing.SpinnerNumberModel(0, 0, 10, 1));
-        jSpinner1.setMaximumSize(new java.awt.Dimension(29, 20));
-        jSpinner1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jSpinner1KeyPressed(evt);
-            }
-        });
-
-        jLabel1.setText("Repeticiones");
-        jLabel1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jLabel1KeyPressed(evt);
-            }
-        });
-
         jButton17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/sirena.png"))); // NOI18N
         jButton17.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1603,17 +1591,10 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jButton18)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton17))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(10, 10, 10)
+                .addComponent(jButton18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton17)
                 .addContainerGap(384, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -1623,23 +1604,10 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton18)
                     .addComponent(jButton17))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 138, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20))
+                .addContainerGap(178, Short.MAX_VALUE))
         );
 
         jTabbedPane4.addTab("efectos ", jPanel2);
-
-        jPanel4.setFocusable(false);
-        jPanel4.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jPanel4KeyPressed(evt);
-            }
-        });
-        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jTabbedPane4.addTab("Bandeja 2", jPanel4);
 
         javax.swing.GroupLayout EscritorioLayout = new javax.swing.GroupLayout(Escritorio);
         Escritorio.setLayout(EscritorioLayout);
@@ -1944,7 +1912,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
 
         jToggleButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/window-close.png"))); // NOI18N
         jToggleButton1.setText("salir");
-        jToggleButton1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jToggleButton1.setBorder(null);
         jToggleButton1.setBorderPainted(false);
         jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2178,7 +2146,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
                 antes1KeyPressed(evt);
             }
         });
-        getContentPane().add(antes1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, 38, 38));
+        getContentPane().add(antes1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, 38, 38));
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/pausa.png"))); // NOI18N
         jButton3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -2195,7 +2163,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
                 jButton3KeyPressed(evt);
             }
         });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 110, 38, 38));
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 38, 38));
 
         stop1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/stop.png"))); // NOI18N
         stop1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -2210,7 +2178,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
                 stop1KeyPressed(evt);
             }
         });
-        getContentPane().add(stop1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 110, 38, 38));
+        getContentPane().add(stop1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, 38, 38));
 
         play1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/play.png"))); // NOI18N
         play1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -2224,7 +2192,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
                 play1KeyPressed(evt);
             }
         });
-        getContentPane().add(play1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 110, 38, 38));
+        getContentPane().add(play1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 110, 38, 38));
 
         next1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/siguiente_1.png"))); // NOI18N
         next1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -2247,7 +2215,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
                 next1KeyPressed(evt);
             }
         });
-        getContentPane().add(next1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 110, 38, 38));
+        getContentPane().add(next1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 110, 38, 38));
 
         antes2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/anterior_1.png"))); // NOI18N
         antes2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -2392,10 +2360,6 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
     private void jTabbedPane4KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTabbedPane4KeyPressed
       keyPressed(evt);setFocusable(true);
     }//GEN-LAST:event_jTabbedPane4KeyPressed
-
-    private void jPanel4KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel4KeyPressed
-      keyPressed(evt);setFocusable(true);   // TODO add your handling code here:
-    }//GEN-LAST:event_jPanel4KeyPressed
 
     private void play2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_play2KeyPressed
       keyPressed(evt);setFocusable(true);
@@ -2588,7 +2552,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
             // BuscadorArchivos bbs=new BuscadorArchivos();
             cargar.buscar();
             jTable1.removeAll();
-            jTable1.setModel(cargar.devolverModelo());
+            jTable1.setModel(cargar.devolverModelo(""));
         } catch (Exception ex) {
             Logger.getLogger(ventanamixer.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -2629,8 +2593,8 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
       try
        {
            con=jTable1.getSelectedRow();
-           jTextField1.setText(buscar.getname(jTable1.getSelectedRow()));
-           cargarCancion(buscar.getname(jTable1.getSelectedRow()));
+           jTextField1.setText(buscar.getname(jTable1.getSelectedRow(),jTextField3.getText()));
+           cargarCancion(buscar.getname(jTable1.getSelectedRow(),jTextField3.getText()));
           
      
         
@@ -2646,8 +2610,8 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
        try
         {
           i=jTable1.getSelectedRow();
-          jTextField2.setText(buscar.getname(jTable1.getSelectedRow()));
-          cargarCancion2(buscar.getname(jTable1.getSelectedRow()));
+          jTextField2.setText(buscar.getname(jTable1.getSelectedRow(),jTextField3.getText()));
+          cargarCancion2(buscar.getname(jTable1.getSelectedRow(),jTextField3.getText()));
         
      
          
@@ -2667,11 +2631,16 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
     }//GEN-LAST:event_jTextField3InputMethodTextChanged
 
     private void jTextField3KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyReleased
-       if (jTextField3.getText()!=null&&evt.getKeyCode()==KeyEvent.VK_ENTER) {
+    /*  if (jTextField3.getText()!=null&&evt.getKeyCode()==KeyEvent.VK_ENTER) {
           Lista.dispose();
            jComboBox1.removeAllItems();
            buscarr();
         }
+     */
+    try{
+    jTable1.setModel(cargar.devolverModelo(jTextField3.getText()));
+    
+    }catch(Exception ex){}
     }//GEN-LAST:event_jTextField3KeyReleased
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
@@ -2728,7 +2697,8 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
                 jButton2.setIcon(gr1);
                 ImageIcon gr2=new ImageIcon( getClass().getResource("/dj/Imagenes/aleatorio.png"));
                 jButton7.setIcon(gr2);
-                 lc1(posicion,1);
+                cant++;
+                 lc1();
                
             }
             if(jComboBox3.getSelectedIndex()==0)
@@ -2759,7 +2729,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
     private void AgregarCancionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarCancionActionPerformed
      
     
-        listas.add(posxw,buscar.getname(jTable1.getSelectedRow()));
+        listas.add(posxw,buscar.getname(jTable1.getSelectedRow(),jTextField3.getText()));
       posxw++;
      jTextPane1.setEditable(false);
       String ns="<td ><tr text-color=\"white\" >Lista Creada</tr>";
@@ -2779,12 +2749,12 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         for (int j = 0; j < jTable1.getRowCount(); j++) 
         {
         String  trr=(String)jComboBox1.getSelectedItem();
-      if(buscar.getname(j).equalsIgnoreCase(trr)==true)
+      if(buscar.getname(j,jTextField3.getText()).equalsIgnoreCase(trr)==true)
       {
       try
        {
         jTable1.setRowSelectionInterval(j, j);
-        listas.add(posxw,buscar.getname(jTable1.getSelectedRow()));
+        listas.add(posxw,buscar.getname(jTable1.getSelectedRow(),jTextField3.getText()));
         posxw++;
         
             
@@ -3211,67 +3181,21 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
-         ImageIcon gr1;
-        ImageIcon gr2;
-        ImageIcon gr3;
-        ImageIcon gr4;
-        try{
-            switch(jTabbedPane1.getSelectedIndex())
-            {
-                case 0: gr1=new ImageIcon( getClass().getResource("/dj/Imagenes/musica2.png"));
-                gr2=new ImageIcon( getClass().getResource("/dj/Imagenes/bandeja.png"));
-                gr3=new ImageIcon(getClass().getResource("/dj/imagenes/configuracion_1.png"));
-                gr4=new ImageIcon(getClass().getResource("/dj/imagenes/camara2.png"));
-                jTabbedPane1.setIconAt(0, gr1);
-                jTabbedPane1.setIconAt(1, gr2);
-                jTabbedPane1.setIconAt(2, gr3);
-                jTabbedPane1.setIconAt(3, gr4);
-                break;
-                case 1: gr1=new ImageIcon( getClass().getResource("/dj/Imagenes/musica2.png"));
-                gr2=new ImageIcon( getClass().getResource("/dj/Imagenes/bandeja1.png"));
-                gr3=new ImageIcon(getClass().getResource("/dj/imagenes/configuracion_1.png"));
-                gr4=new ImageIcon(getClass().getResource("/dj/imagenes/camara2.png"));
-                jTabbedPane1.setIconAt(0, gr1);
-                jTabbedPane1.setIconAt(1, gr2);
-                jTabbedPane1.setIconAt(2, gr3);
-                jTabbedPane1.setIconAt(3, gr4);
-                break;
-                case 2:
-                gr1=new ImageIcon( getClass().getResource("/dj/Imagenes/musica2.png"));
-                gr2=new ImageIcon( getClass().getResource("/dj/Imagenes/bandeja.png"));
-                gr3=new ImageIcon(getClass().getResource("/dj/imagenes/configuracion2.png"));
-                gr4=new ImageIcon(getClass().getResource("/dj/imagenes/camara2.png"));
-                jTabbedPane1.setIconAt(0, gr1);
-                jTabbedPane1.setIconAt(1, gr2);
-                jTabbedPane1.setIconAt(2, gr3);
-                jTabbedPane1.setIconAt(3, gr4);
-                break;
-                case 3:
-                gr1=new ImageIcon( getClass().getResource("/dj/Imagenes/musica2.png"));
-                gr2=new ImageIcon( getClass().getResource("/dj/Imagenes/bandeja.png"));
-                gr3=new ImageIcon(getClass().getResource("/dj/imagenes/configuracion_1.png"));
-                gr4=new ImageIcon(getClass().getResource("/dj/imagenes/camara.png"));
-                jTabbedPane1.setIconAt(0, gr1);
-                jTabbedPane1.setIconAt(1, gr2);
-                jTabbedPane1.setIconAt(2, gr3);
-                jTabbedPane1.setIconAt(3, gr4);
-
-                break;
-            }}catch(Exception ex)
-            {
-
-            }
+    
         jPanel8.repaint();
         jPanel15.repaint();
     }//GEN-LAST:event_jTabbedPane1StateChanged
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-       jDialog1.setVisible(true);
+        jDialog1.setLocation(0, 0);
+        jDialog1.setVisible(true);
        jDialog1.setSize(600,400);
+     
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
-       jDialog2.setVisible(true);
+               jDialog1.setLocation(650, 0);
+        jDialog2.setVisible(true);
        jDialog2.setSize(600,400);
     }//GEN-LAST:event_jButton14ActionPerformed
 
@@ -3391,14 +3315,6 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         keyPressed(evt);setFocusable(true);
     }//GEN-LAST:event_jButton17KeyPressed
 
-    private void jLabel1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabel1KeyPressed
-          keyPressed(evt);setFocusable(true);
-    }//GEN-LAST:event_jLabel1KeyPressed
-
-    private void jSpinner1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jSpinner1KeyPressed
-         keyPressed(evt);setFocusable(true);
-    }//GEN-LAST:event_jSpinner1KeyPressed
-
     private void jPanel8KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel8KeyPressed
           keyPressed(evt);setFocusable(true);
     }//GEN-LAST:event_jPanel8KeyPressed
@@ -3500,7 +3416,6 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
     javax.swing.JDialog jDialog2;
     javax.swing.JDialog jDialog3;
     javax.swing.JDialog jDialog4;
-    javax.swing.JLabel jLabel1;
     javax.swing.JLabel jLabel10;
     javax.swing.JLabel jLabel11;
     javax.swing.JLabel jLabel12;
@@ -3554,7 +3469,6 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
     javax.swing.JPanel jPanel15;
     javax.swing.JPanel jPanel2;
     javax.swing.JPanel jPanel3;
-    javax.swing.JPanel jPanel4;
     javax.swing.JPanel jPanel5;
     javax.swing.JPanel jPanel6;
     javax.swing.JPanel jPanel7;
@@ -3581,7 +3495,6 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
     javax.swing.JSlider jSlider5;
     javax.swing.JSlider jSlider6;
     javax.swing.JSlider jSlider7;
-    javax.swing.JSpinner jSpinner1;
     javax.swing.JTabbedPane jTabbedPane1;
     javax.swing.JTabbedPane jTabbedPane2;
     javax.swing.JTabbedPane jTabbedPane4;
@@ -3792,11 +3705,8 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
              jTabbedPane4.setSelectedIndex(0);
              swAlt=false;
             break;
-            case KeyEvent.VK_2:
-            jTabbedPane1.setSelectedIndex(1);
-             jTabbedPane4.setSelectedIndex(1);
-             swAlt=false;
-            break;
+            
+         
                 
     }
     }
@@ -3842,16 +3752,16 @@ public void value()
   
 private void play1d()
 {  
-   
+    
   try {
             if (iseek==false) {
                
                 try {
                     
-                    jTextField1.setText(buscar.getname(con).replace(".mp3","").replace(".ogg","").replace(".wav", "").replace("{{","'"));
+                    jTextField1.setText(buscar.getname(con,jTextField3.getText()).replace(".mp3","").replace(".ogg","").replace(".wav", "").replace("{{","'"));
                     jLabel6.setText(jTextField1.getText());
                     cBand1.start();
-                      buscar.playSong(con);
+                      buscar.playSong(con,jTextField3.getText());
                       iseek=true;
                       value();
                
@@ -3902,14 +3812,14 @@ private void antes(){
            String  trr=(String)listas.get(posicion);
            for ( int j=0; j < jTable1.getRowCount(); j++)
              {
-                 if(buscar.getname(j).equalsIgnoreCase(trr)==true)//busco el nombre de la cancion
+                 if(buscar.getname(j,jTextField3.getText()).equalsIgnoreCase(trr)==true)//busco el nombre de la cancion
                 {
                  try
                       {
                        
                        jTable1.setRowSelectionInterval(j, j);//selecciono la cancion
                         con=jTable1.getSelectedRow();
-                        jTextField1.setText( buscar.getname(j).replace(".mp3", "").replace(".ogg", "").replace(".wav",""));//escribo el nombre en la bandeja
+                        jTextField1.setText( buscar.getname(j,jTextField3.getText()).replace(".mp3", "").replace(".ogg", "").replace(".wav",""));//escribo el nombre en la bandeja
                         jLabel6.setText(jTextField1.getText());
                       }catch (Exception ex)
                      {
@@ -3927,7 +3837,7 @@ private void antes(){
              con=jTable1.getRowCount()-1;
              }
              posicion=con;
-        }  buscar.playSong(con);
+        }  buscar.playSong(con,jTextField3.getText());
           try
              {
               buscar.Pausa();
@@ -3939,7 +3849,7 @@ private void antes(){
               cBand1.stop();
               s1=0;m1=0;
               jTable1.setRowSelectionInterval(con, con);
-              jTextField1.setText("" + buscar.getname(con).replace(".mp3","").replace(".ogg","").replace(".wav", ""));
+              jTextField1.setText("" + buscar.getname(con,jTextField3.getText()).replace(".mp3","").replace(".ogg","").replace(".wav", ""));
               jLabel6.setText(jTextField1.getText());
         }
         catch (BasicPlayerException ex)
@@ -3982,22 +3892,30 @@ private void siguiente1()
        {if(listaC==true)
        {
            System.out.println("Lista1");
-        
-           if(posicion==listas.size())
+        String  trr="";
+           if(posicion>listas.size())
            {
-           posicion=0;
-           } 
-           String  trr=(String)listas.get(posicion);
+          listaC=false;
+          lista=true;
+          jComboBox3.setSelectedIndex(0);
+          posicion--;
+          
+           }
+          
+            
+           try{
+           trr=(String)listas.get(posicion);}catch(Exception ex)
+           {}
            for ( int j=0; j < jTable1.getRowCount(); j++)
              {
-                 if(buscar.getname(j).equalsIgnoreCase(trr)==true)//busco el nombre de la cancion
+                 if(buscar.getname(j,jTextField3.getText()).equalsIgnoreCase(trr)==true)//busco el nombre de la cancion
                 {
                  try
                       {
                        
                        jTable1.setRowSelectionInterval(j, j);//selecciono la cancion
                         con=jTable1.getSelectedRow();
-                        jTextField2.setText( buscar.getname(j));//escribo el nombre en la bandeja
+                        jTextField2.setText( buscar.getname(j,jTextField3.getText()));//escribo el nombre en la bandeja
                       }catch (Exception ex)
                      {
                         //  Logger.getLogger(ventanamixer.class.getName()).log(Level.SEVERE, null, ex);
@@ -4022,7 +3940,7 @@ private void siguiente1()
             }
             
        }
-            buscar.playSong(con);
+            buscar.playSong(con,jTextField3.getText());
         try 
          {
              buscar.Pausa();
@@ -4034,7 +3952,7 @@ private void siguiente1()
              cBand1.stop();
              s1=0;m1=0;
              jTable1.setRowSelectionInterval(con , con);
-             jTextField1.setText("" + buscar.getname(con).replace(".mp3","").replace(".ogg","").replace(".wav",""));
+             jTextField1.setText("" + buscar.getname(con,jTextField3.getText()).replace(".mp3","").replace(".ogg","").replace(".wav",""));
              jLabel6.setText(jTextField1.getText());
        }
       catch (BasicPlayerException ex)
@@ -4067,14 +3985,14 @@ private void siguiente1()
            String  trr=(String)listas.get(posicion);
            for ( int j=0; j < jTable1.getRowCount(); j++)
              {
-                 if(buscar.getname(j).equalsIgnoreCase(trr)==true)//busco el nombre de la cancion
+                 if(buscar.getname(j,jTextField3.getText()).equalsIgnoreCase(trr)==true)//busco el nombre de la cancion
                 {
                  try
                       {
                        
                        jTable1.setRowSelectionInterval(j, j);//selecciono la cancion
                         i=jTable1.getSelectedRow();
-                        jTextField2.setText( buscar.getname(j).replace(".mp3","").replace(".ogg", "").replace(".wav",""));//escribo el nombre en la bandeja
+                        jTextField2.setText( buscar.getname(j,jTextField3.getText()).replace(".mp3","").replace(".ogg", "").replace(".wav",""));//escribo el nombre en la bandeja
                         jLabel46.setText(jTextField2.getText());
                       }catch (Exception ex)
                      {
@@ -4095,14 +4013,14 @@ private void siguiente1()
             }
             posicion=i;
             }
-            buscar.playsSong(i);
+            buscar.playsSong(i,jTextField3.getText());
        try {
            buscar.Pausa1();
        } catch (Exception ex) {
            Logger.getLogger(ventanamixer.class.getName()).log(Level.SEVERE, null, ex);
        }
             jTable1.setRowSelectionInterval(i, i);
-           jTextField2.setText(buscar.getname(i).replace(".mp3","").replace(".ogg","").replace(".wav", ""));
+           jTextField2.setText(buscar.getname(i,jTextField3.getText()).replace(".mp3","").replace(".ogg","").replace(".wav", ""));
                     jLabel46.setText(jTextField2.getText());
         } catch (BasicPlayerException ex) {
         }
@@ -4153,8 +4071,8 @@ private void siguiente1()
                 
                  
                      cBand2.start();
-                        buscar.playsSong(i);
-                    jTextField2.setText(buscar.getname(i).replace(".mp3","").replace(".ogg","").replace(".wav", "").replace("{{","'"));
+                        buscar.playsSong(i,jTextField3.getText());
+                    jTextField2.setText(buscar.getname(i,jTextField3.getText()).replace(".mp3","").replace(".ogg","").replace(".wav", "").replace("{{","'"));
                     jLabel46.setText(jTextField2.getText());
                     value();
                   
@@ -4189,21 +4107,28 @@ private void siguiente1()
             if(listaC==true)
             {
           
-              if(posicion==listas.size())
+           if(posicion>listas.size())
            {
-           posicion=0;
+          listaC=false;
+          lista=true;
+          posicion--;
+          jComboBox3.setSelectedIndex(0);
+
            } 
-           String  trr=(String)listas.get(posicion);
+           String  trr="";
+           try{
+                   trr=(String)listas.get(posicion);}catch(Exception ex){}
            for ( int j=0; j < jTable1.getRowCount(); j++)
              {
-                 if(buscar.getname(j).equalsIgnoreCase(trr)==true)//busco el nombre de la cancion
+                 if(buscar.getname(j,jTextField3.getText()).equalsIgnoreCase(trr)==true)//busco el nombre de la cancion
                 {
                  try
                       {
                        
                        jTable1.setRowSelectionInterval(j, j);//selecciono la cancion
                         i=jTable1.getSelectedRow();
-                        jTextField2.setText( buscar.getname(j));//escribo el nombre en la bandeja
+                        jTextField2.setText( buscar.getname(j,jTextField3.getText()));//escribo el nombre en la bandeja
+                       
                       }catch (Exception ex)
                      {
                           Logger.getLogger(ventanamixer.class.getName()).log(Level.SEVERE, null, ex);
@@ -4211,7 +4136,7 @@ private void siguiente1()
            
                  }
                }
-           posicion=posicion+1;
+          posicion++;
           
             }else
             {    
@@ -4222,7 +4147,7 @@ private void siguiente1()
             i=0;
             }
             }
-            buscar.playsSong(i);
+            buscar.playsSong(i,jTextField3.getText());
             try {
                 buscar.Pausa1();
             } catch (Exception ex) {
@@ -4230,7 +4155,7 @@ private void siguiente1()
             }
              cBand2.stop();m2=0;s2=0;
             jTable1.setRowSelectionInterval(i, i);
-            jTextField2.setText(buscar.getname(i).replace(".mp3", "").replace(".ogg","").replace(".wav",""));
+            jTextField2.setText(buscar.getname(i,jTextField3.getText()).replace(".mp3", "").replace(".ogg","").replace(".wav",""));
             jLabel46.setText(jTextField2.getText());
         } catch (BasicPlayerException ex) {
         }
@@ -4241,9 +4166,9 @@ private void siguiente1()
 
         for ( int j=0; j < jTable1.getRowCount(); j++) {
 
-            if ((buscar.getname(j).toLowerCase().contains(jTextField3.getText()) == true
-                    || buscar.getname(j).contains(jTextField3.getText()) == true)&&jTextField3.getText().isEmpty()==false) {
-                ttt = buscar.getname(j);
+            if ((buscar.getname(j,jTextField3.getText()).toLowerCase().contains(jTextField3.getText()) == true
+                    || buscar.getname(j,jTextField3.getText()).contains(jTextField3.getText()) == true)&&jTextField3.getText().isEmpty()==false) {
+                ttt = buscar.getname(j,jTextField3.getText());
                 jComboBox1.addItem(ttt);
             }
             
@@ -4268,12 +4193,12 @@ private void siguiente1()
         
             System.out.println(trr);
           
-      if(buscar.getname(j).equalsIgnoreCase(trr)==true)
+      if(buscar.getname(j,jTextField3.getText()).equalsIgnoreCase(trr)==true)
       { try {
-         // stopo1();
+         stopo1();
          jTable1.setRowSelectionInterval(j, j);
          con=jTable1.getSelectedRow();
-         jTextField1.setText( buscar.getname(j));
+         jTextField1.setText( buscar.getname(j,jTextField3.getText()));
             
         } catch (Exception ex) {
             Logger.getLogger(ventanamixer.class.getName()).log(Level.SEVERE, null, ex);
@@ -4296,12 +4221,12 @@ private void siguiente1()
        
             System.out.println(trr);
            
-      if(buscar.getname(j).equalsIgnoreCase(trr)==true)
+      if(buscar.getname(j,jTextField3.getText()).equalsIgnoreCase(trr)==true)
       { try {
-         // stopo2();
+          stopo2();
             jTable1.setRowSelectionInterval(j, j);
             i=jTable1.getSelectedRow();
-            jTextField2.setText( buscar.getname(j));
+            jTextField2.setText( buscar.getname(j,jTextField3.getText()));
         } catch (Exception ex) {
             Logger.getLogger(ventanamixer.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -4312,7 +4237,7 @@ private void siguiente1()
           Lista.dispose();
       
  }
-
+//ecualizador
    public void valores(boolean t,int v0,int v1,int v2,int v3,int v4,int v5,int v6,int v7,int v8,int v9)
    {
        if(t==false){
@@ -4361,7 +4286,8 @@ private void siguiente1()
         escucha2.setEq(9,js19.getValue()); 
        }
    }
- private void valor0()
+//funciones del control remoto
+   private void valor0()
  {
   volumenn.setValue(100);
    value();
@@ -4371,6 +4297,7 @@ private void siguiente1()
    volumenn.setValue(0);
   value();
  }
+ //funciones del control remoto
  public void recibirSms(String s)
  {
      System.out.println(s);
@@ -4405,6 +4332,17 @@ private void siguiente1()
        
     return i;
     }
+       public String devolvernombre1()
+    {   
+      
+    return jTextField3.getText() ;
+    }
+         public String devolvernombre2()
+    {   
+      
+    return jTextField3.getText() ;
+    }
+      //funciones para dibujar en pantalla las bandejas
  public class imagenes extends JPanel
     {
         public imagenes()
@@ -4477,6 +4415,7 @@ private void siguiente1()
            
            
         }
+    //efectos
     private void sirenas(int n)
     {
     try {
@@ -4485,6 +4424,7 @@ private void siguiente1()
             Logger.getLogger(ventanamixer.class.getName()).log(Level.SEVERE, null, ex);
         }  
     }
+    //funciones para mezclar musica de manera automatica
    public void crossfade(int n,int num,int func)
    {
    switch(n)
@@ -4496,6 +4436,7 @@ private void siguiente1()
                    switch(func){
                        case 0: i=(int)(Math.random()*jTable1.getRowCount());
                                  posicion=i;
+                               System.out.println("Cambio1"); 
                                     play2();
                        case 1:
                             posicion++;
@@ -4503,14 +4444,10 @@ private void siguiente1()
                             play2();
                            break;
                        case 2:
-                             cAnt=false;
-                             if(posicion%2==0&&posicion!=0)
-                             { lc1(posicion,2);
-                             posicion++;
-                             }else
-                             {
-                             lc1(posicion+1,2);
-                             }
+                      siguiente2();
+                      play2();
+                           
+                          
                             
                            break;
                    }
@@ -4546,6 +4483,7 @@ private void siguiente1()
                    cBand1.stop();
                    stopo1();
                    break;
+                  
               
            }
            break;
@@ -4555,6 +4493,7 @@ private void siguiente1()
               switch(func){
                   case 0:con=(int)(Math.random()*jTable1.getRowCount()); 
                         posicion=con;
+                       System.out.println("Cambio2");
                         play1d();
               break;
                   case 1:
@@ -4563,13 +4502,17 @@ private void siguiente1()
                         play1d();
                         break;
                   case 2:
-                      if(posicion%2!=0){
-                      lc1(posicion,1);
-                      posicion++;
+                      
+                      siguiente1();
+                      play1d();
+                      
+                      break;
                       }
+                     
+                     
                       break;      
-              }
-               break;
+           
+              
             case 91:
                    volumenn.setValue(90);
                    break;
@@ -4600,28 +4543,26 @@ private void siguiente1()
                    cBand2.stop();
                    stopo2();
                    break;
+              
+   
+      
    }
-           break;    
+           break;
    }
    }
-   public void lc1(int pos,int n)
+   public void lc1()
    {
-       switch(n){case 1:
-            if(pos>=listas.size())
-           {
-           pos=0;
-           }
-   String  trr=(String)listas.get(pos);
+   String  trr=(String)listas.get(posicion);
                 for ( int j=0; j < jTable1.getRowCount(); j++)
                 {
-                    if(buscar.getname(j).equalsIgnoreCase(trr)==true)//busco el nombre de la cancion
+                    if(buscar.getname(j,jTextField3.getText()).equalsIgnoreCase(trr)==true)//busco el nombre de la cancion
                     {
                         try
                         {
                             
                             jTable1.setRowSelectionInterval(j, j);//selecciono la cancion
                             con=jTable1.getSelectedRow();
-                            jTextField1.setText( buscar.getname(j));//escribo el nombre en la bandeja
+                            jTextField1.setText( buscar.getname(j,jTextField3.getText()));//escribo el nombre en la bandeja
                         }catch (Exception ex)
                         {
                             Logger.getLogger(ventanamixer.class.getName()).log(Level.SEVERE, null, ex);
@@ -4630,34 +4571,5 @@ private void siguiente1()
                     }
                 }
                 play1d();
-    //            posicion++;
-                break;
-       case 2: 
-           if(pos>=listas.size())
-           {
-           pos=0;
-           }
-           String  trr1=(String)listas.get(pos);
-                    
-           for ( int j=0; j < jTable1.getRowCount(); j++)
-                {
-                    if(buscar.getname(j).equalsIgnoreCase(trr1)==true)//busco el nombre de la cancion
-                    {
-                        try
-                        {
-                            
-                            jTable1.setRowSelectionInterval(j, j);//selecciono la cancion
-                            i=jTable1.getSelectedRow();
-                            jTextField2.setText( buscar.getname(j));//escribo el nombre en la bandeja
-                        }catch (Exception ex)
-                        {
-                            Logger.getLogger(ventanamixer.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-
-                    }
-                }
-                play2();
-  //              posicion++;
-                break;
-   }}
+   }
 }

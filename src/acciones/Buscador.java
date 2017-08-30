@@ -27,7 +27,7 @@ public class Buscador {
         buscar=new JFileChooser();
         bd=new BaseDatos();
         try{
-        model=bd.DevolverListado("asc");
+        model=bd.DevolverListado("asc","");
         }catch(Exception ex){}
     }
     public void buscar() throws Exception
@@ -57,15 +57,21 @@ public class Buscador {
                 n++;
             }
             
-            model=bd.DevolverListado("asc");
+            model=bd.DevolverListado("asc","");
         }
          else {
             buscar.cancelSelection();
             buscar.resetChoosableFileFilters();
         }
     }
-    public DefaultTableModel devolverModelo()
+    public DefaultTableModel devolverModelo(String tr)throws  Exception
     {
+         model=bd.DevolverListado("asc",tr);
+    return model;
+    }
+    public DefaultTableModel devolverCancion()
+    {
+        
     return model;
     }
        public void eliminar(int n) {

@@ -93,22 +93,22 @@ bd=new BaseDatos();
 
    
 
-    public String getname(int numero) {
+    public String getname(int numero,String txt) {
         String name = "";
         try {
-             name=bd.devolvercancion(numero).getNombre().replaceAll("'","{{");
+             name=bd.devolvercancion(numero,txt).getNombre().replaceAll("'","{{");
         } catch (Exception e) {
         }
      
         return name;
     }
 
-    public void playSong(int i) throws BasicPlayerException {
+    public void playSong(int i,String txt) throws BasicPlayerException {
        
         try {
           
           player.stop();
-player.open(new File(bd.devolvercancion(i).getDireccion().replace(bd.devolvercancion(i).getNombre(), bd.devolvercancion(i).getNombre().replace("{{","'"))));
+player.open(new File(bd.devolvercancion(i,txt).getDireccion().replace(bd.devolvercancion(i,txt).getNombre(), bd.devolvercancion(i,txt).getNombre().replace("{{","'"))));
         } catch (Exception ex) {
             Logger.getLogger(Controles.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -158,12 +158,12 @@ player.open(new File(bd.devolvercancion(i).getDireccion().replace(bd.devolvercan
         model.getDataVector().removeElementAt(n);
     }
 
-    public void playsSong(int id) throws BasicPlayerException {
+    public void playsSong(int id,String txt) throws BasicPlayerException {
     
           
                 try {
                     
-                    playtu.open(new File(bd.devolvercancion(id).getDireccion().replace(bd.devolvercancion(id).getNombre(),bd.devolvercancion(id).getNombre().replace("{{","'"))));
+                    playtu.open(new File(bd.devolvercancion(id,txt).getDireccion().replace(bd.devolvercancion(id,txt).getNombre(),bd.devolvercancion(id,txt).getNombre().replace("{{","'"))));
                
                 } catch (Exception ex) {
                     Logger.getLogger(Controles.class.getName()).log(Level.SEVERE, null, ex);

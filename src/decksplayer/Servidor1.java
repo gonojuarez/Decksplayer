@@ -10,19 +10,20 @@ package decksplayer;
  * @author familia
  */
 import acciones.BaseDatos;
+import com.sun.corba.se.spi.activation.Server;
 import java.io.* ;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-class Servidor1 {
+
+public class Servidor1 {
  static final int PUERTO=5000;
 ServerSocket skServidor;
+
+    
     BaseDatos bd=new BaseDatos();
 public Servidor1( ventanamixer v) {
  try {
-   
  skServidor= new ServerSocket(PUERTO);
 
 System.out.println("Escucho el puerto " + PUERTO );
@@ -33,12 +34,15 @@ while(skServidor.isClosed()==false){
  OutputStream output = skCliente.getOutputStream();
          skCliente.getOutputStream().flush();
  DataOutputStream dat=new DataOutputStream(output);
- dat.writeUTF("hola");
- DataInputStream flujo= new DataInputStream(aux );
- 
- 
- v.recibirSms(flujo.readUTF());
 
+ DataInputStream flujo= new DataInputStream(aux );
+ String fluj=flujo.readUTF();
+ 
+ v.recibirSms(fluj);
+ if(fluj.contains("1"))
+ {dat.writeUTF(bd.devolvercancion(v.devolverCancion1(),v.devolvernombre1()).getNombre());}
+ else if(fluj.contains("2"))
+ { dat.writeUTF(bd.devolvercancion(v.devolverCancion2(),v.devolvernombre2()).getNombre());}
 skCliente.close();
   
   
@@ -47,9 +51,6 @@ skCliente.close();
 
  } catch(Exception e ) {
 System.out.println( e.getMessage() );
- }finally
- {
- 
  }
  
  }
