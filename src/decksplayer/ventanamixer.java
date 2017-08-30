@@ -200,7 +200,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
       this.setIconImage(gr.getImage());//establezco el logo del programa
     this.setTitle("DECKSPLAYER     \n Ip "+InetAddress.getLocalHost().getHostAddress());//pongo el titulo
       this.setLocationRelativeTo(null);//centro la ventana al medio
-      Lista.setLocationRelativeTo(null);//centro la ventana de busqueda al medio
+//      Lista.setLocationRelativeTo(null);//centro la ventana de busqueda al medio
       tir.setText(h2+":"+m2+":"+s2);//muestro hora, minutos y segundos
       ti.setText(h1+":"+m1+":"+s1);//muestro hora, minutos y segundos
     escucha1=new listener();
@@ -280,12 +280,6 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Lista = new javax.swing.JDialog();
-        jComboBox1 = new javax.swing.JComboBox();
-        jButton6 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
-        jButton13 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
         jPopupMenu1 = new javax.swing.JPopupMenu();
         Bandeja1 = new javax.swing.JMenuItem();
         Bandeja2 = new javax.swing.JMenuItem();
@@ -452,78 +446,6 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         stop2 = new javax.swing.JButton();
         play2 = new javax.swing.JToggleButton();
         next2 = new javax.swing.JButton();
-
-        Lista.setMinimumSize(new java.awt.Dimension(400, 200));
-        Lista.setResizable(false);
-        Lista.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                ListaKeyPressed(evt);
-            }
-        });
-        Lista.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
-            }
-        });
-        jComboBox1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jComboBox1KeyPressed(evt);
-            }
-        });
-        Lista.getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 350, -1));
-
-        jButton6.setText("Bandeja 1");
-        jButton6.setBorder(null);
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
-            }
-        });
-        jButton6.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jButton6KeyPressed(evt);
-            }
-        });
-        Lista.getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
-
-        jButton8.setText("Bandeja 2");
-        jButton8.setBorder(null);
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
-            }
-        });
-        jButton8.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jButton8KeyPressed(evt);
-            }
-        });
-        Lista.getContentPane().add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 60, -1, -1));
-
-        jButton13.setText("Cancelar");
-        jButton13.setBorder(null);
-        jButton13.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton13ActionPerformed(evt);
-            }
-        });
-        Lista.getContentPane().add(jButton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, 110, -1));
-
-        jButton5.setText("Agregar a la lista");
-        jButton5.setBorder(null);
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
-        jButton5.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jButton5KeyPressed(evt);
-            }
-        });
-        Lista.getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 40, -1, -1));
 
         jPopupMenu1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jPopupMenu1.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -1499,39 +1421,42 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addComponent(jButton7)
                                 .addGap(54, 54, 54)
                                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(27, 27, 27)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jComboBox3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 65, Short.MAX_VALUE))
+                                .addGap(117, 117, 117)
+                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane4)))
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jScrollPane4))))
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton7)
                             .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(16, 16, 16)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE))
@@ -2304,16 +2229,6 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
     System.exit(0);//salgo del programa
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-    cargarCancion((String)jComboBox1.getSelectedItem()); //metodo para cargar canciones en la bandeja 1
-    jComboBox1.removeAllItems();//remuevo todos los elementos del archivo de busqueda
-    }//GEN-LAST:event_jButton6ActionPerformed
-
-        private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        cargarCancion2((String)jComboBox1.getSelectedItem()); //metodo para cargar canciones en la bandeja 2
-        jComboBox1.removeAllItems();
-    }//GEN-LAST:event_jButton8ActionPerformed
-
     private void volumennKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_volumennKeyPressed
      keyPressed(evt);setFocusable(true);//evento para cuando se aprietan las teclas
     }//GEN-LAST:event_volumennKeyPressed
@@ -2330,28 +2245,12 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
     keyPressed(evt);setFocusable(true);
     }//GEN-LAST:event_jPanel14KeyPressed
 
-    private void jButton6KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton6KeyPressed
-     keyPressed(evt);setFocusable(true);
-    }//GEN-LAST:event_jButton6KeyPressed
-
-    private void jButton8KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton8KeyPressed
-     keyPressed(evt);setFocusable(true);
-    }//GEN-LAST:event_jButton8KeyPressed
-
     private void volumennStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_volumennStateChanged
    
      volumenn.setValue(volumenn.getValue());
 //establezco el volumen
      value();//metodo para cambiar el volumen
     }//GEN-LAST:event_volumennStateChanged
-
-    private void ListaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ListaKeyPressed
-     keyPressed(evt);setFocusable(true);     // TODO add your handling code here:
-    }//GEN-LAST:event_ListaKeyPressed
-
-    private void jComboBox1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jComboBox1KeyPressed
-     keyPressed(evt);setFocusable(true);    // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1KeyPressed
 
     private void jTabbedPane1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTabbedPane1KeyPressed
      keyPressed(evt);setFocusable(true);
@@ -2581,13 +2480,6 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
      
     }//GEN-LAST:event_next1MousePressed
 
-    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
-      //cancelo la busqueda de temas 
-      jComboBox1.removeAllItems();
-      jTextField3.setText("");
-      Lista.dispose();
-    }//GEN-LAST:event_jButton13ActionPerformed
-
     private void Bandeja1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bandeja1ActionPerformed
   
       try
@@ -2627,7 +2519,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
     }//GEN-LAST:event_jPopupMenu1KeyPressed
 
     private void jTextField3InputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jTextField3InputMethodTextChanged
-    buscarr();
+    
     }//GEN-LAST:event_jTextField3InputMethodTextChanged
 
     private void jTextField3KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyReleased
@@ -2642,10 +2534,6 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
     
     }catch(Exception ex){}
     }//GEN-LAST:event_jTextField3KeyReleased
-
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jTable1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseExited
         // TODO add your handling code here:
@@ -2744,31 +2632,6 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
     private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
        
     }//GEN-LAST:event_jComboBox3ActionPerformed
-
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        for (int j = 0; j < jTable1.getRowCount(); j++) 
-        {
-        String  trr=(String)jComboBox1.getSelectedItem();
-      if(buscar.getname(j,jTextField3.getText()).equalsIgnoreCase(trr)==true)
-      {
-      try
-       {
-        jTable1.setRowSelectionInterval(j, j);
-        listas.add(posxw,buscar.getname(jTable1.getSelectedRow(),jTextField3.getText()));
-        posxw++;
-        
-            
-        } catch (Exception ex) {
-            Logger.getLogger(ventanamixer.class.getName()).log(Level.SEVERE, null, ex);
-        }
-           
-      }}
-        
-    }//GEN-LAST:event_jButton5ActionPerformed
-
-    private void jButton5KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton5KeyPressed
-        keyPressed(evt);setFocusable(true);
-    }//GEN-LAST:event_jButton5KeyPressed
 
     private void AgregarCancionKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_AgregarCancionKeyPressed
        keyPressed(evt);setFocusable(true);
@@ -3381,7 +3244,6 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
     javax.swing.JMenuItem FullTreble;
     javax.swing.JMenuItem Jazz;
     javax.swing.JMenuItem Laptop;
-    javax.swing.JDialog Lista;
     javax.swing.JMenuItem Live;
     javax.swing.JComboBox MarcasDeAgua;
     javax.swing.JSlider Parlante;
@@ -3397,19 +3259,14 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
     javax.swing.JButton jButton10;
     javax.swing.JButton jButton11;
     javax.swing.JButton jButton12;
-    javax.swing.JButton jButton13;
     javax.swing.JButton jButton14;
     javax.swing.JButton jButton17;
     javax.swing.JButton jButton18;
     javax.swing.JButton jButton2;
     javax.swing.JButton jButton3;
     javax.swing.JButton jButton4;
-    javax.swing.JButton jButton5;
-    javax.swing.JButton jButton6;
     javax.swing.JButton jButton7;
-    javax.swing.JButton jButton8;
     javax.swing.JButton jButton9;
-    javax.swing.JComboBox jComboBox1;
     javax.swing.JComboBox jComboBox2;
     javax.swing.JComboBox jComboBox3;
     javax.swing.JDialog jDialog1;
@@ -4160,28 +4017,7 @@ private void siguiente1()
         } catch (BasicPlayerException ex) {
         }
  }
- private void buscarr()
- {
- String ttt = "";
 
-        for ( int j=0; j < jTable1.getRowCount(); j++) {
-
-            if ((buscar.getname(j,jTextField3.getText()).toLowerCase().contains(jTextField3.getText()) == true
-                    || buscar.getname(j,jTextField3.getText()).contains(jTextField3.getText()) == true)&&jTextField3.getText().isEmpty()==false) {
-                ttt = buscar.getname(j,jTextField3.getText());
-                jComboBox1.addItem(ttt);
-            }
-            
-        }
-        if (ttt =="")
-        {
-            JOptionPane.showMessageDialog(null, "No se encontro ningun tema con ese nombre / o autor");
-        } else {
-            Lista.setVisible(true);
-            Lista.setSize(200, 300);
-
-        }
- }
  private void cargarCancion(String trr)
  {
         
@@ -4207,7 +4043,7 @@ private void siguiente1()
       }}
      
      
-      Lista.dispose();
+  
        
  }
  private void cargarCancion2(String trr)
@@ -4234,7 +4070,7 @@ private void siguiente1()
       }
         } 
           
-          Lista.dispose();
+
       
  }
 //ecualizador
