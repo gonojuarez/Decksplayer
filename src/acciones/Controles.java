@@ -5,6 +5,7 @@
  */
 package acciones;
 
+import beatit.Main;
 import clases.*;
 import com.sun.prism.impl.PrismSettings;
 import decksplayer.ventanamixer;
@@ -41,7 +42,15 @@ import javazoom.jlgui.basicplayer.BasicPlayerListener;
 import javazoom.spi.vorbis.sampled.file.*;
 import sun.font.EAttribute;
 import java.lang.Object;
-
+import beatit.*;
+import com.sun.media.sound.SoftMixingSourceDataLine;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.LineListener;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.Mixer;
+import javax.sound.sampled.SourceDataLine;
+import javax.sound.sampled.TargetDataLine;
+import org.tritonus.share.sampled.file.AudioOutputStream;
 /*
  *
  * @author joaco
@@ -74,6 +83,7 @@ BasicController control,control1;
 public int tam=0,progresos;
 int n=15;
 BaseDatos bd;
+beatit.Main mn;
     public Controles() throws Exception {
         init();
 bd=new BaseDatos();
@@ -328,7 +338,14 @@ player.open(new File(bd.devolvercancion(i,txt).getDireccion().replace(bd.devolve
             }
       
    }
- 
+   public double calcularBpm(int id,String txt) throws Exception
+   {mn=new Main();
+   double n1=0;
+   n1=mn.cargarCancion(bd.devolvercancion(id,txt).getDireccion().replace(bd.devolvercancion(id,txt).getNombre(), bd.devolvercancion(id,txt).getNombre().replace("{{","'")));
+   return 0;
+   }
+
+
     
 }
  
