@@ -6,6 +6,7 @@
 
 package decksplayer;
 
+import BaseDatos.Json;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JDialog;
@@ -25,10 +26,11 @@ public class Principal {
         JFrame.setDefaultLookAndFeelDecorated(true);
   
       int num=0;
-   
-      v2=new ventanamixer();
+     Json json=new Json();
+      v2=new ventanamixer(json);
            v2.setVisible(true);
-        
+      
+       
      sertv=new Servidor1(v2); 
      
     }

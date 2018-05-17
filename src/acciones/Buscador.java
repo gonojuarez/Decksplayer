@@ -5,12 +5,16 @@
  */
 package acciones;
 
+import BaseDatos.Json;
 import clases.Cancion;
 import java.io.File;
+import java.util.ArrayList;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 /**
  *
@@ -23,13 +27,18 @@ public class Buscador {
     private Cancion cancion;
     private BaseDatos bd;
     private DefaultTableModel model;
-    public Buscador() {
+    
+     private Json json;
+    public Buscador(Json json) {
         buscar=new JFileChooser();
+   
         bd=new BaseDatos();
         try{
-        model=bd.DevolverListado("asc","");
+        model=json.tableModel("");
         }catch(Exception ex){}
+        this.json=json;
     }
+   
     public void buscar() throws Exception
     {
     filtro=new FileFilter[4];//genero los filtros para poder seleccionar el tipo de musica
@@ -47,26 +56,36 @@ public class Buscador {
       buscar.setFileSelectionMode(0);
       
       if(buscar.showOpenDialog(buscar)==JFileChooser.APPROVE_OPTION)
-        {int n=bd.tam();
+        {
            File file[] =buscar.getSelectedFiles();
-            for (File file1:file) //ciclo for each de esta forma hago un recorrido por todos los archivos
+            int n=model.getRowCount();
+            ArrayList<Cancion> ca=new ArrayList<>();
+           for (File file1:file) //ciclo for each de esta forma hago un recorrido por todos los archivos
             {
-                cancion=new Cancion(n, file1.getName().replace("'", "{{"), file1.getTotalSpace(),file1.getAbsolutePath().replace("'", "{{"));
+               
+                cancion=new Cancion(n, file1.getName(), file1.getTotalSpace(),file1.getAbsolutePath());
                 System.out.println(cancion.getId()+":"+cancion.getNombre());
-             bd.agregar(cancion);
+             //bd.agregar(cancion);
+             ca.add(cancion);
                 n++;
             }
-            
-            model=bd.DevolverListado("asc","");
+             json.SetJson(ca);
+            model=json.tableModel("");
+           // model=bd.DevolverListado("asc","");
+          
         }
          else {
             buscar.cancelSelection();
             buscar.resetChoosableFileFilters();
         }
+     
     }
     public DefaultTableModel devolverModelo(String tr)throws  Exception
     {
-         model=bd.DevolverListado("asc",tr);
+        /*
+         model=bd.DevolverListado("asc",tr);*/
+        
+        model=json.tableModel(tr);
     return model;
     }
     public DefaultTableModel devolverCancion()
@@ -81,4 +100,12 @@ public class Buscador {
         model.getDataVector().removeElementAt(n);
     }catch(Exception ex){}
        }
+     public ArrayList<JSONObject> objetos()
+    {
+     return json.getObjetos();
+   }
+     public JFileChooser chooser()
+     {
+         return buscar;
+     }
 }
