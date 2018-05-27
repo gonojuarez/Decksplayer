@@ -31,7 +31,7 @@ public class Principal {
            v2.setVisible(true);
       
        
-     sertv=new Servidor1(v2); 
+   //  sertv=new Servidor1(); 
      
     }
    

@@ -61,6 +61,8 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
     public static Bandeja b2;
     public static JProgressBar auxBar;
     private boolean drag;
+    private Thread ipService;
+    private boolean servidorActivo;
     
     
    public ventanamixer(Json json) throws Exception {
@@ -108,6 +110,14 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         jPanel8.updateUI();
         jPanel15.add(timerBandeja2);
         jPanel15.updateUI();
+       
+        ipService=new Thread(new Runnable() {
+               @Override
+               public void run() {
+                   Servidor1 sv1=new Servidor1();
+                 
+               }
+           });
     }
 
     /**
@@ -252,6 +262,11 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         jTextArea1 = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea2 = new javax.swing.JTextArea();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel17 = new javax.swing.JLabel();
+        jTextField4 = new javax.swing.JTextField();
+        jLabel18 = new javax.swing.JLabel();
+        jButton5 = new javax.swing.JButton();
         jPanel11 = new javax.swing.JPanel();
         jTabbedPane5 = new javax.swing.JTabbedPane();
         jPanel7 = new javax.swing.JPanel();
@@ -1385,7 +1400,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton18)
                     .addComponent(jButton17))
-                .addContainerGap(178, Short.MAX_VALUE))
+                .addContainerGap(184, Short.MAX_VALUE))
         );
 
         jTabbedPane4.addTab("efectos ", jPanel2);
@@ -1499,7 +1514,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(MarcasDeAgua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                 .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24))
         );
@@ -1567,10 +1582,61 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
                     .addComponent(jScrollPane1))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Informacion", jPanel6);
+
+        jLabel17.setText("Puerto ");
+
+        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField4ActionPerformed(evt);
+            }
+        });
+
+        jLabel18.setText("Estado:");
+
+        jButton5.setText("Desactivado");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton5))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(64, 64, 64)
+                        .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(338, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel17)
+                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton5))
+                .addContainerGap(151, Short.MAX_VALUE))
+        );
+
+        jTabbedPane2.addTab("Servidor", jPanel4);
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -1637,7 +1703,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap(198, Short.MAX_VALUE)
+                .addContainerGap(204, Short.MAX_VALUE)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton11)
                     .addComponent(jButton12))
@@ -3125,6 +3191,30 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
 
+    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+      if(!servidorActivo)
+        {  //ipService.resume();
+           try{
+            ipService.start();
+           }catch(Exception ex)
+           {
+           ipService.resume();
+           }        
+        servidorActivo=true;
+            jButton5.setText("Activado");
+        }
+        else
+        {  ipService.suspend();
+        servidorActivo=false;
+        jButton5.setText("Desactivado");
+
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -3193,6 +3283,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
     javax.swing.JButton jButton2;
     javax.swing.JButton jButton3;
     javax.swing.JButton jButton4;
+    javax.swing.JButton jButton5;
     javax.swing.JButton jButton7;
     javax.swing.JButton jButton9;
     javax.swing.JComboBox jComboBox2;
@@ -3209,6 +3300,8 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
     javax.swing.JLabel jLabel14;
     javax.swing.JLabel jLabel15;
     javax.swing.JLabel jLabel16;
+    javax.swing.JLabel jLabel17;
+    javax.swing.JLabel jLabel18;
     javax.swing.JLabel jLabel19;
     javax.swing.JLabel jLabel2;
     javax.swing.JLabel jLabel20;
@@ -3256,6 +3349,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
     javax.swing.JPanel jPanel15;
     javax.swing.JPanel jPanel2;
     javax.swing.JPanel jPanel3;
+    javax.swing.JPanel jPanel4;
     javax.swing.JPanel jPanel5;
     javax.swing.JPanel jPanel6;
     javax.swing.JPanel jPanel7;
@@ -3293,6 +3387,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
     javax.swing.JTextField jTextField1;
     javax.swing.JTextField jTextField2;
     javax.swing.JTextField jTextField3;
+    javax.swing.JTextField jTextField4;
     javax.swing.JToggleButton jToggleButton1;
     javax.swing.JSlider js0;
     javax.swing.JSlider js1;
@@ -3592,13 +3687,16 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
                 break;
             case "pausa1":
                 actionPausa(0);
+                
                 break;
             case "siguiente1":
                 siguiente(0);
+                actionStop(0);
                 
                 break;
             case "anterior1":
                 anterior(0);
+                actionStop(0);
                
                 break;
             case "play2":
@@ -3612,10 +3710,12 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
                 break;
             case "siguiente2":
                  siguiente(1);
+                 actionStop(1);
               
                 break;
             case "anterior2":
                  anterior(1);
+                 actionStop(1);
                
                 break;
           
