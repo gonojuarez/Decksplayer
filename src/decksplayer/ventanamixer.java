@@ -6,6 +6,11 @@ import acciones.Buscador;
 import BaseDatos.Json;
 import Funciones.Bandeja;
 import Funciones.ProgresoBandeja;
+import Funciones.equalizador;
+import imagenes.eqImage;
+import imagenes.qrGenerator;
+import interfaz.bandejaChica;
+import interfaz.uiEqualizador;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -17,6 +22,7 @@ import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.net.*;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -63,20 +69,28 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
     private boolean drag;
     private Thread ipService;
     private boolean servidorActivo;
-    
-    
+    private String qrDireccion;
+    private static int idTemaB1;
+    private static int idTemaB2;
+    private JSlider[] eq1,eq2;
+    private equalizador equalAudio;
+    private bandejaChica r1,r2;
+    private equalizador eql1,eql2;
+    private eqImage imageEq;
    public ventanamixer(Json json) throws Exception {
         initComponents();
         this.json=json;
         gr = new ImageIcon(getClass().getResource("/dj/Imagenes/Decksplayer.png"));//agrego el logo a una foto
         this.setIconImage(gr.getImage());//establezco el logo del programa
-        this.setTitle("DECKSPLAYER     \n Ip " + InetAddress.getLocalHost().getHostAddress());//pongo el titulo
+        this.setTitle("DECKSPLAYER" );//pongo el titulo
+        qrGenerator qrGenerator1=new qrGenerator();
+        qrGenerator1.setQrImage(getCurrentIp().toString().replace("/","ip:"));
         this.setLocationRelativeTo(null);//centro la ventana al medio
 //      Lista.setLocationRelativeTo(null);//centro la ventana de busqueda al medio
         tir.setText(h2 + ":" + m2 + ":" + s2);//muestro hora, minutos y segundos
         ti.setText(h1 + ":" + m1 + ":" + s1);//muestro hora, minutos y segundos
-        escucha1 = new Listener();
-        escucha2 = new Listener();
+        escucha1 = new Listener(ti);
+        escucha2 = new Listener(tir);
 
         try {
             lookAndFeel look=new lookAndFeel();
@@ -98,8 +112,11 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         System.out.println("Iniciando servidor\n");
         b1=new Bandeja(controles);
         b2=new Bandeja(controles1);
+        eq1=new JSlider[10];
+        eq2=new JSlider[10];
+        equalAudio=new equalizador();
         
-
+        
         JDialog d = new JDialog();
 
         timerBandeja=new ProgresoBandeja(1000,1,jProgressBar3,ti,escucha1,volumenn,jTextField1);
@@ -110,6 +127,12 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         jPanel8.updateUI();
         jPanel15.add(timerBandeja2);
         jPanel15.updateUI();
+/*         imageEq=new eqImage();
+        imageEq.pintarPanel();
+       jPanel3.add(imageEq);
+       jPanel3.updateUI();*/
+
+       
        
         ipService=new Thread(new Runnable() {
                @Override
@@ -134,84 +157,6 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         Bandeja2 = new javax.swing.JMenuItem();
         Eliminar = new javax.swing.JMenuItem();
         AgregarCancion = new javax.swing.JMenuItem();
-        jPopupMenu2 = new javax.swing.JPopupMenu();
-        normal = new javax.swing.JMenuItem();
-        clasical = new javax.swing.JMenuItem();
-        Dance = new javax.swing.JMenuItem();
-        Club = new javax.swing.JMenuItem();
-        FullBass = new javax.swing.JMenuItem();
-        FullBassTreble = new javax.swing.JMenuItem();
-        FullTreble = new javax.swing.JMenuItem();
-        Laptop = new javax.swing.JMenuItem();
-        Live = new javax.swing.JMenuItem();
-        Party = new javax.swing.JMenuItem();
-        Pop = new javax.swing.JMenuItem();
-        Reggae = new javax.swing.JMenuItem();
-        Rock = new javax.swing.JMenuItem();
-        Techno = new javax.swing.JMenuItem();
-        Jazz = new javax.swing.JMenuItem();
-        jDialog1 = new javax.swing.JDialog();
-        jPanel12 = new javax.swing.JPanel();
-        Parlante = new javax.swing.JSlider();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jSlider1 = new javax.swing.JSlider();
-        jLabel7 = new javax.swing.JLabel();
-        js0 = new javax.swing.JSlider();
-        js5 = new javax.swing.JSlider();
-        js4 = new javax.swing.JSlider();
-        js6 = new javax.swing.JSlider();
-        js8 = new javax.swing.JSlider();
-        js1 = new javax.swing.JSlider();
-        js3 = new javax.swing.JSlider();
-        js2 = new javax.swing.JSlider();
-        js9 = new javax.swing.JSlider();
-        js7 = new javax.swing.JSlider();
-        jLabel19 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
-        jLabel22 = new javax.swing.JLabel();
-        jLabel23 = new javax.swing.JLabel();
-        jLabel24 = new javax.swing.JLabel();
-        jLabel25 = new javax.swing.JLabel();
-        jLabel26 = new javax.swing.JLabel();
-        jLabel27 = new javax.swing.JLabel();
-        jLabel28 = new javax.swing.JLabel();
-        jLabel29 = new javax.swing.JLabel();
-        jLabel30 = new javax.swing.JLabel();
-        jLabel31 = new javax.swing.JLabel();
-        preset1 = new javax.swing.JLabel();
-        jDialog2 = new javax.swing.JDialog();
-        jPanel13 = new javax.swing.JPanel();
-        jSlider2 = new javax.swing.JSlider();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jSlider3 = new javax.swing.JSlider();
-        jLabel16 = new javax.swing.JLabel();
-        js10 = new javax.swing.JSlider();
-        js11 = new javax.swing.JSlider();
-        js12 = new javax.swing.JSlider();
-        js13 = new javax.swing.JSlider();
-        js14 = new javax.swing.JSlider();
-        js15 = new javax.swing.JSlider();
-        js16 = new javax.swing.JSlider();
-        js17 = new javax.swing.JSlider();
-        js18 = new javax.swing.JSlider();
-        js19 = new javax.swing.JSlider();
-        jLabel32 = new javax.swing.JLabel();
-        jLabel33 = new javax.swing.JLabel();
-        jLabel34 = new javax.swing.JLabel();
-        jLabel35 = new javax.swing.JLabel();
-        jLabel36 = new javax.swing.JLabel();
-        jLabel37 = new javax.swing.JLabel();
-        jLabel38 = new javax.swing.JLabel();
-        jLabel39 = new javax.swing.JLabel();
-        jLabel40 = new javax.swing.JLabel();
-        jLabel41 = new javax.swing.JLabel();
-        jLabel42 = new javax.swing.JLabel();
-        jLabel43 = new javax.swing.JLabel();
-        jLabel44 = new javax.swing.JLabel();
-        preset2 = new javax.swing.JLabel();
         jLabel45 = new javax.swing.JLabel();
         jPopupMenu3 = new javax.swing.JPopupMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -221,10 +166,6 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         jSlider6 = new javax.swing.JSlider();
         jProgressBar5 = new javax.swing.JProgressBar();
         jLabel6 = new javax.swing.JLabel();
-        jDialog4 = new javax.swing.JDialog();
-        jSlider7 = new javax.swing.JSlider();
-        jProgressBar6 = new javax.swing.JProgressBar();
-        jLabel46 = new javax.swing.JLabel();
         jButton14 = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
         jPanel14 = new javax.swing.JPanel();
@@ -263,15 +204,16 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea2 = new javax.swing.JTextArea();
         jPanel4 = new javax.swing.JPanel();
-        jLabel17 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
+        qrIcon = new javax.swing.JLabel();
         jPanel11 = new javax.swing.JPanel();
         jTabbedPane5 = new javax.swing.JTabbedPane();
         jPanel7 = new javax.swing.JPanel();
         jButton11 = new javax.swing.JButton();
         jButton12 = new javax.swing.JButton();
+        jPequalizador = new javax.swing.JPanel();
+        jPanel13 = new javax.swing.JPanel();
         volumen2 = new javax.swing.JProgressBar();
         volumen1 = new javax.swing.JProgressBar();
         jLabel3 = new javax.swing.JLabel();
@@ -364,581 +306,6 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         jPopupMenu1.add(AgregarCancion);
         AgregarCancion.getAccessibleContext().setAccessibleDescription("");
 
-        normal.setText("normal");
-        normal.setToolTipText("");
-        normal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                normalActionPerformed(evt);
-            }
-        });
-        jPopupMenu2.add(normal);
-
-        clasical.setText("clasico");
-        clasical.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                clasicalActionPerformed(evt);
-            }
-        });
-        jPopupMenu2.add(clasical);
-
-        Dance.setText("Dance");
-        Dance.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DanceActionPerformed(evt);
-            }
-        });
-        jPopupMenu2.add(Dance);
-
-        Club.setText("Club");
-        Club.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ClubActionPerformed(evt);
-            }
-        });
-        jPopupMenu2.add(Club);
-
-        FullBass.setText("Bajos");
-        FullBass.setToolTipText("");
-        FullBass.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                FullBassActionPerformed(evt);
-            }
-        });
-        jPopupMenu2.add(FullBass);
-
-        FullBassTreble.setText("Agudos y bajos");
-        FullBassTreble.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                FullBassTrebleActionPerformed(evt);
-            }
-        });
-        jPopupMenu2.add(FullBassTreble);
-
-        FullTreble.setText("Agudos");
-        FullTreble.setToolTipText("");
-        FullTreble.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                FullTrebleActionPerformed(evt);
-            }
-        });
-        jPopupMenu2.add(FullTreble);
-
-        Laptop.setText("potente");
-        Laptop.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LaptopActionPerformed(evt);
-            }
-        });
-        jPopupMenu2.add(Laptop);
-
-        Live.setText("Directo");
-        Live.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LiveActionPerformed(evt);
-            }
-        });
-        jPopupMenu2.add(Live);
-
-        Party.setText("Fiesta");
-        Party.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PartyActionPerformed(evt);
-            }
-        });
-        jPopupMenu2.add(Party);
-
-        Pop.setText("Pop");
-        Pop.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PopActionPerformed(evt);
-            }
-        });
-        jPopupMenu2.add(Pop);
-
-        Reggae.setText("Reggae");
-        Reggae.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ReggaeActionPerformed(evt);
-            }
-        });
-        jPopupMenu2.add(Reggae);
-
-        Rock.setText("Rock");
-        Rock.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RockActionPerformed(evt);
-            }
-        });
-        jPopupMenu2.add(Rock);
-
-        Techno.setText("Techno");
-        Techno.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TechnoActionPerformed(evt);
-            }
-        });
-        jPopupMenu2.add(Techno);
-
-        Jazz.setText("Jazz");
-        Jazz.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JazzActionPerformed(evt);
-            }
-        });
-        jPopupMenu2.add(Jazz);
-
-        jDialog1.setTitle("Bandeja1");
-        jDialog1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jDialog1KeyPressed(evt);
-            }
-        });
-
-        jPanel12.setToolTipText("");
-        jPanel12.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jPanel12KeyPressed(evt);
-            }
-        });
-        jPanel12.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        Parlante.setMinimum(-100);
-        Parlante.setValue(0);
-        Parlante.setFocusable(false);
-        Parlante.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                ParlanteStateChanged(evt);
-            }
-        });
-        Parlante.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                ParlanteKeyPressed(evt);
-            }
-        });
-        jPanel12.add(Parlante, new org.netbeans.lib.awtextra.AbsoluteConstraints(122, 211, -1, -1));
-
-        jLabel10.setText("Izquierda");
-        jPanel12.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(67, 211, -1, 26));
-
-        jLabel11.setText("Derecha");
-        jPanel12.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 210, -1, 26));
-
-        jSlider1.setMaximum(50);
-        jSlider1.setToolTipText("");
-        jSlider1.setValue(0);
-        jSlider1.setFocusable(false);
-        jSlider1.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                jSlider1StateChanged(evt);
-            }
-        });
-        jSlider1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jSlider1KeyPressed(evt);
-            }
-        });
-        jPanel12.add(jSlider1, new org.netbeans.lib.awtextra.AbsoluteConstraints(125, 160, -1, 33));
-
-        jLabel7.setText("Pitch");
-        jPanel12.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(92, 167, -1, -1));
-
-        js0.setMinimum(-100);
-        js0.setOrientation(javax.swing.JSlider.VERTICAL);
-        js0.setValue(0);
-        js0.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                js0StateChanged(evt);
-            }
-        });
-        js0.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                js0KeyPressed(evt);
-            }
-        });
-        jPanel12.add(js0, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 20, 100));
-
-        js5.setMinimum(-100);
-        js5.setOrientation(javax.swing.JSlider.VERTICAL);
-        js5.setValue(0);
-        js5.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                js5StateChanged(evt);
-            }
-        });
-        jPanel12.add(js5, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 30, 20, 100));
-
-        js4.setMinimum(-100);
-        js4.setOrientation(javax.swing.JSlider.VERTICAL);
-        js4.setValue(0);
-        js4.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                js4StateChanged(evt);
-            }
-        });
-        jPanel12.add(js4, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 30, 20, 100));
-
-        js6.setMinimum(-100);
-        js6.setOrientation(javax.swing.JSlider.VERTICAL);
-        js6.setValue(0);
-        js6.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                js6StateChanged(evt);
-            }
-        });
-        jPanel12.add(js6, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 30, 20, 100));
-
-        js8.setMinimum(-100);
-        js8.setOrientation(javax.swing.JSlider.VERTICAL);
-        js8.setValue(0);
-        js8.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                js8StateChanged(evt);
-            }
-        });
-        jPanel12.add(js8, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 30, 20, 100));
-
-        js1.setMinimum(-100);
-        js1.setOrientation(javax.swing.JSlider.VERTICAL);
-        js1.setValue(0);
-        js1.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                js1StateChanged(evt);
-            }
-        });
-        jPanel12.add(js1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 30, 20, 100));
-
-        js3.setMinimum(-100);
-        js3.setOrientation(javax.swing.JSlider.VERTICAL);
-        js3.setValue(0);
-        js3.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                js3StateChanged(evt);
-            }
-        });
-        jPanel12.add(js3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, 20, 100));
-
-        js2.setMinimum(-100);
-        js2.setOrientation(javax.swing.JSlider.VERTICAL);
-        js2.setValue(0);
-        js2.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                js2StateChanged(evt);
-            }
-        });
-        jPanel12.add(js2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, 20, 100));
-
-        js9.setMinimum(-100);
-        js9.setOrientation(javax.swing.JSlider.VERTICAL);
-        js9.setValue(0);
-        js9.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                js9StateChanged(evt);
-            }
-        });
-        jPanel12.add(js9, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 30, 20, 100));
-
-        js7.setMinimum(-100);
-        js7.setOrientation(javax.swing.JSlider.VERTICAL);
-        js7.setValue(0);
-        js7.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                js7StateChanged(evt);
-            }
-        });
-        jPanel12.add(js7, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 30, 20, 100));
-
-        jLabel19.setText("31");
-        jPanel12.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, -1, -1));
-
-        jLabel20.setText("62");
-        jPanel12.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, -1, -1));
-
-        jLabel21.setText("125");
-        jPanel12.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 140, -1, -1));
-
-        jLabel22.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel22.setText("Graves");
-        jPanel12.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 70, -1));
-
-        jLabel23.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel23.setText("Medios");
-        jPanel12.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 10, 80, 20));
-
-        jLabel24.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel24.setText("Agudos");
-        jPanel12.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 2, -1, 30));
-
-        jLabel25.setText("250");
-        jPanel12.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, -1, -1));
-
-        jLabel26.setText("500");
-        jPanel12.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 140, -1, -1));
-
-        jLabel27.setText("1KHZ");
-        jPanel12.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 140, -1, -1));
-
-        jLabel28.setText("    2");
-        jPanel12.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 140, 30, -1));
-
-        jLabel29.setText("   4");
-        jPanel12.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 140, 30, -1));
-
-        jLabel30.setText("8 ");
-        jPanel12.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(349, 140, 10, -1));
-
-        jLabel31.setText("16KHZ");
-        jPanel12.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 140, 40, -1));
-
-        preset1.setText("preset");
-        preset1.setComponentPopupMenu(jPopupMenu2);
-        preset1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                preset1MouseEntered(evt);
-            }
-        });
-        jPanel12.add(preset1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 10, 140, -1));
-
-        javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
-        jDialog1.getContentPane().setLayout(jDialog1Layout);
-        jDialog1Layout.setHorizontalGroup(
-            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 577, Short.MAX_VALUE)
-            .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jDialog1Layout.createSequentialGroup()
-                    .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, 577, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-        jDialog1Layout.setVerticalGroup(
-            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-            .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanel12, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE))
-        );
-
-        jDialog2.setTitle("Bandeja 2");
-        jDialog2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jDialog2KeyPressed(evt);
-            }
-        });
-
-        jPanel13.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jPanel13KeyPressed(evt);
-            }
-        });
-        jPanel13.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jSlider2.setMinimum(-100);
-        jSlider2.setValue(0);
-        jSlider2.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                jSlider2StateChanged(evt);
-            }
-        });
-        jSlider2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jSlider2KeyPressed(evt);
-            }
-        });
-        jPanel13.add(jSlider2, new org.netbeans.lib.awtextra.AbsoluteConstraints(101, 213, -1, -1));
-
-        jLabel12.setText("Izquierda");
-        jPanel13.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(52, 213, -1, 26));
-
-        jLabel13.setText("Derecha");
-        jPanel13.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(336, 213, -1, 26));
-
-        jSlider3.setMaximum(50);
-        jSlider3.setToolTipText("");
-        jSlider3.setValue(0);
-        jSlider3.setFocusable(false);
-        jSlider3.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                jSlider3StateChanged(evt);
-            }
-        });
-        jSlider3.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jSlider3KeyPressed(evt);
-            }
-        });
-        jPanel13.add(jSlider3, new org.netbeans.lib.awtextra.AbsoluteConstraints(97, 181, -1, -1));
-
-        jLabel16.setText("pitch");
-        jPanel13.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 181, -1, -1));
-
-        js10.setMinimum(-100);
-        js10.setOrientation(javax.swing.JSlider.VERTICAL);
-        js10.setValue(0);
-        js10.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                js10StateChanged(evt);
-            }
-        });
-        js10.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                js10KeyPressed(evt);
-            }
-        });
-        jPanel13.add(js10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, -1, 100));
-
-        js11.setMinimum(-100);
-        js11.setOrientation(javax.swing.JSlider.VERTICAL);
-        js11.setValue(0);
-        js11.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                js11StateChanged(evt);
-            }
-        });
-        jPanel13.add(js11, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, -1, 100));
-
-        js12.setMinimum(-100);
-        js12.setOrientation(javax.swing.JSlider.VERTICAL);
-        js12.setValue(0);
-        js12.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                js12StateChanged(evt);
-            }
-        });
-        jPanel13.add(js12, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, -1, 100));
-
-        js13.setMinimum(-100);
-        js13.setOrientation(javax.swing.JSlider.VERTICAL);
-        js13.setValue(0);
-        js13.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                js13StateChanged(evt);
-            }
-        });
-        jPanel13.add(js13, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 40, 20, 100));
-
-        js14.setMinimum(-100);
-        js14.setOrientation(javax.swing.JSlider.VERTICAL);
-        js14.setValue(0);
-        js14.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                js14StateChanged(evt);
-            }
-        });
-        jPanel13.add(js14, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 40, 20, 100));
-
-        js15.setMinimum(-100);
-        js15.setOrientation(javax.swing.JSlider.VERTICAL);
-        js15.setValue(0);
-        js15.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                js15StateChanged(evt);
-            }
-        });
-        jPanel13.add(js15, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 40, 20, 100));
-
-        js16.setMinimum(-100);
-        js16.setOrientation(javax.swing.JSlider.VERTICAL);
-        js16.setValue(0);
-        js16.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                js16StateChanged(evt);
-            }
-        });
-        jPanel13.add(js16, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 40, 20, 100));
-
-        js17.setMinimum(-100);
-        js17.setOrientation(javax.swing.JSlider.VERTICAL);
-        js17.setValue(0);
-        js17.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                js17StateChanged(evt);
-            }
-        });
-        jPanel13.add(js17, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 40, 20, 100));
-
-        js18.setMinimum(-100);
-        js18.setOrientation(javax.swing.JSlider.VERTICAL);
-        js18.setValue(0);
-        js18.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                js18StateChanged(evt);
-            }
-        });
-        jPanel13.add(js18, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 40, 20, 100));
-
-        js19.setMinimum(-100);
-        js19.setOrientation(javax.swing.JSlider.VERTICAL);
-        js19.setValue(0);
-        js19.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                js19StateChanged(evt);
-            }
-        });
-        jPanel13.add(js19, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 40, 20, 100));
-
-        jLabel32.setText("125");
-        jPanel13.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(88, 140, 30, -1));
-
-        jLabel33.setText("31");
-        jPanel13.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 140, 20, -1));
-
-        jLabel34.setText("62");
-        jPanel13.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(62, 140, 20, -1));
-
-        jLabel35.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel35.setText("Graves");
-        jPanel13.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 70, -1));
-
-        jLabel36.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel36.setText("Agudos");
-        jPanel13.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 2, -1, 30));
-
-        jLabel37.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel37.setText("Medios");
-        jPanel13.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 10, 80, 20));
-
-        jLabel38.setText("250");
-        jPanel13.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(148, 140, 30, -1));
-
-        jLabel39.setText("500");
-        jPanel13.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 140, -1, -1));
-
-        jLabel40.setText("1KHZ");
-        jPanel13.add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 140, -1, -1));
-
-        jLabel41.setText("    2");
-        jPanel13.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 140, 30, -1));
-
-        jLabel42.setText("   4");
-        jPanel13.add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 140, 30, -1));
-
-        jLabel43.setText("8 ");
-        jPanel13.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(349, 140, 10, -1));
-
-        jLabel44.setText("16KHZ");
-        jPanel13.add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 140, 40, -1));
-
-        preset2.setText("Preset");
-        preset2.setComponentPopupMenu(jPopupMenu2);
-        preset2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                preset2MouseEntered(evt);
-            }
-        });
-        jPanel13.add(preset2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 10, 130, -1));
-
-        javax.swing.GroupLayout jDialog2Layout = new javax.swing.GroupLayout(jDialog2.getContentPane());
-        jDialog2.getContentPane().setLayout(jDialog2Layout);
-        jDialog2Layout.setHorizontalGroup(
-            jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 566, Short.MAX_VALUE)
-            .addGroup(jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE))
-        );
-        jDialog2Layout.setVerticalGroup(
-            jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-            .addGroup(jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanel13, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE))
-        );
-
         jLabel45.setText("jLabel45");
 
         jMenuItem1.setText("bandeja1 - informe");
@@ -1012,64 +379,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
                 .addComponent(jSlider6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
-        jDialog4.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jDialog4KeyPressed(evt);
-            }
-        });
-
-        jSlider7.setValue(0);
-        jSlider7.setFocusable(false);
-        jSlider7.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                jSlider7StateChanged(evt);
-            }
-        });
-        jSlider7.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jSlider7KeyPressed(evt);
-            }
-        });
-
-        jProgressBar6.setStringPainted(true);
-        jProgressBar6.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jProgressBar6KeyPressed(evt);
-            }
-        });
-
-        jLabel46.setText(" ");
-        jLabel46.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jLabel46KeyPressed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jDialog4Layout = new javax.swing.GroupLayout(jDialog4.getContentPane());
-        jDialog4.getContentPane().setLayout(jDialog4Layout);
-        jDialog4Layout.setHorizontalGroup(
-            jDialog4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jDialog4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jDialog4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jProgressBar6, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSlider7, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel46, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(32, Short.MAX_VALUE))
-        );
-        jDialog4Layout.setVerticalGroup(
-            jDialog4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jDialog4Layout.createSequentialGroup()
-                .addGap(4, 4, 4)
-                .addComponent(jProgressBar6, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jSlider7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel46, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(83, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -1098,7 +408,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
                 jButton14KeyPressed(evt);
             }
         });
-        getContentPane().add(jButton14, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 10, 60, 40));
+        getContentPane().add(jButton14, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 110, 60, 40));
 
         jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/ecualizador.png"))); // NOI18N
         jButton10.setBorder(null);
@@ -1112,7 +422,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
                 jButton10KeyPressed(evt);
             }
         });
-        getContentPane().add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 10, 60, 40));
+        getContentPane().add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 60, 40));
 
         jPanel14.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jPanel14.setFocusable(false);
@@ -1293,22 +603,25 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, Short.MAX_VALUE)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addGap(18, 18, Short.MAX_VALUE)
                                 .addComponent(jButton7)
                                 .addGap(54, 54, 54)
                                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(117, 117, 117)
                                 .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addGap(230, 230, 230)
+                                .addComponent(jComboBox3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
@@ -1497,7 +810,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(MarcasDeAgua, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(162, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1582,18 +895,10 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
                     .addComponent(jScrollPane1))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Informacion", jPanel6);
-
-        jLabel17.setText("Puerto ");
-
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
-            }
-        });
 
         jLabel18.setText("Estado:");
 
@@ -1611,29 +916,25 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
+                        .addGap(45, 45, 45)
                         .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton5))
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(64, 64, 64)
-                        .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(117, 117, 117)
+                        .addComponent(qrIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(338, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel17)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addComponent(qrIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5))
-                .addContainerGap(151, Short.MAX_VALUE))
+                    .addComponent(jButton5)
+                    .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(67, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Servidor", jPanel4);
@@ -1724,6 +1025,36 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         );
 
         jTabbedPane1.addTab("", new javax.swing.ImageIcon(getClass().getResource("/dj/Imagenes/camara2.png")), jPanel11); // NOI18N
+
+        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
+        jPanel13.setLayout(jPanel13Layout);
+        jPanel13Layout.setHorizontalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 221, Short.MAX_VALUE)
+        );
+        jPanel13Layout.setVerticalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 143, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jPequalizadorLayout = new javax.swing.GroupLayout(jPequalizador);
+        jPequalizador.setLayout(jPequalizadorLayout);
+        jPequalizadorLayout.setHorizontalGroup(
+            jPequalizadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPequalizadorLayout.createSequentialGroup()
+                .addGap(48, 48, 48)
+                .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(291, Short.MAX_VALUE))
+        );
+        jPequalizadorLayout.setVerticalGroup(
+            jPequalizadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPequalizadorLayout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(88, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("equalizador", jPequalizador);
 
         volumen2.setMaximum(101);
         volumen2.setOrientation(1);
@@ -1821,7 +1152,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
                         .addGap(18, 18, 18)
                         .addComponent(volumen2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel3))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel14Layout.setVerticalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2013,7 +1344,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         ti.setFont(new java.awt.Font("Trebuchet MS", 0, 10)); // NOI18N
         ti.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         ti.setText("0:0:0");
-        getContentPane().add(ti, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 70, 60, 20));
+        getContentPane().add(ti, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 70, 60, 20));
 
         tir.setFont(new java.awt.Font("Trebuchet MS", 0, 10)); // NOI18N
         tir.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -2406,6 +1737,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         pos=jTable1.getSelectedRow();
+        
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
@@ -2470,7 +1802,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
 
     private void jSlider4StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider4StateChanged
         try {
-            controles.setVolumen((float) jSlider4.getValue() / jSlider4.getMaximum());
+            controles.setVolumen(controles.getPlayer(),(float) jSlider4.getValue() / jSlider4.getMaximum());
             volumen1.setValue(jSlider4.getValue());
         } catch (Exception ex) {
 
@@ -2479,7 +1811,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
 
     private void jSlider5StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider5StateChanged
         try {
-            controles1.setVolumen((float) jSlider5.getValue() / jSlider5.getMaximum());
+            controles1.setVolumen(controles1.getPlayer(),(float) jSlider5.getValue() / jSlider5.getMaximum());
             volumen2.setValue(jSlider5.getValue());
         } catch (Exception ex) {
 
@@ -2535,11 +1867,11 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
 
     private void jProgressBar2StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jProgressBar2StateChanged
 
-        controles1.adelantar(jProgressBar2.getValue());
+        controles1.adelantar(controles1.getPlayer(),jProgressBar2.getValue());
     }//GEN-LAST:event_jProgressBar2StateChanged
 
     private void jProgressBar2VetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {//GEN-FIRST:event_jProgressBar2VetoableChange
-        controles1.adelantar(jProgressBar2.getValue());
+        controles1.adelantar(controles1.getPlayer(),jProgressBar2.getValue());
     }//GEN-LAST:event_jProgressBar2VetoableChange
 
     private void jProgressBar2PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jProgressBar2PropertyChange
@@ -2550,74 +1882,6 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         keyPressed(evt);
         setFocusable(true);
     }//GEN-LAST:event_jTabbedPane5KeyPressed
-
-    private void jPanel12KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel12KeyPressed
-        keyPressed(evt);
-        setFocusable(true);        // TODO add your handling code here:
-    }//GEN-LAST:event_jPanel12KeyPressed
-
-    private void js7StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_js7StateChanged
-        escucha1.setEq(7, js7.getValue());
-    }//GEN-LAST:event_js7StateChanged
-
-    private void js9StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_js9StateChanged
-        escucha1.setEq(8, js9.getValue());
-    }//GEN-LAST:event_js9StateChanged
-
-    private void js2StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_js2StateChanged
-        escucha1.setEq(2, js2.getValue());
-    }//GEN-LAST:event_js2StateChanged
-
-    private void js3StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_js3StateChanged
-        escucha1.setEq(3, js3.getValue());
-    }//GEN-LAST:event_js3StateChanged
-
-    private void js1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_js1StateChanged
-        escucha1.setEq(1, js1.getValue());
-    }//GEN-LAST:event_js1StateChanged
-
-    private void js8StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_js8StateChanged
-        escucha1.setEq(9, js8.getValue());
-    }//GEN-LAST:event_js8StateChanged
-
-    private void js6StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_js6StateChanged
-        escucha1.setEq(6, js6.getValue());
-    }//GEN-LAST:event_js6StateChanged
-
-    private void js4StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_js4StateChanged
-        escucha1.setEq(4, js4.getValue());
-    }//GEN-LAST:event_js4StateChanged
-
-    private void js0KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_js0KeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_js0KeyPressed
-
-    private void js0StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_js0StateChanged
-        escucha1.setEq(0, js0.getValue());
-    }//GEN-LAST:event_js0StateChanged
-
-    private void js5StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_js5StateChanged
-        escucha1.setEq(5, js5.getValue());
-    }//GEN-LAST:event_js5StateChanged
-
-    private void jSlider1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jSlider1KeyPressed
-        keyPressed(evt);
-        setFocusable(true);
-    }//GEN-LAST:event_jSlider1KeyPressed
-
-    private void jSlider1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider1StateChanged
-        controles.pitch(jSlider1.getValue());
-    }//GEN-LAST:event_jSlider1StateChanged
-
-    private void ParlanteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ParlanteKeyPressed
-        keyPressed(evt);
-        setFocusable(true);
-    }//GEN-LAST:event_ParlanteKeyPressed
-
-    private void ParlanteStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_ParlanteStateChanged
-        double sw = (double) (Parlante.getValue() / 100);//cambio el paneo del programa
-        controles.setPan(sw);
-    }//GEN-LAST:event_ParlanteStateChanged
 
     private void jPanel7KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel7KeyPressed
         keyPressed(evt);
@@ -2652,221 +1916,9 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         }
     }//GEN-LAST:event_jButton11ActionPerformed
 
-    private void jPanel13KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel13KeyPressed
-        keyPressed(evt);
-        setFocusable(true);
-    }//GEN-LAST:event_jPanel13KeyPressed
-
-    private void jSlider3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jSlider3KeyPressed
-        keyPressed(evt);
-        setFocusable(true);
-    }//GEN-LAST:event_jSlider3KeyPressed
-
-    private void jSlider3StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider3StateChanged
-        controles1.pitch((jSlider3.getValue()));
-    }//GEN-LAST:event_jSlider3StateChanged
-
-    private void jSlider2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jSlider2KeyPressed
-        keyPressed(evt);
-        setFocusable(true);
-    }//GEN-LAST:event_jSlider2KeyPressed
-
-    private void jSlider2StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider2StateChanged
-        double sw = (double) (jSlider2.getValue() / 100);
-        controles1.setPan(sw);
-    }//GEN-LAST:event_jSlider2StateChanged
-
-    private void js10StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_js10StateChanged
-        escucha2.setEq(0, js10.getValue());
-    }//GEN-LAST:event_js10StateChanged
-
-    private void js10KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_js10KeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_js10KeyPressed
-
-    private void js11StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_js11StateChanged
-        escucha2.setEq(2, js11.getValue());
-    }//GEN-LAST:event_js11StateChanged
-
-    private void js12StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_js12StateChanged
-        escucha2.setEq(1, js12.getValue());
-    }//GEN-LAST:event_js12StateChanged
-
-    private void js13StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_js13StateChanged
-        escucha2.setEq(4, js13.getValue());
-    }//GEN-LAST:event_js13StateChanged
-
-    private void js14StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_js14StateChanged
-        escucha2.setEq(3, js14.getValue());
-    }//GEN-LAST:event_js14StateChanged
-
-    private void js15StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_js15StateChanged
-        escucha2.setEq(5, js15.getValue());
-    }//GEN-LAST:event_js15StateChanged
-
-    private void js16StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_js16StateChanged
-        escucha2.setEq(6, js16.getValue());
-    }//GEN-LAST:event_js16StateChanged
-
-    private void js17StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_js17StateChanged
-        escucha2.setEq(7, js17.getValue());
-    }//GEN-LAST:event_js17StateChanged
-
-    private void js18StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_js18StateChanged
-        escucha2.setEq(8, js18.getValue());
-    }//GEN-LAST:event_js18StateChanged
-
-    private void js19StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_js19StateChanged
-        escucha2.setEq(9, js19.getValue());
-    }//GEN-LAST:event_js19StateChanged
-
-    private void normalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_normalActionPerformed
-        valores(verd, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-        if (verd == true) {
-            preset2.setText("normal");
-        } else {
-            preset1.setText("normal");
-        }
-    }//GEN-LAST:event_normalActionPerformed
-
-    private void FullBassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FullBassActionPerformed
-
-        valores(verd, 80, 72, 64, 24, 0, -24, -40, -48, -64, -64);
-        if (verd == true) {
-            preset2.setText("Full Bass ");
-        } else {
-            preset1.setText("Full Bass");
-        }
-    }//GEN-LAST:event_FullBassActionPerformed
-
-    private void FullBassTrebleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FullBassTrebleActionPerformed
-        valores(verd, 80, 72, 64, 24, 0, 18, 72, 72, 72, 72);
-        if (verd == true) {
-            preset2.setText("Full Bass Treble");
-        } else {
-            preset1.setText("Full Bass Treble");
-        }
-    }//GEN-LAST:event_FullBassTrebleActionPerformed
-
-    private void clasicalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clasicalActionPerformed
-        valores(verd, 0, 0, 0, 0, 0, 0, -40, -40, -40, -48);
-        if (verd == true) {
-            preset2.setText("clasical ");
-        } else {
-            preset1.setText("clasical ");
-        }
-    }//GEN-LAST:event_clasicalActionPerformed
-
-    private void DanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DanceActionPerformed
-        valores(verd, 56, 32, 8, 0, 0, -24, -40, -40, 0, 0);
-        if (verd == true) {
-            preset2.setText("Dance ");
-        } else {
-            preset1.setText("Dance");
-        }
-    }//GEN-LAST:event_DanceActionPerformed
-
-    private void ClubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClubActionPerformed
-        valores(verd, 0, 0, 16, 40, 40, 40, 16, 0, 0, 0);
-        if (verd == true) {
-            preset2.setText("Club");
-        } else {
-            preset1.setText("Club");
-        }
-    }//GEN-LAST:event_ClubActionPerformed
-
-    private void FullTrebleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FullTrebleActionPerformed
-        valores(verd, -64, -64, -64, -32, 0, 18, 72, 72, 72, 72);
-        if (verd == true) {
-            preset2.setText("Full Treble ");
-        } else {
-            preset1.setText("Full Treble");
-        }
-    }//GEN-LAST:event_FullTrebleActionPerformed
-
-    private void LaptopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LaptopActionPerformed
-        valores(verd, 64, 56, 32, -32, -16, 8, 48, 56, 72, 72);
-        if (verd == true) {
-            preset2.setText("Laptop");
-        } else {
-            preset1.setText("Laptop");
-        }
-    }//GEN-LAST:event_LaptopActionPerformed
-
-    private void LiveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LiveActionPerformed
-        valores(verd, -24, 0, 32, 40, 40, 40, 16, 16, 8, 8);
-        if (verd == true) {
-            preset2.setText("Live");
-        } else {
-            preset1.setText("Live");
-        }
-    }//GEN-LAST:event_LiveActionPerformed
-
-    private void PartyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PartyActionPerformed
-        valores(verd, 40, 40, 0, 0, 0, 0, 0, 0, 40, 40);
-        if (verd == true) {
-            preset2.setText("Party ");
-        } else {
-            preset1.setText("Party");
-        }
-    }//GEN-LAST:event_PartyActionPerformed
-
-    private void ReggaeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReggaeActionPerformed
-        valores(verd, 0, 0, -8, -16, 8, 16, 16, 0, 0, 0);
-        if (verd == true) {
-            preset2.setText("Reggae");
-        } else {
-            preset1.setText("Reggae");
-        }
-    }//GEN-LAST:event_ReggaeActionPerformed
-
-    private void RockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RockActionPerformed
-        valores(verd, 32, 16, -16, -40, -16, 16, 40, 48, 48, 48);
-        if (verd == true) {
-            preset2.setText("Rock ");
-        } else {
-            preset1.setText("Rock");
-        }
-    }//GEN-LAST:event_RockActionPerformed
-
-    private void TechnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TechnoActionPerformed
-        valores(verd, 32, 16, -16, -40, -16, 16, 40, 48, 56, 48);
-        if (verd == true) {
-            preset2.setText("Techno");
-        } else {
-            preset1.setText("Techno");
-        }
-    }//GEN-LAST:event_TechnoActionPerformed
-
-    private void preset1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_preset1MouseEntered
-        verd = false;
-    }//GEN-LAST:event_preset1MouseEntered
-
-    private void preset2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_preset2MouseEntered
-        verd = true;
-    }//GEN-LAST:event_preset2MouseEntered
-
     private void jTable1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseEntered
         // TODO add your handling code here:
     }//GEN-LAST:event_jTable1MouseEntered
-
-    private void PopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PopActionPerformed
-        valores(verd, -16, 16, 32, 40, 32, -16, -24, -24, -24, -24);
-        if (verd == true) {
-            preset2.setText("Pop ");
-        } else {
-            preset1.setText("Pop");
-        }
-    }//GEN-LAST:event_PopActionPerformed
-
-    private void JazzActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JazzActionPerformed
-        valores(verd, -16, 40, -64, 0, 64, 56, 48, 0, 0, 0);
-        if (verd == true) {
-            preset2.setText("Jazz ");
-        } else {
-            preset1.setText("Jazz");
-        }
-    }//GEN-LAST:event_JazzActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         timerBandeja.setAutomixer(true);
@@ -2880,9 +1932,10 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
     }//GEN-LAST:event_jTabbedPane1StateChanged
 
     private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
-        jDialog1.setLocation(650, 0);
-        jDialog2.setVisible(true);
-        jDialog2.setSize(600, 400);
+uiEqualizador ui=new uiEqualizador(this, false);
+      ui.setEscucha(escucha2);
+      ui.setControl(controles1);
+      ui.setVisible(true);       
     }//GEN-LAST:event_jButton14ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
@@ -2891,8 +1944,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        jDialog4.setVisible(true);
-        jDialog4.setSize(415, 150);
+      
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jDialog3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jDialog3KeyPressed
@@ -2910,48 +1962,14 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         setFocusable(true);
     }//GEN-LAST:event_jSlider6KeyPressed
 
-    private void jDialog4KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jDialog4KeyPressed
-        keyPressed(evt);
-        setFocusable(true);
-    }//GEN-LAST:event_jDialog4KeyPressed
-
-    private void jProgressBar6KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jProgressBar6KeyPressed
-        keyPressed(evt);
-        setFocusable(true);
-    }//GEN-LAST:event_jProgressBar6KeyPressed
-
-    private void jSlider7KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jSlider7KeyPressed
-        keyPressed(evt);
-        setFocusable(true);
-    }//GEN-LAST:event_jSlider7KeyPressed
-
-    private void jLabel46KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabel46KeyPressed
-        keyPressed(evt);
-        setFocusable(true);
-    }//GEN-LAST:event_jLabel46KeyPressed
-
     private void jLabel6KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabel6KeyPressed
         keyPressed(evt);
         setFocusable(true);
     }//GEN-LAST:event_jLabel6KeyPressed
 
-    private void jSlider7StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider7StateChanged
-        controles1.adelantar(jSlider7.getValue());
-    }//GEN-LAST:event_jSlider7StateChanged
-
     private void jSlider6StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider6StateChanged
-        controles.adelantar(jSlider6.getValue());
+        controles.adelantar(controles.getPlayer(),jSlider6.getValue());
     }//GEN-LAST:event_jSlider6StateChanged
-
-    private void jDialog1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jDialog1KeyPressed
-        keyPressed(evt);
-        setFocusable(true);
-    }//GEN-LAST:event_jDialog1KeyPressed
-
-    private void jDialog2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jDialog2KeyPressed
-        keyPressed(evt);
-        setFocusable(true);
-    }//GEN-LAST:event_jDialog2KeyPressed
 
     private void jButton7KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton7KeyPressed
         keyPressed(evt);
@@ -3016,6 +2034,14 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         jTextField2.setEditable(true);
         jTextField3.setEditable(false);
         drag=true;
+        if(b1.getEstado()==1)
+        {
+            json.guardarSiguiente(b1.getPos(),jTable1.getSelectedRow());
+               }
+        else if(b2.getEstado()==1)
+        {
+             json.guardarSiguiente(b2.getPos(),jTable1.getSelectedRow());
+        }
       
 
 
@@ -3074,7 +2100,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
     }//GEN-LAST:event_jPanel8MouseClicked
 
     private void jProgressBar1VetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {//GEN-FIRST:event_jProgressBar1VetoableChange
-        controles.adelantar(jProgressBar1.getValue());
+        controles.adelantar(controles.getPlayer(),jProgressBar1.getValue());
     }//GEN-LAST:event_jProgressBar1VetoableChange
 
     private void jProgressBar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jProgressBar1MouseClicked
@@ -3082,7 +2108,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
     }//GEN-LAST:event_jProgressBar1MouseClicked
 
     private void jProgressBar1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jProgressBar1StateChanged
-        controles.adelantar(jProgressBar1.getValue());
+        controles.adelantar(controles.getPlayer(),jProgressBar1.getValue());
     }//GEN-LAST:event_jProgressBar1StateChanged
 
     private void next1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_next1KeyPressed
@@ -3104,9 +2130,10 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
     }//GEN-LAST:event_jButton10KeyPressed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        jDialog1.setLocation(0, 0);
-        jDialog1.setVisible(true);
-        jDialog1.setSize(600, 400);
+      uiEqualizador ui=new uiEqualizador(this, false);
+      ui.setEscucha(escucha1);
+      ui.setControl(controles);
+      ui.setVisible(true);
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void antes1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_antes1KeyPressed
@@ -3191,10 +2218,6 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
-
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
       if(!servidorActivo)
         {  //ipService.resume();
@@ -3253,26 +2276,11 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
     javax.swing.JMenuItem AgregarCancion;
     javax.swing.JMenuItem Bandeja1;
     javax.swing.JMenuItem Bandeja2;
-    javax.swing.JMenuItem Club;
-    javax.swing.JMenuItem Dance;
     javax.swing.JMenuItem Eliminar;
     javax.swing.JPanel Escritorio;
-    javax.swing.JMenuItem FullBass;
-    javax.swing.JMenuItem FullBassTreble;
-    javax.swing.JMenuItem FullTreble;
-    javax.swing.JMenuItem Jazz;
-    javax.swing.JMenuItem Laptop;
-    javax.swing.JMenuItem Live;
     javax.swing.JComboBox MarcasDeAgua;
-    javax.swing.JSlider Parlante;
-    javax.swing.JMenuItem Party;
-    javax.swing.JMenuItem Pop;
-    javax.swing.JMenuItem Reggae;
-    javax.swing.JMenuItem Rock;
-    javax.swing.JMenuItem Techno;
     javax.swing.JButton antes1;
     javax.swing.JButton antes2;
-    javax.swing.JMenuItem clasical;
     javax.swing.JButton jButton1;
     javax.swing.JButton jButton10;
     javax.swing.JButton jButton11;
@@ -3288,54 +2296,17 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
     javax.swing.JButton jButton9;
     javax.swing.JComboBox jComboBox2;
     javax.swing.JComboBox jComboBox3;
-    javax.swing.JDialog jDialog1;
-    javax.swing.JDialog jDialog2;
     javax.swing.JDialog jDialog3;
-    javax.swing.JDialog jDialog4;
     javax.swing.JLabel jLabel1;
-    javax.swing.JLabel jLabel10;
-    javax.swing.JLabel jLabel11;
-    javax.swing.JLabel jLabel12;
-    javax.swing.JLabel jLabel13;
     javax.swing.JLabel jLabel14;
     javax.swing.JLabel jLabel15;
-    javax.swing.JLabel jLabel16;
-    javax.swing.JLabel jLabel17;
     javax.swing.JLabel jLabel18;
-    javax.swing.JLabel jLabel19;
     javax.swing.JLabel jLabel2;
-    javax.swing.JLabel jLabel20;
-    javax.swing.JLabel jLabel21;
-    javax.swing.JLabel jLabel22;
-    javax.swing.JLabel jLabel23;
-    javax.swing.JLabel jLabel24;
-    javax.swing.JLabel jLabel25;
-    javax.swing.JLabel jLabel26;
-    javax.swing.JLabel jLabel27;
-    javax.swing.JLabel jLabel28;
-    javax.swing.JLabel jLabel29;
     javax.swing.JLabel jLabel3;
-    javax.swing.JLabel jLabel30;
-    javax.swing.JLabel jLabel31;
-    javax.swing.JLabel jLabel32;
-    javax.swing.JLabel jLabel33;
-    javax.swing.JLabel jLabel34;
-    javax.swing.JLabel jLabel35;
-    javax.swing.JLabel jLabel36;
-    javax.swing.JLabel jLabel37;
-    javax.swing.JLabel jLabel38;
-    javax.swing.JLabel jLabel39;
     javax.swing.JLabel jLabel4;
-    javax.swing.JLabel jLabel40;
-    javax.swing.JLabel jLabel41;
-    javax.swing.JLabel jLabel42;
-    javax.swing.JLabel jLabel43;
-    javax.swing.JLabel jLabel44;
     javax.swing.JLabel jLabel45;
-    javax.swing.JLabel jLabel46;
     javax.swing.JLabel jLabel5;
     javax.swing.JLabel jLabel6;
-    javax.swing.JLabel jLabel7;
     javax.swing.JLabel jLabel8;
     javax.swing.JLabel jLabel9;
     javax.swing.JMenuItem jMenuItem1;
@@ -3343,8 +2314,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
     javax.swing.JPanel jPanel1;
     javax.swing.JPanel jPanel10;
     javax.swing.JPanel jPanel11;
-    javax.swing.JPanel jPanel12;
-    javax.swing.JPanel jPanel13;
+    private static javax.swing.JPanel jPanel13;
     javax.swing.JPanel jPanel14;
     javax.swing.JPanel jPanel15;
     javax.swing.JPanel jPanel2;
@@ -3355,8 +2325,8 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
     javax.swing.JPanel jPanel7;
     javax.swing.JPanel jPanel8;
     javax.swing.JPanel jPanel9;
+    public static javax.swing.JPanel jPequalizador;
     javax.swing.JPopupMenu jPopupMenu1;
-    javax.swing.JPopupMenu jPopupMenu2;
     javax.swing.JPopupMenu jPopupMenu3;
     javax.swing.JPopupMenu jPopupMenu4;
     javax.swing.JSlider jProgressBar1;
@@ -3364,18 +2334,13 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
     public transient javax.swing.JProgressBar jProgressBar3;
     public javax.swing.JProgressBar jProgressBar4;
     javax.swing.JProgressBar jProgressBar5;
-    javax.swing.JProgressBar jProgressBar6;
     javax.swing.JScrollPane jScrollPane1;
     javax.swing.JScrollPane jScrollPane2;
     javax.swing.JScrollPane jScrollPane3;
     javax.swing.JScrollPane jScrollPane4;
-    javax.swing.JSlider jSlider1;
-    javax.swing.JSlider jSlider2;
-    javax.swing.JSlider jSlider3;
     javax.swing.JSlider jSlider4;
     javax.swing.JSlider jSlider5;
     javax.swing.JSlider jSlider6;
-    javax.swing.JSlider jSlider7;
     javax.swing.JTabbedPane jTabbedPane1;
     javax.swing.JTabbedPane jTabbedPane2;
     javax.swing.JTabbedPane jTabbedPane4;
@@ -3387,35 +2352,12 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
     javax.swing.JTextField jTextField1;
     javax.swing.JTextField jTextField2;
     javax.swing.JTextField jTextField3;
-    javax.swing.JTextField jTextField4;
     javax.swing.JToggleButton jToggleButton1;
-    javax.swing.JSlider js0;
-    javax.swing.JSlider js1;
-    javax.swing.JSlider js10;
-    javax.swing.JSlider js11;
-    javax.swing.JSlider js12;
-    javax.swing.JSlider js13;
-    javax.swing.JSlider js14;
-    javax.swing.JSlider js15;
-    javax.swing.JSlider js16;
-    javax.swing.JSlider js17;
-    javax.swing.JSlider js18;
-    javax.swing.JSlider js19;
-    javax.swing.JSlider js2;
-    javax.swing.JSlider js3;
-    javax.swing.JSlider js4;
-    javax.swing.JSlider js5;
-    javax.swing.JSlider js6;
-    javax.swing.JSlider js7;
-    javax.swing.JSlider js8;
-    javax.swing.JSlider js9;
     javax.swing.JButton next1;
     javax.swing.JButton next2;
-    javax.swing.JMenuItem normal;
     javax.swing.JButton play1;
     javax.swing.JToggleButton play2;
-    javax.swing.JLabel preset1;
-    javax.swing.JLabel preset2;
+    static javax.swing.JLabel qrIcon;
     javax.swing.JButton stop1;
     javax.swing.JButton stop2;
     javax.swing.JLabel ti;
@@ -3488,21 +2430,11 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
                     break;
                 case KeyEvent.VK_E:
                     swcontrol = false;
-                    jDialog1.setVisible(true);
-                    jDialog1.setSize(500, 350);
-                    jDialog1.setTitle("Bandeja  1");
-                    jDialog2.setVisible(true);
-                    jDialog2.setBounds(jDialog1.getX() + jDialog1.getWidth(), 0, 500, 350);
-                    jDialog2.setTitle("Bandeja  2");
+                   //ver aca
                     break;
                 case KeyEvent.VK_I:
                     swShift = false;
-                    jDialog4.setVisible(true);
-                    jDialog4.setTitle("Bandeja 2");
-                    jDialog3.setVisible(true);
-                    jDialog3.setSize(400, 150);
-                    jDialog3.setTitle("Bandeja  1");
-                    jDialog4.setBounds(jDialog3.getX() + jDialog3.getWidth(), 0, 400, 150);
+                    //ver aca
                     break;
             }
         }
@@ -3534,21 +2466,11 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
                     break;
                 case KeyEvent.VK_E:
                     swShift = false;
-                    jDialog2.setVisible(true);
-                    jDialog2.setTitle("Bandeja 2");
-                    jDialog1.setVisible(true);
-                    jDialog1.setSize(500, 350);
-                    jDialog1.setTitle("Bandeja  1");
-                    jDialog2.setBounds(jDialog1.getX() + jDialog1.getWidth(), 0, 500, 350);
+                    //ver aca
                     break;
                 case KeyEvent.VK_I:
                     swShift = false;
-                    jDialog4.setVisible(true);
-                    jDialog4.setTitle("Bandeja 2");
-                    jDialog3.setVisible(true);
-                    jDialog3.setSize(400, 150);
-                    jDialog3.setTitle("Bandeja  1");
-                    jDialog4.setBounds(jDialog3.getX() + jDialog3.getWidth(), 0, 400, 150);
+                //ver aca
                     break;
             }
         }
@@ -3607,8 +2529,8 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
             int gainValue = volumen1.getValue();
             int gainValue1 = volumen2.getValue();
             int maxGain = volumenn.getMaximum();
-            controles.setVolumen((float) ((double) gainValue / (double) maxGain));
-            controles1.setVolumen((float) ((double) gainValue1 / (double) maxGain));
+            controles.setVolumen(controles.getPlayer(),(float) ((double) gainValue / (double) maxGain));
+            controles1.setVolumen(controles1.getPlayer(),(float) ((double) gainValue1 / (double) maxGain));
         } catch (BasicPlayerException ex) {
             Logger.getLogger(ventanamixer.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -3617,52 +2539,7 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
     
   
 //ecualizado
-    public void valores(boolean t, int v0, int v1, int v2, int v3, int v4, int v5, int v6, int v7, int v8, int v9) {
-        if (t == false) {
-            js0.setValue(v0);
-            js1.setValue(v1);
-            js2.setValue(v2);
-            js3.setValue(v3);
-            js4.setValue(v4);
-            js5.setValue(v5);
-            js6.setValue(v6);
-            js7.setValue(v7);
-            js8.setValue(v9);
-            js9.setValue(v8);
-            escucha1.setEq(0, js0.getValue());
-            escucha1.setEq(1, js1.getValue());
-            escucha1.setEq(2, js2.getValue());
-            escucha1.setEq(3, js3.getValue());
-            escucha1.setEq(4, js4.getValue());
-            escucha1.setEq(5, js5.getValue());
-            escucha1.setEq(6, js6.getValue());
-            escucha1.setEq(7, js7.getValue());
-            escucha1.setEq(8, js9.getValue());
-            escucha1.setEq(9, js8.getValue());
-        }
-        if (t == true) {
-            js10.setValue(v0);
-            js11.setValue(v2);
-            js12.setValue(v1);
-            js13.setValue(v4);
-            js14.setValue(v3);
-            js15.setValue(v5);
-            js16.setValue(v6);
-            js17.setValue(v7);
-            js18.setValue(v8);
-            js19.setValue(v9);
-            escucha2.setEq(0, js10.getValue());
-            escucha2.setEq(1, js12.getValue());
-            escucha2.setEq(2, js11.getValue());
-            escucha2.setEq(3, js14.getValue());
-            escucha2.setEq(4, js13.getValue());
-            escucha2.setEq(5, js15.getValue());
-            escucha2.setEq(6, js16.getValue());
-            escucha2.setEq(7, js17.getValue());
-            escucha2.setEq(8, js18.getValue());
-            escucha2.setEq(9, js19.getValue());
-        }
-    }
+   
 //funciones del control remoto
 
     private void valor0() {
@@ -3847,7 +2724,8 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
                 controles.getPlayer().addBasicPlayerListener(escucha1);
                  jProgressBar1.setMaximum(escucha1.taman());
                 jProgressBar3.setMaximum(escucha1.taman());
-                jProgressBar1.setValue(0);
+                jProgressBar3.setValue(escucha1.progresos());
+                jProgressBar1.setValue(escucha1.progresos());
                 timerBandeja.start();
              
               
@@ -3858,7 +2736,8 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
              controles1.getPlayer().addBasicPlayerListener(escucha2);    
              jProgressBar2.setMaximum(escucha2.taman());
              jProgressBar4.setMaximum(escucha2.taman());
-              jProgressBar2.setValue(0);
+             jProgressBar4.setValue(escucha2.progresos());
+              jProgressBar2.setValue(escucha2.progresos());
             timerBandeja2.start();
                 break;
         }
@@ -3899,5 +2778,31 @@ public class ventanamixer extends javax.swing.JFrame implements KeyListener {
         break;
    }
    }
-
+   public static JLabel getQrIcon()
+   {
+   return qrIcon;
+   }
+   
+    public InetAddress getCurrentIp() {
+            try {
+                Enumeration<NetworkInterface> networkInterfaces = NetworkInterface
+                        .getNetworkInterfaces();
+                while (networkInterfaces.hasMoreElements()) {
+                    NetworkInterface ni = (NetworkInterface) networkInterfaces
+                            .nextElement();
+                    Enumeration<InetAddress> nias = ni.getInetAddresses();
+                    while(nias.hasMoreElements()) {
+                        InetAddress ia= (InetAddress) nias.nextElement();
+                        if (!ia.isLinkLocalAddress() 
+                         && !ia.isLoopbackAddress()
+                         && ia instanceof Inet4Address) {
+                            return ia;
+                        }
+                    }
+                }
+            } catch (SocketException e) {
+            }
+            return null;
+        }
+  
 }

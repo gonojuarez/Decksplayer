@@ -10,11 +10,16 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.DataOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -100,8 +105,8 @@ private JSONArray arreglos;
             File file=new File("musica.db");
            if(file.exists()){
                
-            f = new FileReader("musica.db");
-            BufferedReader b = new BufferedReader(f);
+           
+            BufferedReader b = new BufferedReader(new InputStreamReader(new FileInputStream(file),"utf-8"));
           
             
             while ((cadena = b.readLine()) != null) {
@@ -224,12 +229,16 @@ private JSONArray arreglos;
         File f = new File("musica.db");
           
         try {
-            FileWriter escrit = new FileWriter(f);
-            BufferedWriter escritor = new BufferedWriter(escrit);
+            FileOutputStream fos=new FileOutputStream(f);
+            Writer writer=new OutputStreamWriter(fos,"utf-8");
+
+            BufferedWriter escritor = new BufferedWriter(writer);
             if(array!=null){
                 System.out.println(array.toString());
-            escritor.append(array.toString());
+                writer.write(array.toString());
             }
+            writer.flush();
+            writer.close();
             escritor.flush();
             escritor.close();
         } catch (Exception ex) {
@@ -237,9 +246,18 @@ private JSONArray arreglos;
         } 
         
    }
+   public void guardarSiguiente(int n,int next)
+   {
+    try {
+        objetos.get(n).put("siguiente", next);               
+    } catch (JSONException ex) {
+        Logger.getLogger(Json.class.getName()).log(Level.SEVERE, null, ex);
+    
+                               
+   }  
+    guardarJson();  
+   }        
    
    
    
-  
-   
-}
+   }

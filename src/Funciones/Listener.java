@@ -5,10 +5,16 @@
  */
 package Funciones;
 
+import com.sun.org.apache.xalan.internal.xsltc.cmdline.getopt.GetOpt;
+import decksplayer.ventanamixer;
+import java.awt.Label;
 import java.util.Map;
+import javax.swing.JLabel;
 import javax.swing.JProgressBar;
+import javax.swing.JTextField;
 import javazoom.jlgui.basicplayer.BasicController;
 import javazoom.jlgui.basicplayer.BasicPlayerEvent;
+import javazoom.jlgui.basicplayer.BasicPlayerException;
 import javazoom.jlgui.basicplayer.BasicPlayerListener;
 
 /**
@@ -25,7 +31,12 @@ public int estado;
 public int bitrate;
 public int chanels;
 public int sampleBits;
-    public Listener() {
+public Float sampleFrame;
+public JLabel textfield;
+int seconds=0;
+
+    public Listener(JLabel label) {
+        textfield=label;
     }
 
 
@@ -35,9 +46,16 @@ public int sampleBits;
             
      double bytesLength = Double.parseDouble(map.get("audio.length.bytes").toString());
      chanels=Integer.parseInt(map.get("audio.channels").toString());
-//     sampleBits=Integer.parseInt(map.get("audio.samplesize.bits").toString());
-     
      System.out.println("mapaa1"+map.toString());
+   
+           /* sampleFrame= Float.parseFloat(map.get("audio.framerate.fps")+"");
+            System.out.println("mapaa1"+map.toString());
+            bitrate=(Integer.parseInt(map.get("bitrate")+""))/1000;
+            System.out.println("total tiempo "+((bitrate/sampleFrame)*3600));*/
+        
+ 
+            
+            
    
      tam=(int)bytesLength;
     
@@ -48,18 +66,38 @@ public int sampleBits;
       distintas funciones como el progreso del audio
       y los ecualizadores  
     */
+    
     @Override
-    public void progress(int i, long l, byte[] bytes, Map map) {
+    public void progress(int i, long l, byte[] bytes, Map map)  {
        try{
-        
         float progressUpdate = (float) (i * 1.0f/ l * 1.0f);
         int progressNow = (int) (l * progressUpdate);
         progreso=progressNow;
+        System.out.println("mapaa2"+map.toString());
+        if(map.get("mp3.position.microseconds")!=null)
+        {
+            seconds=Integer.parseInt(map.get("mp3.position.microseconds")+"")/1000000;
+            int minute=0;
+            int hour=0;
+            if(seconds>60)
+            {
+                minute=seconds/60;
+                seconds=seconds-(minute*60);
+                if(minute>60)
+                {
+                    hour=minute/60;
+                }
+            }
+            System.out.println("totalPr "+minute+":"+seconds);
+            textfield.setText(hour+":"+minute+":"+seconds);
+            
+        }
         equalizer=(float[])map.get("mp3.equalizer");
         System.arraycopy(eq, 0, equalizer, 0, equalizer.length);
-        //System.out.print(map.toString());
-          // System.out.println(progressNow);
-       }catch(Exception ex){}
+       }catch(Exception ex)
+       {
+           System.out.println(""+ex.getMessage());
+       }
     }
 
     @Override
@@ -94,5 +132,14 @@ return progreso;
     public void setEq(int n,int value)
     {
     eq[n]=(float)value/100;
+    }
+    public Object tipo()
+    {
+    
+      return  null;
+    }
+    public int getSeconds()
+    {
+    return seconds;
     }
 }

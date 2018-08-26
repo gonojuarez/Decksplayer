@@ -52,7 +52,6 @@ public class ProgresoBandeja extends JPanel{
      this.tiempo=tiempo;
      this.barraDeProgreso=barraDeProgreso;
      this.textField=texto;
-     this.panel=panel;
      this.slider=slider;
      this.tipo=tipo;
      this.panel=this;
@@ -82,7 +81,7 @@ public class ProgresoBandeja extends JPanel{
            stop();
            }
            
-           textField.setText(h+":"+m+":"+s);
+          // textField.setText(h+":"+m+":"+s);
          panel.updateUI();
          }
         

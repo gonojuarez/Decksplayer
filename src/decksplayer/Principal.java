@@ -20,16 +20,23 @@ import decksplayer.ventanamixer;
  */
 public class Principal {
    
-       static ventanamixer v2 ;
+    public   static ventanamixer v2 ;
     public   static  Servidor1 sertv;
-    public static void main(String[]args) throws Exception {
+    private static Json json;
+    public static void main(String[]args)  {
+    
         JFrame.setDefaultLookAndFeelDecorated(true);
   
       int num=0;
-     Json json=new Json();
-      v2=new ventanamixer(json);
+      json=new Json();
+ 
+        try {
+            v2=new ventanamixer(json);
+        } catch (Exception ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
            v2.setVisible(true);
-      
+    
        
    //  sertv=new Servidor1(); 
      

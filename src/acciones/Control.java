@@ -43,7 +43,7 @@ public class Control{
     private DefaultTableModel model;
     private Decoder dec;
     private Converter conv;
-    private BasicPlayer player;
+   private BasicPlayer bandeja;
     private BasicController controll;
     private String display="";
     private int tamaño=0;
@@ -67,12 +67,7 @@ int n=15;
 
     public void init() {
 
-        player = new BasicPlayer();
-       
-        
-        
-       
-    
+        bandeja = new BasicPlayer();
     }
 
   
@@ -80,7 +75,7 @@ int n=15;
    
 
  
-    public void playSong(int i,String txt) throws BasicPlayerException {
+    public void playSong(BasicPlayer player,int i,String txt) throws BasicPlayerException {
        ArrayList<JSONObject> canciones=json.getCanciones(txt);
                   player.stop();
        
@@ -90,7 +85,7 @@ int n=15;
             Logger.getLogger(Control.class.getName()).log(Level.SEVERE, null, ex);
         }
        
-                player.play();
+               player.play();
               
         
             
@@ -137,7 +132,7 @@ int n=15;
 
    
 
-    public void setVolumen(float a) throws BasicPlayerException {
+    public void setVolumen(BasicPlayer player,float a) throws BasicPlayerException {
         try {
             player.setGain(a);
 
@@ -147,10 +142,10 @@ int n=15;
     }
 
     public BasicPlayer getPlayer() {
-        return player;
+        return bandeja;
     }
 
-    public int play() throws BasicPlayerException {
+    public int play(BasicPlayer player) throws BasicPlayerException {
         int n = 0;
 
         if (player.getLineCurrentBufferSize() != 0) {
@@ -165,15 +160,15 @@ int n=15;
 
     }
 
-    public void Pausa() throws Exception {
+    public void Pausa(BasicPlayer player) throws Exception {
         player.pause();
     }
 
-    public void Continuar() throws Exception {
+    public void Continuar(BasicPlayer player) throws Exception {
         player.resume();
     }
 
-    public void Stop() throws Exception {
+    public void Stop(BasicPlayer player) throws Exception {
 
         player.stop();
         
@@ -187,11 +182,11 @@ int n=15;
     
    
 
-    public int size() {
+    public int size(BasicPlayer player) {
         return player.getLineBufferSize();
     }
 
-    public void setPan(double x) {
+    public void setPan(BasicPlayer player,double x) {
         try {
             player.setPan(x);
         } catch (BasicPlayerException ex) {
@@ -208,7 +203,7 @@ int n=15;
         return r;
     }
 
-    public void adelantar(int n) {
+    public void adelantar(BasicPlayer player,int n) {
         try {
             player.seek(n);
         } catch (Exception ex) {
@@ -218,7 +213,7 @@ int n=15;
 
    
 
-    public void pitch(int n) {
+    public void pitch(BasicPlayer player,int n) {
         player.setSleepTime(n);
         
     }

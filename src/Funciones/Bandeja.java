@@ -37,7 +37,7 @@ public class Bandeja {
                 }
                 else
                 {
-                 controles.playSong(position, txt);
+                 controles.playSong(controles.getPlayer(),position, txt);
                  estado=1;
                 }
                
@@ -50,7 +50,11 @@ public class Bandeja {
     public void stop()
     {estado=0;
         try{
-            controles.Stop();   
+        try {   
+            controles.Stop(controles.getPlayer());
+        } catch (BasicPlayerException ex) {
+            Logger.getLogger(Bandeja.class.getName()).log(Level.SEVERE, null, ex);
+        }
          }catch(Exception ex)
         {
         
@@ -60,7 +64,12 @@ public class Bandeja {
     {
          try{
       
-            controles.Pausa();
+             try {
+                 controles.Pausa(controles.getPlayer());
+             } catch (BasicPlayerException ex) {
+                 Logger.getLogger(Bandeja.class.getName()).log(Level.SEVERE, null, ex);
+             }
+           
        
        
         }catch(Exception ex)
@@ -72,7 +81,11 @@ public class Bandeja {
     {
         try {
              
-                controles.Continuar();
+            try {
+                controles.Continuar(controles.getPlayer());
+            } catch (BasicPlayerException ex) {
+                Logger.getLogger(Bandeja.class.getName()).log(Level.SEVERE, null, ex);
+            }
           
         } catch (Exception ex) {
             Logger.getLogger(Bandeja.class.getName()).log(Level.SEVERE, null, ex);
