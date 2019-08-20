@@ -38,7 +38,7 @@ public class bandejaChica extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 150, Short.MAX_VALUE)
+            .addGap(0, 56, Short.MAX_VALUE)
         );
 
         pack();

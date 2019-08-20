@@ -5,43 +5,38 @@
  */
 package interfaz;
 
-import Funciones.Listener;
 import Funciones.equalizador;
-import acciones.Control;
+import de.craften.ui.swingmaterial.MaterialColor;
 import java.awt.event.ActionEvent;
 import javax.swing.JSlider;
-import org.json.JSONArray;
 
 /**
  *
  * @author familia
  */
-public class uiEqualizador extends javax.swing.JDialog {
+public class uiEqualizador extends javax.swing.JFrame {
 
     /**
      * Creates new form uiEqualizador
      */
-    Listener escucha;
-    Control controles;
+    PlayerListener escucha;
     JSlider[] eq1;
     equalizador equalAudio;
     
-    public uiEqualizador(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public uiEqualizador() {
+        this.setResizable(false);
         initComponents();
         eq1=new JSlider[10];
-        equalAudio=new equalizador();
         cargarSlider();
+        equalAudio=new equalizador();
+        jPanel12.setBackground(MaterialColor.BLUEGREY_900);
+        cambiarDiseñoSlider();
     }
-    public void setEscucha(Listener l)
+    public void setEscucha(PlayerListener l)
     {
     escucha=l;
     }
-    public void setControl( Control c)
-    {
-     controles=c;
-    }
-
+ 
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -107,9 +102,11 @@ public class uiEqualizador extends javax.swing.JDialog {
         });
         jPanel12.add(Parlante, new org.netbeans.lib.awtextra.AbsoluteConstraints(122, 211, -1, -1));
 
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Izquierda");
         jPanel12.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(67, 211, -1, 26));
 
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Derecha");
         jPanel12.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 210, -1, 26));
 
@@ -129,6 +126,7 @@ public class uiEqualizador extends javax.swing.JDialog {
         });
         jPanel12.add(jSlider1, new org.netbeans.lib.awtextra.AbsoluteConstraints(125, 160, -1, 33));
 
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Pitch");
         jPanel12.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(92, 167, -1, -1));
 
@@ -188,7 +186,7 @@ public class uiEqualizador extends javax.swing.JDialog {
                 js8StateChanged(evt);
             }
         });
-        jPanel12.add(js8, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 30, 20, 100));
+        jPanel12.add(js8, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 30, 20, 100));
 
         js1.setMinimum(-100);
         js1.setOrientation(javax.swing.JSlider.VERTICAL);
@@ -231,7 +229,7 @@ public class uiEqualizador extends javax.swing.JDialog {
                 js9StateChanged(evt);
             }
         });
-        jPanel12.add(js9, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 30, 20, 100));
+        jPanel12.add(js9, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 30, 20, 100));
 
         js7.setMinimum(-100);
         js7.setOrientation(javax.swing.JSlider.VERTICAL);
@@ -244,45 +242,58 @@ public class uiEqualizador extends javax.swing.JDialog {
         });
         jPanel12.add(js7, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 30, 20, 100));
 
+        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
         jLabel19.setText("31");
         jPanel12.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, -1, -1));
 
+        jLabel20.setForeground(new java.awt.Color(255, 255, 255));
         jLabel20.setText("62");
         jPanel12.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, -1, -1));
 
+        jLabel21.setForeground(new java.awt.Color(255, 255, 255));
         jLabel21.setText("125");
         jPanel12.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 140, -1, -1));
 
         jLabel22.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel22.setForeground(new java.awt.Color(255, 255, 255));
         jLabel22.setText("Graves");
         jPanel12.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 70, -1));
 
         jLabel23.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel23.setForeground(new java.awt.Color(255, 255, 255));
         jLabel23.setText("Medios");
         jPanel12.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 10, 80, 20));
 
         jLabel24.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel24.setForeground(new java.awt.Color(255, 255, 255));
         jLabel24.setText("Agudos");
         jPanel12.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 2, -1, 30));
 
+        jLabel25.setForeground(new java.awt.Color(255, 255, 255));
         jLabel25.setText("250");
         jPanel12.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, -1, -1));
 
+        jLabel26.setForeground(new java.awt.Color(255, 255, 255));
         jLabel26.setText("500");
         jPanel12.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 140, -1, -1));
 
+        jLabel27.setForeground(new java.awt.Color(255, 255, 255));
         jLabel27.setText("1KHZ");
         jPanel12.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 140, -1, -1));
 
+        jLabel28.setForeground(new java.awt.Color(255, 255, 255));
         jLabel28.setText("    2");
         jPanel12.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 140, 30, -1));
 
+        jLabel29.setForeground(new java.awt.Color(255, 255, 255));
         jLabel29.setText("   4");
         jPanel12.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 140, 30, -1));
 
+        jLabel30.setForeground(new java.awt.Color(255, 255, 255));
         jLabel30.setText("8 ");
         jPanel12.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(349, 140, 10, -1));
 
+        jLabel31.setForeground(new java.awt.Color(255, 255, 255));
         jLabel31.setText("16KHZ");
         jPanel12.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 140, 40, -1));
 
@@ -298,17 +309,13 @@ public class uiEqualizador extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 577, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, 577, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, 577, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanel12, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE))
+            .addComponent(jPanel12, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
         );
 
         pack();
@@ -316,7 +323,6 @@ public class uiEqualizador extends javax.swing.JDialog {
 
     private void ParlanteStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_ParlanteStateChanged
         double sw = (double) (Parlante.getValue() / 100);//cambio el paneo del programa
-        controles.setPan(controles.getPlayer(),sw);
     }//GEN-LAST:event_ParlanteStateChanged
 
     private void ParlanteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ParlanteKeyPressed
@@ -325,7 +331,6 @@ public class uiEqualizador extends javax.swing.JDialog {
     }//GEN-LAST:event_ParlanteKeyPressed
 
     private void jSlider1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider1StateChanged
-        controles.pitch(controles.getPlayer(),jSlider1.getValue());
     }//GEN-LAST:event_jSlider1StateChanged
 
     private void jSlider1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jSlider1KeyPressed
@@ -358,7 +363,7 @@ public class uiEqualizador extends javax.swing.JDialog {
     }//GEN-LAST:event_js8StateChanged
 
     private void js1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_js1StateChanged
-        escucha.setEq(1, js1.getValue());
+       escucha.setEq(1, js1.getValue());
     }//GEN-LAST:event_js1StateChanged
 
     private void js3StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_js3StateChanged
@@ -416,7 +421,8 @@ public class uiEqualizador extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                uiEqualizador dialog = new uiEqualizador(new javax.swing.JFrame(), true);
+                uiEqualizador dialog = new uiEqualizador();
+                dialog.setVisible(true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -462,28 +468,28 @@ public class uiEqualizador extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
   public void cargarSlider()
     {
-        eq1[0]=js0;
-        eq1[1]=js1;
-        eq1[2]=js3;
-        eq1[3]=js4;
-        eq1[4]=js5;
-        eq1[5]=js6;
-        eq1[6]=js7;
-        eq1[8]=js8;
-        eq1[9]=js9;
+        eq1=new JSlider[]{js0,js1,js2,js3,js4,js5,js6,js7,js8,js9};
+       
  
     }
  public void valores() {
-     
+    
+     cargarSlider();
     equalAudio.cargarOpciones(jComboBox1.getSelectedIndex(), eq1);
-            for(int i=0;i<eq1.length;i++)
+    if(escucha!=null)        
+    {for(int i=0;i<eq1.length;i++)
             {
                 
             escucha.setEq(i, eq1[i].getValue());
             }
           
         
-       }
+           }
+ }
+ 
+ public void cambiarDiseñoSlider(){
+ js0.setUI(new DibujarBordes().getSliderUI(js0));
+ }
    
 
 }

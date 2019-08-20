@@ -23,21 +23,15 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="577" max="32767" attributes="0"/>
-          <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <Component id="jPanel12" min="-2" pref="577" max="-2" attributes="0"/>
-                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-              </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              <Component id="jPanel12" min="-2" pref="577" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="300" max="32767" attributes="0"/>
-          <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-              <Component id="jPanel12" alignment="1" pref="300" max="32767" attributes="0"/>
-          </Group>
+          <Component id="jPanel12" alignment="1" pref="300" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -72,6 +66,9 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel10">
           <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Izquierda"/>
           </Properties>
           <Constraints>
@@ -82,6 +79,9 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel11">
           <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Derecha"/>
           </Properties>
           <Constraints>
@@ -109,6 +109,9 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel7">
           <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Pitch"/>
           </Properties>
           <Constraints>
@@ -192,7 +195,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="370" y="30" width="20" height="100"/>
+              <AbsoluteConstraints x="340" y="30" width="20" height="100"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -255,7 +258,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="340" y="30" width="20" height="100"/>
+              <AbsoluteConstraints x="370" y="30" width="20" height="100"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -277,6 +280,9 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel19">
           <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="31"/>
           </Properties>
           <Constraints>
@@ -287,6 +293,9 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel20">
           <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="62"/>
           </Properties>
           <Constraints>
@@ -297,6 +306,9 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel21">
           <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="125"/>
           </Properties>
           <Constraints>
@@ -309,6 +321,9 @@
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="18" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Graves"/>
           </Properties>
@@ -323,6 +338,9 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="18" style="1"/>
             </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Medios"/>
           </Properties>
           <Constraints>
@@ -336,6 +354,9 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="18" style="1"/>
             </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Agudos"/>
           </Properties>
           <Constraints>
@@ -346,6 +367,9 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel25">
           <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="250"/>
           </Properties>
           <Constraints>
@@ -356,6 +380,9 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel26">
           <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="500"/>
           </Properties>
           <Constraints>
@@ -366,6 +393,9 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel27">
           <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="1KHZ"/>
           </Properties>
           <Constraints>
@@ -376,6 +406,9 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel28">
           <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="    2"/>
           </Properties>
           <Constraints>
@@ -386,6 +419,9 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel29">
           <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="   4"/>
           </Properties>
           <Constraints>
@@ -396,6 +432,9 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel30">
           <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="8 "/>
           </Properties>
           <Constraints>
@@ -406,6 +445,9 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel31">
           <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="16KHZ"/>
           </Properties>
           <Constraints>
