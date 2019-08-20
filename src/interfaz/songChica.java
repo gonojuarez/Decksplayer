@@ -6,6 +6,8 @@
 package interfaz;
 
 import clases.Cancion;
+import clases.DibujarBordes;
+import clases.PlayerListener;
 import de.craften.ui.swingmaterial.MaterialColor;
 import java.awt.Frame;
 import java.util.Map;

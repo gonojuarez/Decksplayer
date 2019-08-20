@@ -6,7 +6,9 @@
 package interfaz;
 
 import acciones.Buscador2;
+import acciones.cargarDatosPanel;
 import clases.Cancion;
+import clases.DibujarBordes;
 import de.craften.ui.swingmaterial.MaterialColor;
 import de.craften.ui.swingmaterial.fonts.MaterialIcons;
 import static decksplayer.Principal.v2;

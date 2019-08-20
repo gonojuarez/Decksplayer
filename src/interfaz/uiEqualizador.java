@@ -6,6 +6,8 @@
 package interfaz;
 
 import Funciones.equalizador;
+import clases.DibujarBordes;
+import clases.PlayerListener;
 import de.craften.ui.swingmaterial.MaterialColor;
 import java.awt.event.ActionEvent;
 import javax.swing.JSlider;
