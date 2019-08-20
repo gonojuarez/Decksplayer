@@ -4,6 +4,7 @@
  */
 package clases;
 
+
 /**
  *
  * @author Administrador
@@ -12,12 +13,22 @@ public class Cancion {
    private int id;
     private String nombre;
     private long tamaño;
-    private String direccion;
+    private String direccion; 
+    private int progreso;
+    private BasicPlayerActions basicPlayerActions;
     public Cancion(int id, String nombre, long tamaño, String direccion) {
         this.id = id;
         this.nombre = nombre;
         this.tamaño = tamaño;
         this.direccion = direccion;
+        this.basicPlayerActions=new BasicPlayerActions();
+
+    }
+     public Cancion(int id, String nombre, String direccion) {
+        this.id = id;
+        this.nombre = nombre;
+        this.direccion = direccion;
+        this.basicPlayerActions=new BasicPlayerActions();
     }
 
     public String getDireccion() {
@@ -41,7 +52,7 @@ public class Cancion {
     }
 
     public void setNombre(String nombre) {
-        this.nombre = nombre;
+        this.nombre = nombre; 
     }
 
     public long getTamaño() {
@@ -51,5 +62,21 @@ public class Cancion {
     public void setTamaño(long tamaño) {
         this.tamaño = tamaño;
     }
+  public void setProgreso(int progress){
+      this.progreso=progress;
+  }
+
+    public int getProgreso() {
+        return progreso;
+    }
+    
+    public BasicPlayerActions getActions(){
+        return basicPlayerActions;
+    }
+    
+    
+  
+    
+  
  
 }
