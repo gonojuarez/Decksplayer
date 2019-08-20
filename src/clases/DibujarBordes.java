@@ -17,6 +17,7 @@ import java.awt.Rectangle;
 import java.awt.Scrollbar;
 import java.awt.geom.Rectangle2D;
 import java.awt.geom.RoundRectangle2D;
+import javafx.geometry.Orientation;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JProgressBar;
@@ -369,29 +370,18 @@ public SliderUI getSliderUI(JSlider b){
             Paint gp = new ColorUIResource(MaterialColor.BLUEA_700);
             g2.setPaint(gp);
              b.setBackground(MaterialColor.BLUEGREY_900);
-            g2.fillRect(b.getWidth()/4,0,b.getWidth()/2,b.getHeight());
-        }
 
-        @Override
-        public void paintFocus(Graphics g) {
-            super.paintFocus(g); //To change body of generated methods, choose Tools | Templates.
-             Graphics2D g2 = (Graphics2D) g;
-            Paint gp = new ColorUIResource(MaterialColor.AMBERA_400);
-            g2.setPaint(gp);
-             b.setBackground(MaterialColor.BLUEGREY_900);
-            g2.fillRect(b.getWidth()/4,0,b.getWidth()/2,b.getHeight());
-        }
-
-        @Override
-        protected void paintMinorTickForVertSlider(Graphics g, Rectangle tickBounds, int y) {
-            super.paintMinorTickForVertSlider(g, tickBounds, y); //To change body of generated methods, choose Tools | Templates.
-             Graphics2D g2 = (Graphics2D) g;
-            Paint gp = new ColorUIResource(MaterialColor.AMBERA_400);
-            g2.setPaint(gp);
-             b.setBackground(MaterialColor.BLUEGREY_900);
-            g2.fillRect(b.getWidth()/4,0,b.getWidth()/2,b.getHeight());
         }
         
+
+        @Override
+        public void paintTrack(Graphics g) {
+            super.paintTrack(g); //To change body of generated methods, choose Tools | Templates.
+             Graphics2D g2 = (Graphics2D) g;
+           
+        }
+
+     
 
       
         
