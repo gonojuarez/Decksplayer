@@ -9,7 +9,7 @@ import clases.Cancion;
 import de.craften.ui.swingmaterial.MaterialColor;
 import de.craften.ui.swingmaterial.MaterialProgressSpinner;
 import clases.DibujarBordes;
-import interfaz.song;
+import decksplayer.song;
 import interfaz.songChica;
 import java.awt.Component;
 import java.awt.Dimension;
