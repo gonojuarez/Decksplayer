@@ -36,7 +36,7 @@ public class equalizador {
     {
     for(int i=0;i<slider.length;i++)
      {
-      slider[i].setValue(pos[i]);
+      slider[i].setValue((int)pos[i]);
      }
     }
     public void cargarOpciones(int n,JSlider[] slider)
