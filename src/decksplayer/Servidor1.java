@@ -1,7 +1,6 @@
 package decksplayer;
 
 
-import decksplayer.ventanamixer;
 import java.io.* ;
 import java.net.Inet4Address;
 import java.net.InetAddress;
@@ -19,7 +18,7 @@ public class Servidor1 {
  String filtro="";
 int tipo;
 ServerSocket skServidor;
-private ventanamixer v;
+private bandeja v;
   
 public Servidor1()
 {
@@ -29,7 +28,7 @@ public Servidor1()
 }
     
    
-public Servidor1( int puerto) {
+public Servidor1( int puerto) {/*
  try {
  skServidor= new ServerSocket(puerto);
 System.out.println("Escucho el puerto " + puerto );
@@ -98,14 +97,18 @@ skCliente.close();
  {
  
  }
- 
+ */
  }
- public static void main( String[] arg,ventanamixer v) {
+ public static void main( String[] arg,bandeja v) {
 try{
      new Servidor1(PUERTO);
     
 }catch(Exception ex)
 {} 
  }
+
+    public Servidor1(bandeja ventana) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
  
 }
