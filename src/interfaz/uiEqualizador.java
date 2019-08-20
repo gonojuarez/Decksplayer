@@ -6,11 +6,15 @@
 package interfaz;
 
 import Funciones.equalizador;
+import clases.BasicPlayerActions;
 import clases.DibujarBordes;
 import clases.PlayerListener;
 import de.craften.ui.swingmaterial.MaterialColor;
 import java.awt.event.ActionEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JSlider;
+import javazoom.jlgui.basicplayer.BasicPlayerException;
 
 /**
  *
@@ -21,10 +25,10 @@ public class uiEqualizador extends javax.swing.JFrame {
     /**
      * Creates new form uiEqualizador
      */
-    PlayerListener escucha;
-    JSlider[] eq1;
-    equalizador equalAudio;
-    
+    private PlayerListener escucha;
+    private JSlider[] eq1;
+    private equalizador equalAudio;
+    private BasicPlayerActions actions;
     public uiEqualizador() {
         this.setResizable(false);
         initComponents();
@@ -34,9 +38,13 @@ public class uiEqualizador extends javax.swing.JFrame {
         jPanel12.setBackground(MaterialColor.BLUEGREY_900);
         cambiarDiseñoSlider();
     }
-    public void setEscucha(PlayerListener l)
+    public void setTitulo(String titulo){
+    this.setTitle(titulo);
+    }
+    public void setEscucha(BasicPlayerActions l)
     {
-    escucha=l;
+        actions=l;
+    escucha=l.getPlayerListener();
     }
  
     /**
@@ -52,8 +60,6 @@ public class uiEqualizador extends javax.swing.JFrame {
         Parlante = new javax.swing.JSlider();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jSlider1 = new javax.swing.JSlider();
-        jLabel7 = new javax.swing.JLabel();
         js0 = new javax.swing.JSlider();
         js5 = new javax.swing.JSlider();
         js4 = new javax.swing.JSlider();
@@ -111,26 +117,6 @@ public class uiEqualizador extends javax.swing.JFrame {
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Derecha");
         jPanel12.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 210, -1, 26));
-
-        jSlider1.setMaximum(50);
-        jSlider1.setToolTipText("");
-        jSlider1.setValue(0);
-        jSlider1.setFocusable(false);
-        jSlider1.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                jSlider1StateChanged(evt);
-            }
-        });
-        jSlider1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jSlider1KeyPressed(evt);
-            }
-        });
-        jPanel12.add(jSlider1, new org.netbeans.lib.awtextra.AbsoluteConstraints(125, 160, -1, 33));
-
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Pitch");
-        jPanel12.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(92, 167, -1, -1));
 
         js0.setMinimum(-100);
         js0.setOrientation(javax.swing.JSlider.VERTICAL);
@@ -325,20 +311,17 @@ public class uiEqualizador extends javax.swing.JFrame {
 
     private void ParlanteStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_ParlanteStateChanged
         double sw = (double) (Parlante.getValue() / 100);//cambio el paneo del programa
+        try {
+            actions.getBasicPlayer().setPan(sw);
+        } catch (BasicPlayerException ex) {
+            Logger.getLogger(uiEqualizador.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_ParlanteStateChanged
 
     private void ParlanteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ParlanteKeyPressed
       
         setFocusable(true);
     }//GEN-LAST:event_ParlanteKeyPressed
-
-    private void jSlider1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider1StateChanged
-    }//GEN-LAST:event_jSlider1StateChanged
-
-    private void jSlider1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jSlider1KeyPressed
-       
-        setFocusable(true);
-    }//GEN-LAST:event_jSlider1KeyPressed
 
     private void js0StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_js0StateChanged
         escucha.setEq(0, js0.getValue());
@@ -454,9 +437,7 @@ public class uiEqualizador extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel12;
-    private javax.swing.JSlider jSlider1;
     private javax.swing.JSlider js0;
     private javax.swing.JSlider js1;
     private javax.swing.JSlider js2;
@@ -491,6 +472,16 @@ public class uiEqualizador extends javax.swing.JFrame {
  
  public void cambiarDiseñoSlider(){
  js0.setUI(new DibujarBordes().getSliderUI(js0));
+ js1.setUI(new DibujarBordes().getSliderUI(js1));
+ js2.setUI(new DibujarBordes().getSliderUI(js2));
+ js3.setUI(new DibujarBordes().getSliderUI(js3));
+ js4.setUI(new DibujarBordes().getSliderUI(js4));
+ js5.setUI(new DibujarBordes().getSliderUI(js5));
+ js6.setUI(new DibujarBordes().getSliderUI(js6));
+ js7.setUI(new DibujarBordes().getSliderUI(js7));
+ js8.setUI(new DibujarBordes().getSliderUI(js8));
+ js9.setUI(new DibujarBordes().getSliderUI(js9));
+ Parlante.setUI(new DibujarBordes().getSliderUI(Parlante));
  }
    
 

@@ -16,6 +16,7 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javazoom.jlgui.basicplayer.BasicController;
 import javazoom.jlgui.basicplayer.BasicPlayerEvent;
@@ -63,6 +64,11 @@ public class songChica extends javax.swing.JPanel{
         loadIcon();
     
     }
+
+    public JPanel getjPanel1() {
+        return jPanel1;
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -127,8 +133,8 @@ public class songChica extends javax.swing.JPanel{
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 279, Short.MAX_VALUE)
-                .addGap(0, 0, 0)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0))
         );
         layout.setVerticalGroup(
@@ -163,8 +169,8 @@ public class songChica extends javax.swing.JPanel{
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
     
         uiEqualizador equalizer=  new uiEqualizador();
-     
-        equalizer.setEscucha(cancion.getActions().getPlayerListener());
+        equalizer.setTitle(cancion.getNombre());
+        equalizer.setEscucha(cancion.getActions());
         equalizer.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
     public void setTitle(String title){
