@@ -15,7 +15,7 @@ public class Preferencias {
        private Preferences prefs;
     public Preferencias()
     {
-      this.prefs= Preferences.userNodeForPackage(decksplayer.Principal.class);
+      this.prefs= Preferences.userNodeForPackage(decksplayer.bandeja.class);
     }
     public Preferences crearPreferencia()
     {
