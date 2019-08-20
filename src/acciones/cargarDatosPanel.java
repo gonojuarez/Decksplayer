@@ -148,9 +148,11 @@ public class cargarDatosPanel {
                           
                            songChica cancion=new songChica(cancionesFiltrados.get(pos));   
                             cancion.setTitle("  "+(pos+1)+"  "+ cancionesFiltrados.get(pos).getNombre());
+                          
                             cancion.setSize(panel.getWidth()/2,51);
-                            cancion.getLabel().setSize(cancion.getWidth()/2, cancion.getHeight()/2);
-                            cancion.getjProgressBar1().setSize(cancion.getWidth()/2, cancion.getHeight()/2);
+                              cancion.getjPanel1().setSize(cancion.getWidth()/2, 51);
+                            cancion.getLabel().setSize(cancion.getjPanel1().getWidth(), cancion.getHeight()/2);
+                            cancion.getjProgressBar1().setSize(cancion.getjPanel1().getWidth(), cancion.getHeight()/2);
                             cancion.setLocation(i*(panel.getWidth()/2), (j*51));
                             agregarCanciones(cancion);
 
